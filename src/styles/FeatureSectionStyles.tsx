@@ -1,0 +1,101 @@
+import styled from "@emotion/styled";
+import { THEME_COLORS } from "./GlobalStyles";
+
+export const FeatureContainer = styled.div<{ isInverted: boolean }>`
+    display: grid;
+    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 2rem 2rem 2rem;
+    row-gap: 30px;
+    column-gap: 10px;
+    grid-template-columns: repeat(2,1fr);
+    grid-template-areas:
+        "header header"
+        "img cards";
+
+    ${({ isInverted }) => isInverted && `
+    padding-top: 20px;
+    border-top: 2px solid rgba(0,101,85,.2);
+    grid-template-areas:
+    "header header"
+    "cards img";
+    `}
+
+    @media (min-width: 1024px){
+        grid-template-columns: 60% 40%;
+        grid-template-areas:
+                "header img"
+                "cards img";
+
+        ${({ isInverted }) => isInverted && `
+        grid-template-columns: 40% 60%;
+            grid-template-areas:
+            "img header"
+            "img cards";
+        `}
+    }
+`
+
+export const SectionInfoCol = styled.div`
+    grid-area: header;
+`
+
+export const FeatureHeading = styled.h2`
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 3rem;
+    font-size: 1.8rem;
+    font-weight: 600;
+`
+
+export const FeatureSubHeading = styled.h3`
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 0;
+    color: ${THEME_COLORS.success};
+    opacity: .8;
+    font-weight: 500;
+`
+
+export const FeatureText = styled.p`
+    text-align: center;
+    font-size: 1.1rem;
+    color: rgba(0, 0, 0, .6);
+    max-width: 400px;
+    margin: 0 auto;
+`
+
+export const FeatureImg = styled.img<{ isInverted: boolean }>`
+    width: 100%;
+    height: 100%;
+    max-width: 300px;
+    object-fit: contain;
+    grid-area: img;
+    margin-left: auto;
+
+    ${({ isInverted }) => isInverted && `
+    margin-left: 0; margin-right: auto;
+    `}
+
+    @media (min-width: 1024px){
+        margin: auto;
+    }
+`
+
+//Features Cards
+
+export const CardsContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    flex-direction: column;
+    height: 100%;
+    grid-area: cards;
+
+    @media (min-width: 1024px){
+        flex-direction: row;
+        align-items: start;
+    }
+`
