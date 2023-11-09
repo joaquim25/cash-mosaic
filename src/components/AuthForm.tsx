@@ -44,9 +44,10 @@ export const AuthForm = ({ endpoint, fields, title }: propTypes) => {
             const { email, password } = values;
             // Make a POST request to the provided endpoint with input values and set authToken
             const response = await axios.post(endpoint, { email, password });
+
             // !!! TO-DO
-            // dispatch(logIn(response.data.authToken));
-            //set authToken in browser, get user info
+            // 1- dispatch(logIn(response.data.authToken));
+            //      1.1- set authToken in browser, get user info
 
             // Navigate to the user dashboard after a successful submission
             setSubmitRequest({
@@ -57,13 +58,13 @@ export const AuthForm = ({ endpoint, fields, title }: propTypes) => {
             setTimeout(() => {
                 //!!! TO-DO Redirect to dashboard instead
                 router.push('/');
-            }, 3500);
-        } catch (error) {
+            }, 2500);
+        } catch (error: any) {
             setSubmitRequest({
                 ...submitRequest,
                 error: true,
                 submited: true,
-                errorMessage: "error",
+                errorMessage: error && error.response?.data?.message || "An unknown error occurred",
             });
 
             setTimeout(() => {
@@ -78,7 +79,7 @@ export const AuthForm = ({ endpoint, fields, title }: propTypes) => {
     return (
         <AuthContainer>
             <FormContainer>
-                <FormTitle>{title == "Login" ? "Log In" : "Sign-up"}</FormTitle>
+                <FormTitle>{title === "Login" ? "Log In" : "Sign-up"}</FormTitle>
                 <StyledAuthForm onSubmit={handleSubmit}>
                     {fields.map((field) => (
                         <div key={field.name}>
@@ -89,14 +90,11 @@ export const AuthForm = ({ endpoint, fields, title }: propTypes) => {
                                 value={values[field.name]}
                                 onChange={(e) => onInputChange(e)}
                                 required
-                                //add Autocompletes (next.js suggestion)
                             />
                         </div>
                     ))}
                     <DefaultButton bgColor="danger" type='submit'>{title}</DefaultButton>
                     <ExtraFormLinks>
-                        {/* Auto switch links */}
-
                         <p>
                             {title === "Login"
                                 ? "Do not have an account?"
