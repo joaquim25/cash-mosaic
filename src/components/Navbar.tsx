@@ -4,6 +4,7 @@ import { AiOutlineClose } from 'react-icons/ai';
 import { CloseIconContainer, DesktopLinks, HambuguerIcon, NavbarContainer, Sidebar, SidebarFadedBackground, SidebarLinks, SidebarTitle } from "@/styles/NavbarStyles"
 import Image from "next/image"
 import { useState } from 'react';
+import Link from 'next/link';
 
 function Navbar() {
     const [showSidebar, setShowSidebar] = useState(false);
@@ -22,11 +23,15 @@ function Navbar() {
                 <HambuguerIcon>
                     <IoIosMenu onClick={toggleShowSidebar} />
                 </HambuguerIcon>
-                <Image src="/images/logo.svg" width={100} height={45} alt="menu icon" />
+                <Link href="/">
+                    <Image src="/images/logo.svg" width={100} height={45} alt="menu icon" />
+                </Link>
                 <DesktopLinks>
                     <li><a href='#' onClick={handleSideBarLinkClick}>Dashboard</a></li>
                 </DesktopLinks>
-                <LiaUser />
+                <Link href="login">
+                    <LiaUser />
+                </Link>
             </NavbarContainer>
             <SidebarFadedBackground showSidebar={showSidebar} onClick={toggleShowSidebar} />
             <Sidebar showSidebar={showSidebar}>
@@ -37,7 +42,7 @@ function Navbar() {
                 <SidebarLinks>
                     <li><a href='#' onClick={handleSideBarLinkClick}>Dashboard</a></li>
                     <li><a href='#' onClick={handleSideBarLinkClick}>Profile</a></li>
-                    <li><a href='#' onClick={handleSideBarLinkClick}>Login</a></li>
+                    <li><Link href='/login' onClick={handleSideBarLinkClick}>Login</Link></li>
                     <li><a href='#' onClick={handleSideBarLinkClick}>Sign-up</a></li>
                 </SidebarLinks>
             </Sidebar>
