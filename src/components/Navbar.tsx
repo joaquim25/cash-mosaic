@@ -40,10 +40,10 @@ function Navbar() {
                 </CloseIconContainer>
                 <SidebarTitle>Links</SidebarTitle>
                 <SidebarLinks>
-                    <li><a href='#' onClick={handleSideBarLinkClick}>Dashboard</a></li>
-                    <li><a href='#' onClick={handleSideBarLinkClick}>Profile</a></li>
+                    <li><Link href='#' onClick={handleSideBarLinkClick}>Dashboard</Link></li>
+                    <li><Link href='#' onClick={handleSideBarLinkClick}>Profile</Link></li>
                     <li><Link href='/login' onClick={handleSideBarLinkClick}>Login</Link></li>
-                    <li><a href='#' onClick={handleSideBarLinkClick}>Sign-up</a></li>
+                    <li><Link href='#' onClick={handleSideBarLinkClick}>Sign-up</Link></li>
                 </SidebarLinks>
             </Sidebar>
         </>
