@@ -44,16 +44,3 @@ const AlertMessage = styled.div`
     text-align: center;
   }
 `;
-
-export const ErrorMessage = styled(AlertMessage)`
-  border: 1px solid ${THEME_COLORS.danger};
-  background-color: rgba(179, 53, 86, .1);
-  color: ${THEME_COLORS.danger};
-`
-
-
-export const SuccessMessage = styled(AlertMessage)`
-  border: 1px solid ${THEME_COLORS.success};
-  background-color: rgba(0,101,85,.1);
-  color: ${THEME_COLORS.success};
-`;
