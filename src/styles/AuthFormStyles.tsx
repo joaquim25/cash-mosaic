@@ -32,7 +32,6 @@ export const FormImageContainer = styled.div`
 
 export const FormContainer = styled.div`
   display: flex;
-  margin-top: 10%;
   gap: 1rem;
   flex-direction: column;
   align-items: center;
@@ -44,11 +43,24 @@ export const FormTitle = styled.h1`
 `
 
 export const StyledAuthForm = styled.form`
+    margin-top: 10%;
     padding: 2rem 1rem;
     display: grid;
+    grid-template-columns: repeat(2,1fr);
     row-gap: 20px;
+    column-gap: 10px;
     width: 100%;
     max-width: 380px;
+
+    & button {
+        grid-column-start: span 2
+    }
+`
+
+export const FieldContainer = styled.div<{ name: string }>`
+    ${({ name }) => name === "firstname" ? `grid-column-start: 1;
+    grid-column-end: 2;` : name === "lastname" ? `grid-column-start: 2;
+    grid-column-end: 3;` : `grid-column-start: span 2`}
 `
 
 export const FormInput = styled.input`
@@ -77,6 +89,7 @@ export const ExtraFormLinks = styled.div`
     font-size: 0.9rem;
     position: relative;
     top: 40px;
+    grid-column-start: span 2;
 
     & a {
         text-decoration: underline;

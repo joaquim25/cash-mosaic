@@ -1,30 +1,22 @@
-import { Fields } from "@/pages/login";
-import { AuthContainer, ExtraFormLinks, FormContainer, FormImageContainer, FormInput, FormTitle, StyledAuthForm } from "@/styles/AuthFormStyles";
+import { AuthContainer, ExtraFormLinks, FieldContainer, FormContainer, FormImageContainer, FormInput, FormTitle, StyledAuthForm } from "@/styles/AuthFormStyles";
 import { DefaultButton } from "@/styles/GlobalStyles";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from 'next/router';
 import { ChangeEvent, useState } from "react";
 import { Alert, Snackbar } from "@mui/material";
-import axios from "axios";
+import { Fields, FormValues } from "@/types";
+import { authLogin, authSignup } from "@/pages/api/auth";
 // import { logIn } from "../../store/user/actions";
 
 type propTypes = {
-    endpoint: string,
     fields: Fields,
     title: string
 }
 
-type FormValues = {
-    name: string,
-    email: string,
-    password: string
-}
-
-
-export const AuthForm = ({ endpoint, fields, title }: propTypes) => {
+export const AuthForm = ({ fields, title }: propTypes) => {
     const [submitRequest, setSubmitRequest] = useState({ isLoading: false, submited: false, error: false, errorMessage: "" });
-    const [values, setValues] = useState<FormValues>({ name: "", email: "", password: "" });
+    const [values, setValues] = useState<FormValues>({ firstname: "", lastname: "", email: "", password: "" });
     const router = useRouter();
 
     // Function to handle input changes and update its state value
@@ -42,9 +34,11 @@ export const AuthForm = ({ endpoint, fields, title }: propTypes) => {
             setSubmitRequest({ ...submitRequest, isLoading: true });
             e.preventDefault();
 
-            const { email, password } = values;
-            // Make a POST request to the provided endpoint (login/register)
-            const response = await axios.post(endpoint, { email, password });
+            // const { email, password } = values;
+            // // Make a POST request to the provided endpoint (login/register)
+            // const response = await axios.post(endpoint, { email, password });
+
+            title === "Login" ? await authLogin(values) : await authSignup(values);
 
             // !!! TO-DO: Redux user
             // 1- dispatch(logIn(response.data.authToken));
@@ -91,7 +85,7 @@ export const AuthForm = ({ endpoint, fields, title }: propTypes) => {
 
                 <StyledAuthForm onSubmit={handleSubmit}>
                     {fields.map((field) => (
-                        <div key={field.name}>
+                        <FieldContainer key={field.name} name={field.name}>
                             <label>{field.label}:</label>
                             <FormInput
                                 type={field.type}
@@ -100,7 +94,7 @@ export const AuthForm = ({ endpoint, fields, title }: propTypes) => {
                                 onChange={(e) => onInputChange(e)}
                                 required
                             />
-                        </div>
+                        </FieldContainer>
                     ))}
                     <DefaultButton bgColor="danger" type='submit'>{title}</DefaultButton>
 

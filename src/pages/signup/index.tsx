@@ -4,8 +4,10 @@ import React from 'react'
 
 
 
-function LoginPage() {
+function SignupPage() {
     const fields: Fields = [
+        { name: "firstname", label: "First Name", type: "text" },
+        { name: "lastname", label: "Last Name", type: "text" },
         { name: "email", label: "Email", type: "email" },
         { name: "password", label: "Password", type: "password" },
     ]
@@ -13,9 +15,9 @@ function LoginPage() {
     return (
         <AuthForm
             fields={fields}
-            title="Login"
+            title="Signup"
         />
     )
 }
 
-export default LoginPage;
+export default SignupPage;
