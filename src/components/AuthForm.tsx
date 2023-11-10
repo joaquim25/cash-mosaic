@@ -7,7 +7,8 @@ import { ChangeEvent, useState } from "react";
 import { Alert, Snackbar } from "@mui/material";
 import { Fields, FormValues } from "@/types";
 import { authLogin, authSignup } from "@/pages/api/auth";
-// import { logIn } from "../../store/user/actions";
+import { useDispatch } from "react-redux";
+import { logIn } from "@/store/user/actions";
 
 type propTypes = {
     fields: Fields,
@@ -18,6 +19,7 @@ export const AuthForm = ({ fields, title }: propTypes) => {
     const [submitRequest, setSubmitRequest] = useState({ isLoading: false, submited: false, error: false, errorMessage: "" });
     const [values, setValues] = useState<FormValues>({ firstname: "", lastname: "", email: "", password: "" });
     const router = useRouter();
+    const dispatch = useDispatch()
 
     // Function to handle input changes and update its state value
     const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -31,18 +33,13 @@ export const AuthForm = ({ fields, title }: propTypes) => {
     // Function to handle form submission
     const handleSubmit = async (e: { preventDefault: () => void; }) => {
         try {
+            //set the submit request to loading as true
             setSubmitRequest({ ...submitRequest, isLoading: true });
             e.preventDefault();
 
-            // const { email, password } = values;
-            // // Make a POST request to the provided endpoint (login/register)
-            // const response = await axios.post(endpoint, { email, password });
+            const response = title === "Login" ? await authLogin(values) : await authSignup(values);
 
-            title === "Login" ? await authLogin(values) : await authSignup(values);
-
-            // !!! TO-DO: Redux user
-            // 1- dispatch(logIn(response.data.authToken));
-            //      1.1- set authToken in browser, get user info
+            dispatch(logIn(response.data.authToken));
 
             // Change submit request state to show success snackbar
             setSubmitRequest({
