@@ -17,19 +17,10 @@ import {
 } from "@/styles/NavbarStyles";
 import Image from "next/image"
 import Link from 'next/link';
-import { RootState } from '@/types';
+import { NavItem, RootState } from '@/types';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from '@/store/user/actions';
-
-interface NavItem {
-    href: string;
-    content?: string;
-    icon?: React.ReactNode;
-    class?: string;
-    action?: any;
-}
-
 
 function Navbar() {
     const [showSidebar, setShowSidebar] = useState(false);
@@ -122,7 +113,7 @@ function Navbar() {
                         } else {
                             return (
                                 <SidebarIcon key={index}>
-                                    <Link href={item.href} className={item.class ? item.class : ""} onClick={item.action ? item.action : null}>{item.icon}</Link>
+                                    <Link href={item.href} className={item.class ? item.class : ""} onClick={item.action && item.action}>{item.icon}</Link>
                                 </SidebarIcon>
                             )
                         }

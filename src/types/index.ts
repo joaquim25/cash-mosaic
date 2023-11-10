@@ -1,14 +1,11 @@
 //Navbar
-export type navData = {
-    links: {
-        href: string;
-        content: string;
-    }[]
-    icons: {
-        href: string;
-        tag: string;
-    }[];
-}[]
+export type NavItem = {
+    href: string;
+    content?: string;
+    icon?: React.ReactNode;
+    class?: string;
+    action?: () => void;
+}
 
 
 // Login & Sign-up
