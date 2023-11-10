@@ -2,8 +2,38 @@ import { HiOutlineMail } from 'react-icons/hi';
 import { FiGithub, FiLinkedin } from 'react-icons/fi';
 import { CopyrightText, FooterContainer, FooterLinks, FooterLogo, SocialLinksContainer } from "@/styles/FooterStyles"
 import Image from "next/image"
+import { useSelector } from 'react-redux';
+import { FooterLink, RootState } from '@/types';
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
 
 function Footer() {
+    const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
+    const [footerLinks, setFooterLinks] = useState<FooterLink[]>();
+
+    useEffect(() => {
+        if (isLoggedIn) {
+            setFooterLinks([
+                { href: "/", content: "Homepage" },
+                { href: "/dashboard", content: "Dashboard" },
+                { href: "/profile", content: "Profile" },
+                { href: "/#", content: "Terms" },
+                { href: "/#", content: "Privacy" },
+                { href: "/#", content: "About" }
+            ])
+        } else {
+            setFooterLinks([
+                { href: "/", content: "Homepage" },
+                { href: "/login", content: "Login" },
+                { href: "/signup", content: "Sign-up" },
+                { href: "/#", content: "Terms" },
+                { href: "/#", content: "Privacy" },
+                { href: "/#", content: "About" }
+            ])
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isLoggedIn]);
+
     return (
         <FooterContainer>
             <FooterLogo>
@@ -12,10 +42,9 @@ function Footer() {
                 </a>
             </FooterLogo>
             <FooterLinks>
-                <li><a href='#'>Dashboard</a></li>
-                <li><a href='#'>Profile</a></li>
-                <li><a href='#'>Login</a></li>
-                <li><a href='#'>Sign-up</a></li>
+                {footerLinks && footerLinks.map((item, index) => (
+                    <li key={index}><Link href={item.href}>{item.content}</Link></li>
+                ))}
             </FooterLinks>
             <SocialLinksContainer>
                 <HiOutlineMail />

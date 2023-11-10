@@ -20,19 +20,26 @@ export const FooterLogo = styled.div`
 `
 
 export const FooterLinks = styled.ul`
-    list-style-type: none;
-    display: flex;
-    flex-direction: column;
-    font-size: .8rem;
+    display: none;
 
-    & li{
-        & a:hover {
-            font-weight: 500;
-            transition: all .2s ease-in-out;
+    @media (min-width: 425px){
+        list-style-type: none;
+        display: grid;
+        grid-template-rows: repeat(3,1fr);
+        grid-auto-flow: column;
+        column-gap: 10px;
+        font-size: .8rem;
+
+        & li{
+            & a:hover {
+                font-weight: 500;
+                transition: all .2s ease-in-out;
+            }
         }
     }
 
     @media (min-width: 1024px){
+        display: flex;
         flex-direction: row;
         gap: 10px;
         font-size: .9rem;
@@ -51,6 +58,8 @@ export const FooterLinks = styled.ul`
 
 export const SocialLinksContainer = styled.div`
     display: flex;
+    justify-content: flex-end;
+    min-width: 90px;
     gap: 5px;
 
     & svg{

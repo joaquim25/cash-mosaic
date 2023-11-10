@@ -7,6 +7,11 @@ export type NavItem = {
     action?: () => void;
 }
 
+//Footer
+export type FooterLink = {
+    href: string;
+    content: string;
+}
 
 // Login & Sign-up
 export type Fields = {
