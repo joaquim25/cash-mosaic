@@ -129,7 +129,7 @@ export const SidebarIcon = styled.div`
     order: 0;
     margin: auto 0 auto auto;
 
-    :nth-child(even){
+    :nth-of-type(even){
         margin-left: 0;
         margin-right: auto;
     }

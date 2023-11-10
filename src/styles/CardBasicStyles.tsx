@@ -66,5 +66,6 @@ export const CardIcon = styled.div <{ bgColor: string }> `
 
     & img{
         height: 12px;
+        width: auto;
     }
 `
