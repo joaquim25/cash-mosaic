@@ -1,3 +1,16 @@
+//Navbar
+export type navData = {
+    links: {
+        href: string;
+        content: string;
+    }[]
+    icons: {
+        href: string;
+        tag: string;
+    }[];
+}[]
+
+
 // Login & Sign-up
 export type Fields = {
     name: "email" | "password" | "firstname" | "lastname",
@@ -13,7 +26,7 @@ export type FormValues = {
     password: string
 }
 
-// REDUX General
+// REDUX
 export interface RootState {
     user: User;
 }
@@ -26,9 +39,6 @@ export interface Action {
 // userReducer
 export interface User {
     id: number | null;
-    firstname: string;
-    lastname: string;
-    location: string;
-    bio: string;
+    name: string;
     isLoggedIn: boolean;
 }
