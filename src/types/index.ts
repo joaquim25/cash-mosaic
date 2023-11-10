@@ -17,7 +17,8 @@ export type FooterLink = {
 export type Fields = {
     name: "email" | "password" | "firstname" | "lastname",
     label: string,
-    type: string
+    type: string,
+    autocomplete?: string
 }[];
 
 // AuthForm

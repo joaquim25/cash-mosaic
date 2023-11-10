@@ -89,6 +89,7 @@ export const AuthForm = ({ fields, title }: propTypes) => {
                                 name={field.name}
                                 value={values[field.name]}
                                 onChange={(e) => onInputChange(e)}
+                                autoComplete={field.autocomplete && field.autocomplete}
                                 required
                             />
                         </FieldContainer>
