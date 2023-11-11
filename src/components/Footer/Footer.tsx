@@ -1,11 +1,12 @@
+import { CopyrightText, FooterContainer, FooterLinks, FooterLogo, SocialLinksContainer } from "@/components/Footer/styles/FooterStyles"
 import { HiOutlineMail } from 'react-icons/hi';
 import { FiGithub, FiLinkedin } from 'react-icons/fi';
-import { CopyrightText, FooterContainer, FooterLinks, FooterLogo, SocialLinksContainer } from "@/styles/FooterStyles"
 import Image from "next/image"
-import { useSelector } from 'react-redux';
-import { FooterLink, RootState } from '@/types';
-import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { RootState } from '@/types';
+import { FooterLink } from './types';
 
 function Footer() {
     const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);

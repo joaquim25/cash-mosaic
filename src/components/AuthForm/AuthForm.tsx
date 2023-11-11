@@ -1,19 +1,16 @@
-import { AuthContainer, ExtraFormLinks, FieldContainer, FormContainer, FormImageContainer, FormInput, FormTitle, StyledAuthForm } from "@/styles/AuthFormStyles";
+import { AuthContainer, ExtraFormLinks, FieldContainer, FormContainer, FormImageContainer, FormInput, FormTitle, StyledAuthForm } from "@/components/AuthForm/styles/styles";
 import { DefaultButton } from "@/styles/GlobalStyles";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from 'next/router';
 import { ChangeEvent, useState } from "react";
 import { Alert, Snackbar } from "@mui/material";
-import { Fields, FormValues } from "@/types";
 import { authLogin, authSignup } from "@/pages/api/auth";
 import { useDispatch } from "react-redux";
 import { logIn } from "@/store/user/actions";
+import { FormValues, propTypes } from "./types";
 
-type propTypes = {
-    fields: Fields,
-    title: string
-}
+
 
 export const AuthForm = ({ fields, title }: propTypes) => {
     const [submitRequest, setSubmitRequest] = useState({ isLoading: false, submited: false, error: false, errorMessage: "" });

@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { THEME_COLORS } from "./GlobalStyles";
+import { THEME_COLORS } from "../../../styles/GlobalStyles";
 // import { THEME_COLORS } from "./GlobalStyles";
 
 export const NavbarContainer = styled.div`

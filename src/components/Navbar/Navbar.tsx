@@ -1,7 +1,3 @@
-import { IoIosMenu } from 'react-icons/io';
-import { LiaUser } from 'react-icons/lia';
-import { MdOutlineLogout } from 'react-icons/md';
-import { AiOutlineClose } from 'react-icons/ai';
 import {
     CloseIconContainer,
     DesktopNavItemsContainer,
@@ -14,10 +10,15 @@ import {
     SidebarIcon,
     SidebarItems,
     SidebarTitle
-} from "@/styles/NavbarStyles";
+} from "@/components/Navbar/styles/NavbarStyles";
+import { IoIosMenu } from 'react-icons/io';
+import { LiaUser } from 'react-icons/lia';
+import { MdOutlineLogout } from 'react-icons/md';
+import { AiOutlineClose } from 'react-icons/ai';
 import Image from "next/image"
 import Link from 'next/link';
-import { NavItem, RootState } from '@/types';
+import { RootState } from '@/types';
+import { NavItem } from './types';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from '@/store/user/actions';

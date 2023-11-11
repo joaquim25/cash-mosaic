@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { THEME_COLORS } from "./GlobalStyles";
+import { THEME_COLORS } from "../../../styles/GlobalStyles";
 
 export const CardContainer = styled.div <{ size: string; bgColor: string }>`
     border-radius: 24px;

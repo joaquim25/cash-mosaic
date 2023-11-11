@@ -12,7 +12,6 @@ export const AuthContainer = styled.div`
 export const FormImageContainer = styled.div`
     display: none;
 
-
     @media (min-width: 768px) {
         display: flex;
 

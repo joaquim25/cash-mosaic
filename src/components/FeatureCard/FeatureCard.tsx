@@ -1,14 +1,7 @@
-import { CardContainer, CardIcon, CardText, CardUnList } from "@/styles/CardBasicStyles"
+import { CardContainer, CardIcon, CardText, CardUnList } from "@/components/FeatureCard/styles/FeatureCardStyles"
 import Image from "next/image"
 
-type Card = {
-    size: string;
-    icon: string;
-    color: string;
-    content: string | string[];
-}
-
-function CardBasic({ card }: { card: Card }) {
+function FeatureCard({ card }: { card: Card }) {
     return (
         <CardContainer size={card.size} bgColor={card.color}>
             <CardIcon bgColor={card.color}>
@@ -27,4 +20,4 @@ function CardBasic({ card }: { card: Card }) {
     )
 }
 
-export default CardBasic
+export default FeatureCard
