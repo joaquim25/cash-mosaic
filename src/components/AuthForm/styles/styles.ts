@@ -1,3 +1,4 @@
+import { THEME_COLORS } from "@/styles/GlobalStyles";
 import styled from "@emotion/styled";
 
 export const AuthContainer = styled.div`
@@ -16,7 +17,7 @@ export const FormImageContainer = styled.div`
         display: flex;
 
         & img {
-            border-left: 2px solid rgba(100,100,100,.5);
+            border-left: 2px solid ${THEME_COLORS.grey_border};
             top: 0;
             right: 0;
             position: absolute;
@@ -30,10 +31,10 @@ export const FormImageContainer = styled.div`
 `
 
 export const FormContainer = styled.div`
-  display: flex;
-  gap: 1rem;
-  flex-direction: column;
-  align-items: center;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    align-items: center;
 `;
 
 export const FormTitle = styled.h1`
@@ -74,12 +75,12 @@ export const FormInput = styled.input`
     outline: none;
 
     :hover {
-        border: 2px solid rgba(100, 100, 100, 0.6);
+        border: 2px solid ${THEME_COLORS.grey_border};
     }
 `
 
 export const ExtraFormLinks = styled.div`
-    color: #333;
+    color: ${THEME_COLORS.grey_text};
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -92,9 +93,10 @@ export const ExtraFormLinks = styled.div`
 
     & a {
         text-decoration: underline;
+        font-weight: 600;
 
         :hover {
-            font-weight: 500;
+            opacity: .8;
         }
     }
 `;

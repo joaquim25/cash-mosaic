@@ -7,12 +7,12 @@ export const HomepageContainer = styled.div`
 
 // Hero Section
 export const HeroSection = styled.div`
-    border-top: 2px solid rgba(0,0,0,.2);
-    border-bottom: 2px solid rgba(0,0,0,.2);
+    border-top: 2px solid ${THEME_COLORS.grey_border};
+    border-bottom: 2px solid ${THEME_COLORS.grey_border};
     display: flex;
     flex-direction: column;
     gap: 20px;
-    background-color: rgba(226, 238, 215, .7);
+    background-color: ${THEME_COLORS.green_light};
     padding: 2rem 2rem;
 
     @media (min-width: 1024px){
@@ -57,11 +57,11 @@ export const HeroText = styled.p`
     margin-bottom: 40px;
     text-align: center;
     font-size: 1.1rem;
-    color: rgba(0,0,0,.8);
+    color: ${THEME_COLORS.text_prim};
 
     & span{
         font-weight: 600;
-        color: rgb(0,0,0);
+        color: black;
     }
 `
 
@@ -104,7 +104,6 @@ export const FeatureSectionSubHeading = styled.h3`
     width: 80%;
     max-width: 850px;
     text-align: center;
-    color: ${THEME_COLORS.success};
-    opacity: .5;
-    border-bottom: 3px solid ${THEME_COLORS.success};
+    color: ${THEME_COLORS.green_normal};
+    border-bottom: 3px solid ${THEME_COLORS.green_normal};
 `

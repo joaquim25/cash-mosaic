@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import { THEME_COLORS } from "../../../styles/GlobalStyles";
-// import { THEME_COLORS } from "./GlobalStyles";
 
 export const NavbarContainer = styled.div`
     padding: 0 24px;
@@ -13,11 +12,11 @@ export const NavbarContainer = styled.div`
         width: 30px;
         height: 30px;
         cursor: pointer;
-        color: rgba(0,0,0,.3);
+        color: ${THEME_COLORS.svg_prim};
         transition: all .2s ease-in-out;
 
         :hover {
-            color: rgba(0,0,0,.8);
+            color: ${THEME_COLORS.svg_prim_hover};
         }
     }
 
@@ -31,9 +30,9 @@ export const NavbarContainer = styled.div`
 `
 
 export const HambuguerIcon = styled.div`
-@media (min-width: 1024px){
-    display: none;
-}
+    @media (min-width: 1024px){
+        display: none;
+    }
 `
 
 export const SidebarFadedBackground = styled.div<{ showSidebar: boolean }>`
@@ -89,11 +88,11 @@ export const CloseIconContainer = styled.div`
         width: 20px;
         height: 20px;
         cursor: pointer;
-        color: rgba(0,0,0,.3);
+        color: ${THEME_COLORS.svg_prim};
         transition: all .2s ease-in-out;
 
         :hover {
-            color: rgba(0,0,0,.8);
+            color: ${THEME_COLORS.svg_prim_hover};
         }
     }
 `
@@ -105,8 +104,6 @@ export const SidebarTitle = styled.h2`
 export const SidebarItems = styled.ul`
     list-style-type: none;
     margin-top: 20px;
-
-    // flex-direction: column;
     display: grid;
     justify-items: center;
     grid-template-columns: 1fr 1fr;
@@ -137,21 +134,22 @@ export const SidebarIcon = styled.div`
     & svg{
         width: 35px;
         height: 35px;
-        color: ${THEME_COLORS.greyText};
+        color: ${THEME_COLORS.svg_prim};
 
         :hover {
-            color: rgba(0,0,0,.8);
+            color: ${THEME_COLORS.svg_prim_hover};
         }
     }
 
     .logout-icon{
-        background-color: rgba(174, 78, 78, .8);
+        background-color: ${THEME_COLORS.danger};
+        opacity: .8;
         border-radius: 50%;
-        padding: 5px 7px;
+        padding: 4px 6px;
         transition: all .2s ease-in-out;
 
         :hover {
-            background-color: rgb(174, 78, 78);
+            opacity: 1;
         }
 
         & svg{
@@ -170,7 +168,7 @@ export const DesktopNavItemsContainer = styled.ul`
     flex: 1 0 auto;
     list-style-type: none;
     font-weight: 500;
-    color: rgba(0,0,0,.6);
+    color: ${THEME_COLORS.text_prim};
 
     gap: 20px;
     justify-content: flex-end;
@@ -182,11 +180,9 @@ export const DesktopNavItemsContainer = styled.ul`
 `
 
 export const NavItemLink = styled.li`
-& a:hover {
-    font-weight: 600;
-    color: rgba(0,0,0,.8);
-    transition: all .2s ease-in-out;
-}
+    & a:hover {
+        font-weight: 600;
+    }
 `
 
 export const NavItemIcon = styled.div`
@@ -198,15 +194,16 @@ export const NavItemIcon = styled.div`
 
     .logout-icon{
         margin-left: -10px;
-        background-color: rgba(174, 78, 78, .65);
+        background-color: ${THEME_COLORS.danger};
+        opacity: .8;
         width: 25px;
         height: 25px;
         border-radius: 50%;
-        padding: 4px 7px;
+        padding: 4px 6px;
         transition: all .2s ease-in-out;
 
         :hover {
-            background-color: rgb(174, 78, 78);
+            opacity: 1;
         }
 
         & a{
@@ -214,7 +211,6 @@ export const NavItemIcon = styled.div`
         }
 
         & svg{
-            padding: auto;
             width: 15px;
             height: 15px;
             color: white;

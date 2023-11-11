@@ -33,7 +33,7 @@ export const CardText = styled.p`
     flex: 1 0 auto;
     font-size: .8rem;
     font-weight: 400;
-    color: ${THEME_COLORS.greyText};
+    color: ${THEME_COLORS.grey_text};
 
     @media (min-width: 425px){
         font-size: 1rem;
@@ -46,7 +46,7 @@ export const CardUnList = styled.ul`
     flex: 1 0 auto;
     font-size: .8rem;
     font-weight: 400;
-    color: ${THEME_COLORS.greyText};
+    color: ${THEME_COLORS.grey_text};
     list-style-type: circle;
 
     @media (min-width: 425px){
@@ -61,7 +61,7 @@ export const CardIcon = styled.div <{ bgColor: string }> `
     left: 15px;
     top: 15px;
     background-color: ${props => props.bgColor};
-    padding: 3px;
+    padding: 4px 7px;
     border-radius: 50%;
 
     & img{

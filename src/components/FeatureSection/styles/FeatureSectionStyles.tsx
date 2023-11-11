@@ -15,11 +15,11 @@ export const FeatureContainer = styled.div<{ isInverted: boolean }>`
         "img cards";
 
     ${({ isInverted }) => isInverted && `
-    padding-top: 20px;
-    border-top: 2px solid rgba(0,101,85,.2);
-    grid-template-areas:
-    "header header"
-    "cards img";
+        padding-top: 20px;
+        border-top: 2px solid ${THEME_COLORS.green_normal};
+        grid-template-areas:
+        "header header"
+        "cards img";
     `}
 
     @media (min-width: 1024px){
@@ -61,7 +61,7 @@ export const FeatureSubHeading = styled.h3`
 export const FeatureText = styled.p`
     text-align: center;
     font-size: 1.1rem;
-    color: rgba(0, 0, 0, .6);
+    color: ${THEME_COLORS.text_prim};
     max-width: 400px;
     margin: 0 auto;
 `

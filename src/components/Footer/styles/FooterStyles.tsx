@@ -1,5 +1,5 @@
+import { THEME_COLORS } from "@/styles/GlobalStyles";
 import styled from "@emotion/styled";
-// import { THEME_COLORS } from "./GlobalStyles";
 
 export const FooterContainer = styled.div`
     position: relative;
@@ -66,10 +66,10 @@ export const SocialLinksContainer = styled.div`
         width: 16px;
         height: 16px;
         cursor: pointer;
-        color: rgba(0,0,0,.8);
+        color: ${THEME_COLORS.text_prim};
 
         :hover {
-            color: rgb(0,0,0);
+            color: black;
         }
 
         @media (min-width: 1024px){
