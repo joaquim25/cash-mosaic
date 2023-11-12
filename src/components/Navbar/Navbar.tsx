@@ -17,7 +17,7 @@ import { MdOutlineLogout } from 'react-icons/md';
 import { AiOutlineClose } from 'react-icons/ai';
 import Image from "next/image"
 import Link from 'next/link';
-import { RootState } from '@/types';
+import { RootState } from '@/store/types';
 import { NavItem } from './types';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";

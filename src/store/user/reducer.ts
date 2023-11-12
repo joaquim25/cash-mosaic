@@ -1,4 +1,4 @@
-import { Action, User } from "@/types";
+import { Action, User } from "../types";
 import { actions } from "./actions";
 
 const authToken = typeof localStorage !== 'undefined' ? localStorage.getItem("authToken") : null;
@@ -26,11 +26,16 @@ export const userReducer = (state: User = initialState, action: Action) => {
                 ...state,
                 isLoggedIn: false,
             };
-        case actions.SET_USER:
+        case actions.GET_PROFILE_INFO:
+            console.log("[reducer.ts] payload: ", action.payload)
+            const { id, firstname, lastname, location, bio } = action.payload;
             return {
-                id: action.payload.id,
-                name: action.payload.name,
-                lists: action.payload.user_lists,
+                ...state,
+                id,
+                firstname,
+                lastname,
+                location,
+                bio,
                 isLoggedIn: true,
             };
         default:

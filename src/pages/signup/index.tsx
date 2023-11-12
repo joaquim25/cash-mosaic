@@ -1,6 +1,5 @@
 import { AuthForm } from '@/components/AuthForm/AuthForm';
-import { Fields } from '@/types';
-import React from 'react'
+import { Fields } from '@/components/AuthForm/types';
 
 
 

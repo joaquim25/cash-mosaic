@@ -1,4 +1,4 @@
-// REDUX global
+// store global
 export interface RootState {
     user: User;
 }
@@ -11,6 +11,9 @@ export interface Action {
 // userReducer
 export interface User {
     id: number | null;
-    name: string;
+    firstname: string;
+    lastname: string;
+    location: string;
+    bio: string;
     isLoggedIn: boolean;
 }
