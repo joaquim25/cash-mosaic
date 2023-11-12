@@ -22,13 +22,17 @@ import { NavItem } from './types';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from '@/store/user/actions';
+import ConfimationModal from "../ConfirmationModal/ConfirmationModal";
 
 function Navbar() {
     const [showSidebar, setShowSidebar] = useState(false);
     const [navItems, setNavItems] = useState<NavItem[]>();
-
     const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
     const dispatch = useDispatch();
+
+
+    const [showLogoutConfirmation, setShowLogoutConfirmation] = useState(false);
+    const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
 
 
@@ -50,9 +54,12 @@ function Navbar() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoggedIn]);
 
-    const onLogoutClick = () => {
-        setShowSidebar(false);
-        dispatch(logOut());
+    const onLogoutClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        // setShowSidebar(false);
+        // dispatch(logOut());
+
+        setShowLogoutConfirmation(true);
+        setAnchorEl(event.currentTarget);
     }
 
     const toggleShowSidebar = () => {
@@ -122,6 +129,15 @@ function Navbar() {
                 </SidebarItems>
 
             </Sidebar>
+
+            {showLogoutConfirmation && (
+                <ConfimationModal
+                    open={showLogoutConfirmation}
+                    anchorEl={anchorEl}
+                    onClose={() => setShowLogoutConfirmation(false)}
+                    action={() => dispatch(logOut())}
+                />
+            )}
         </>
     )
 }

@@ -3,5 +3,5 @@ export type NavItem = {
     content?: string;
     icon?: React.ReactNode;
     class?: string;
-    action?: () => void;
+    action?: any;
 }
