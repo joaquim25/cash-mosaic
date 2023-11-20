@@ -35,7 +35,6 @@ export const AuthForm = ({ fields, title }: propTypes) => {
             e.preventDefault();
 
             const response = title === "Login" ? await authLogin(values) : await authSignup(values);
-
             dispatch(logIn(response.data.authToken));
 
             // Change submit request state to show success snackbar

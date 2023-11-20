@@ -22,7 +22,8 @@ import { NavItem } from './types';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from '@/store/user/actions';
-import ConfimationModal from "../ConfirmationModal/ConfirmationModal";
+import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
+import { AnyAction } from "@reduxjs/toolkit";
 
 function Navbar() {
     const [showSidebar, setShowSidebar] = useState(false);
@@ -42,7 +43,7 @@ function Navbar() {
                 { href: "/", content: "Homepage" },
                 { href: "/dashboard", content: "Dashboard" },
                 { href: "/profile", icon: <LiaUser /> },
-                { href: "/", class: "logout-icon", icon: <MdOutlineLogout />, action: onLogoutClick },
+                { href: "#", class: "logout-icon", icon: <MdOutlineLogout />, action: onLogoutClick },
             ])
         } else {
             setNavItems([
@@ -55,12 +56,10 @@ function Navbar() {
     }, [isLoggedIn]);
 
     const onLogoutClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        // setShowSidebar(false);
-        // dispatch(logOut());
-
         setShowLogoutConfirmation(true);
         setAnchorEl(event.currentTarget);
     }
+
 
     const toggleShowSidebar = () => {
         setShowSidebar(prevVal => !prevVal);
@@ -128,16 +127,15 @@ function Navbar() {
                     })}
                 </SidebarItems>
 
-            </Sidebar>
-
-            {showLogoutConfirmation && (
-                <ConfimationModal
+                <ConfirmationModal
                     open={showLogoutConfirmation}
                     anchorEl={anchorEl}
                     onClose={() => setShowLogoutConfirmation(false)}
-                    action={() => dispatch(logOut())}
+                    action={() => dispatch(logOut() as unknown as AnyAction)}
                 />
-            )}
+            </Sidebar>
+
+
         </>
     )
 }

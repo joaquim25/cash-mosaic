@@ -15,5 +15,6 @@ export interface User {
     lastname: string;
     location: string;
     bio: string;
+    authToken?: string;
     isLoggedIn: boolean;
 }

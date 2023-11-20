@@ -1,18 +1,14 @@
 import React, { useState, useEffect } from 'react';
-
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import { ButtonsContainer, CancelButton, ConfimationModalText, ConfirmButton, StyledPopover } from './styles/ConfirmationModalStyles';
-import { DefaultButton } from '@/styles/GlobalStyles';
 
 interface ConfirmationModalProps {
     open: boolean;
     anchorEl: HTMLButtonElement | null;
     onClose: () => void;
-    action: () => void;
+    action: any;
 }
 
-function ConfimationModal({ open, anchorEl, onClose, action }: ConfirmationModalProps) {
+function ConfirmationModal({ open, anchorEl, onClose, action }: ConfirmationModalProps) {
     const [localOpen, setLocalOpen] = useState(open);
 
     useEffect(() => {
@@ -56,4 +52,4 @@ function ConfimationModal({ open, anchorEl, onClose, action }: ConfirmationModal
     );
 }
 
-export default ConfimationModal;
+export default ConfirmationModal;
