@@ -22,9 +22,10 @@ function ProfilePage({ user }: ProfilePageProps) {
 export const getServerSideProps: GetServerSideProps<ProfilePageProps> = async (context) => {
     try {
         const cookieHeader = context.req.headers.cookie;
+        const parsedCookies = cookie.parse(cookieHeader!);
 
-        if (!cookieHeader) {
-            // If the cookie header is undefined, redirect to login page
+        if (!parsedCookies.authToken) {
+            // If there is no authToken, redirect to login page
             return {
                 redirect: {
                     destination: '/login',
@@ -33,7 +34,6 @@ export const getServerSideProps: GetServerSideProps<ProfilePageProps> = async (c
             };
         }
 
-        const parsedCookies = cookie.parse(cookieHeader);
         const user = await fetchProfileData(parsedCookies.authToken);
 
         return {
