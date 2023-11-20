@@ -1,26 +1,14 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setProfileInfo } from "@/store/user/actions";
-import { ThunkDispatch } from "redux-thunk";
-import { AnyAction } from "redux";
-import { RootState } from "@/store/types";
+import React from "react";
+import { GetServerSideProps } from "next";
+import { fetchProfileData } from "../api/profile";
+import { User } from "@/store/types";
+import * as cookie from 'cookie'
 
-function ProfilePage() {
-    const dispatch = useDispatch<ThunkDispatch<any, any, AnyAction>>();
-    const user = useSelector((state: RootState) => state.user);
+type ProfilePageProps = {
+    user: User;
+};
 
-    useEffect(() => {
-        const getProfileInfo = async () => {
-            try {
-                await dispatch(setProfileInfo());
-            } catch (error) {
-                console.error(error);
-            }
-        };
-
-        getProfileInfo();
-    }, [dispatch]);
-
+function ProfilePage({ user }: ProfilePageProps) {
     return (
         <div>
             <h1>ProfilePage</h1>
@@ -30,5 +18,34 @@ function ProfilePage() {
         </div>
     );
 }
+
+export const getServerSideProps: GetServerSideProps<ProfilePageProps> = async (context) => {
+    try {
+        const cookieHeader = context.req.headers.cookie;
+
+        if (!cookieHeader) {
+            // If the cookie header is undefined, redirect to login page
+            return {
+                redirect: {
+                    destination: '/login',
+                    permanent: false,
+                },
+            };
+        }
+
+        const parsedCookies = cookie.parse(cookieHeader);
+        const user = await fetchProfileData(parsedCookies.authToken);
+
+        return {
+            props: {
+                user,
+            },
+        };
+    } catch (error) {
+        console.error("Error in getServerSideProps: ", error);
+
+        throw error;
+    }
+};
 
 export default ProfilePage;
