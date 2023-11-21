@@ -7,17 +7,16 @@ import ProfileFormContainer from "@/components/ProfileFormContainer";
 import { simplifyUserData } from "../../../utils";
 import { useDispatch } from "react-redux";
 import { setUser } from "@/store/user/actions";
+import { Alert, Snackbar } from "@mui/material";
+import axios from "axios";
 
 type ProfilePageProps = {
     user: User;
 };
 
-//TO-DO's:
-//-submit logic
-
-
 function ProfilePage({ user }: ProfilePageProps) {
     const dispatch = useDispatch();
+    const [submitChangesRequestState, setSubmitChangesRequestState] = useState({ success: false, error: false, errorMessage: "" });
     const [userData, setUserData] = useState({
         firstname: { value: user.firstname, isEditing: false },
         lastname: { value: user.lastname, isEditing: false },
@@ -92,12 +91,54 @@ function ProfilePage({ user }: ProfilePageProps) {
         const newUserData = simplifyUserData(userData);
         try {
             const response = await changeProfileData(user.id, newUserData);
-
-            console.log(response)
+            //update the user local state
             dispatch(setUser(response));
+
+            //show a success message
+            setSubmitChangesRequestState(
+                {
+                    ...submitChangesRequestState,
+                    success: true,
+                }
+            )
+            setTimeout(() => {
+                setSubmitChangesRequestState(
+                    {
+                        ...submitChangesRequestState,
+                        success: false,
+                    }
+                )
+            }, 3000);
         } catch (error) {
             console.error("Error updating profile data: ", error);
-            // Handle error, show a message to the user, etc.
+            //show an error message
+            if (axios.isAxiosError(error)) {
+                setSubmitChangesRequestState(
+                    {
+                        ...submitChangesRequestState,
+                        error: true,
+                        errorMessage: error!.response?.data?.message
+                    }
+                )
+            } else {
+                setSubmitChangesRequestState(
+                    {
+                        ...submitChangesRequestState,
+                        error: true,
+                        errorMessage: "Sorry, an error ocurred."
+                    }
+                )
+            }
+
+            setTimeout(() => {
+                setSubmitChangesRequestState(
+                    {
+                        ...submitChangesRequestState,
+                        error: false,
+                        errorMessage: "",
+                    }
+                )
+            }, 4000);
         }
     };
 
@@ -121,6 +162,22 @@ function ProfilePage({ user }: ProfilePageProps) {
                 handleEditActionField={handleEditActionField}
                 cancelChanges={cancelChanges} submitChanges={submitChanges}
             />
+
+            <Snackbar
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                open={submitChangesRequestState.error}
+                autoHideDuration={5000}
+            >
+                <Alert severity="error">{submitChangesRequestState.errorMessage}</Alert>
+            </Snackbar>
+
+            <Snackbar
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                open={submitChangesRequestState.success}
+                autoHideDuration={5000}
+            >
+                <Alert severity="success">Success!! Your profile changes were sent!</Alert>
+            </Snackbar>
         </>
     );
 }
