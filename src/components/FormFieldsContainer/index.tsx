@@ -1,18 +1,22 @@
-import React from 'react';
-import { FieldContainer, Input, Label, TextArea } from "./styles/index"
+import React, { ChangeEvent } from 'react';
+import { CheckIconContainer, DismissIconContainer, EditIconContainer, EditingIconsContainer, FieldContainer, Input, Label, TextArea } from "./styles/index"
+import { FaRegEdit } from "react-icons/fa";
+import { IoMdCheckmark, IoMdClose } from "react-icons/io";
 
 type FormFieldsContainerProps = {
     fields: {
         label: string;
         type: string;
-        name: string;
+        name: "firstname" | "lastname" | "location" | "bio" | "password";
         value: string;
         isEditing: boolean;
     }[];
-    handleFieldChange: any;
+    handleFieldChange: (fieldname: "firstname" | "lastname" | "location" | "bio" | "password", e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => void;
+    handleEditActionField: (action: "edit" | "save" | "dismiss", fieldname: "firstname" | "lastname" | "location" | "bio" | "password") => void;
 };
 
-function FormFieldsContainer({ fields, handleFieldChange }: FormFieldsContainerProps) {
+function FormFieldsContainer({ fields, handleFieldChange, handleEditActionField }: FormFieldsContainerProps) {
+
     return (
         <>
             {fields.map((field) => (
@@ -24,6 +28,7 @@ function FormFieldsContainer({ fields, handleFieldChange }: FormFieldsContainerP
                             value={field.value}
                             onChange={(e) => handleFieldChange(field.name, e)}
                             rows={8}
+                            disabled={!field.isEditing}
                         />
 
                         : field.type === "password" && field.isEditing === true ?
@@ -32,15 +37,29 @@ function FormFieldsContainer({ fields, handleFieldChange }: FormFieldsContainerP
                                 name={field.name}
                                 value={field.value}
                                 onChange={(e) => handleFieldChange(field.name, e)}
+                                disabled={!field.isEditing}
                             />
                             : <Input
                                 type={field.type}
                                 name={field.name}
                                 value={field.value}
                                 onChange={(e) => handleFieldChange(field.name, e)}
+                                disabled={!field.isEditing}
                             />
 
                     }
+
+                    <EditIconContainer isEditing={field.isEditing} onClick={() => handleEditActionField("edit", field.name)}>
+                        <FaRegEdit />
+                    </EditIconContainer>
+                    <EditingIconsContainer isEditing={field.isEditing}>
+                        <CheckIconContainer onClick={() => handleEditActionField("save", field.name)}>
+                            <IoMdCheckmark />
+                        </CheckIconContainer>
+                        <DismissIconContainer onClick={() => handleEditActionField("dismiss", field.name)}>
+                            <IoMdClose />
+                        </DismissIconContainer>
+                    </EditingIconsContainer>
                 </FieldContainer>
             ))}
         </>

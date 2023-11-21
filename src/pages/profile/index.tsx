@@ -3,15 +3,13 @@ import { GetServerSideProps } from "next";
 import { fetchProfileData } from "../api/profile";
 import { User } from "@/store/types";
 import * as cookie from 'cookie'
-import FormFieldsContainer from "@/components/FormFieldsContainer";
-import { EditButton, ProfileContainer } from "@/components/FormFieldsContainer/styles";
+import ProfileFormContainer from "@/components/ProfileFormContainer";
 
 type ProfilePageProps = {
     user: User;
 };
 
 //TO-DO's:
-//-inputs have independent edit & save & cancel buttons
 //-submit logic
 
 
@@ -21,47 +19,72 @@ function ProfilePage({ user }: ProfilePageProps) {
         lastname: { value: user.lastname, isEditing: false },
         location: { value: user.location, isEditing: false },
         bio: { value: user.bio, isEditing: false },
-        password: { value: "32FAsdhQ2", isEditing: false }
+        password: { value: "password", isEditing: false },
     });
 
     type UserDataKeys = keyof typeof userData;
 
-    const handleEditClick = () => {
-        setUserData({
-            firstname: { value: user.firstname, isEditing: true },
-            lastname: { value: user.lastname, isEditing: true },
-            location: { value: user.location, isEditing: true },
-            bio: { value: user.bio, isEditing: true },
-            password: { value: "*******", isEditing: true },
-        });
+    const handleFieldChange = (
+        fieldname: UserDataKeys,
+        e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
+    ) => {
+        setUserData((prevUserData) => ({
+            ...prevUserData,
+            [fieldname]: {
+                ...prevUserData[fieldname],
+                value: e.target.value,
+            },
+        }));
     };
 
-    const handleCancelClick = () => {
-        // TO-DO: Reset the field data to the original user data
-        setUserData({
-            firstname: { value: user.firstname, isEditing: false },
-            lastname: { value: user.lastname, isEditing: false },
-            location: { value: user.location, isEditing: false },
-            bio: { value: user.bio, isEditing: false },
-            password: { value: "32FAsdhQ2", isEditing: false },
-        });
-    };
+    const handleEditActionField = (action: "edit" | "save" | "dismiss", fieldname: UserDataKeys) => {
+        switch (action) {
+            case "edit":
+                setUserData((prevUserData) => ({
+                    ...prevUserData,
+                    [fieldname]: {
+                        ...prevUserData[fieldname],
+                        isEditing: true,
+                    },
+                }));
+                break;
+            case "save":
+                setUserData((prevUserData) => ({
+                    ...prevUserData,
+                    [fieldname]: {
+                        ...prevUserData[fieldname],
+                        isEditing: false,
+                    },
+                }));
+                break;
+            case "dismiss":
+                //return to prevValue
+                if (fieldname === "password") {
+                    setUserData((prevUserData) => ({
+                        ...prevUserData,
+                        [fieldname]: {
+                            ...prevUserData[fieldname],
+                            value: "password",
+                            isEditing: false,
+                        },
+                    }));
+                } else {
+                    setUserData((prevUserData) => ({
+                        ...prevUserData,
+                        [fieldname]: {
+                            ...prevUserData[fieldname],
+                            value: user[fieldname],
+                            isEditing: false,
+                        },
+                    }));
+                }
+                break;
+            default:
+                return;
+        }
+    }
 
-    const handleFieldChange = (fieldname: UserDataKeys, e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
-        setUserData((prevUserData) => {
-            const isEditing = prevUserData[fieldname].isEditing;
-            return {
-                ...prevUserData,
-                [fieldname]: {
-                    ...prevUserData[fieldname],
-                    value: e.target.value,
-                    isEditing: isEditing,
-                },
-            };
-        });
-    };
-
-    const handleFormSubmit = async () => {
+    const submitChanges = async () => {
         try {
             console.log("submit")
             // Logic to update the user's profile data on the server
@@ -76,69 +99,22 @@ function ProfilePage({ user }: ProfilePageProps) {
         }
     };
 
+    const cancelChanges = () => {
+        setUserData({
+            firstname: { value: user.firstname, isEditing: false },
+            lastname: { value: user.lastname, isEditing: false },
+            location: { value: user.location, isEditing: false },
+            bio: { value: user.bio, isEditing: false },
+            password: { value: "password", isEditing: false },
+        })
+    }
+
     return (
-        <ProfileContainer>
+        <>
             <h1>{user.firstname}&apos;s Profile</h1>
 
-            <FormFieldsContainer
-                fields={[
-                    {
-                        label: "First Name:",
-                        type: "text",
-                        name: "firstname",
-                        value: userData.firstname.value,
-                        isEditing: userData.firstname.isEditing
-                    },
-                    {
-                        label: "Last Name:",
-                        type: "text",
-                        name: "lastname",
-                        value: userData.lastname.value,
-                        isEditing: userData.lastname.isEditing
-                    }
-                ]}
-                handleFieldChange={handleFieldChange}
-            />
-
-            <FormFieldsContainer
-                fields={[
-                    {
-                        label: "Location:",
-                        type: "text",
-                        name: "location",
-                        value: userData.location.value,
-                        isEditing: userData.location.isEditing
-                    },
-                    {
-                        label: "Bio:",
-                        type: "textarea",
-                        name: "bio",
-                        value: userData.bio.value,
-                        isEditing: userData.bio.isEditing
-                    }
-                ]}
-                handleFieldChange={handleFieldChange}
-            />
-
-            <FormFieldsContainer
-                fields={[
-                    {
-                        label: "Password:",
-                        type: "password",
-                        name: "password",
-                        value: userData.password.value,
-                        isEditing: userData.password.isEditing
-                    }
-                ]}
-                handleFieldChange={handleFieldChange}
-            />
-
-            <>
-                <button onClick={handleFormSubmit}>Submit</button>
-                <button onClick={handleCancelClick}>Cancel</button>
-            </>
-            <EditButton onClick={handleEditClick}>Edit</EditButton>
-        </ProfileContainer>
+            <ProfileFormContainer userData={userData} handleFieldChange={handleFieldChange} handleEditActionField={handleEditActionField} />
+        </>
     );
 }
 
@@ -165,9 +141,13 @@ export const getServerSideProps: GetServerSideProps<ProfilePageProps> = async (c
             },
         };
     } catch (error) {
-        console.error("Error in getServerSideProps: ", error);
+        console.error("Error in getServerSideProps[profile page]: ", error);
 
-        throw error;
+        return {
+            props: {
+                user: {},
+            },
+        };
     }
 };
 
