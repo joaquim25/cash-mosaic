@@ -26,11 +26,13 @@ type ProfileFormContainerProps = {
         e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
     ) => void;
     handleEditActionField: (action: "edit" | "save" | "dismiss", fieldname: "firstname" | "lastname" | "location" | "bio" | "password") => void;
+    cancelChanges: () => void;
+    submitChanges: () => Promise<void>;
 };
 
 function ProfileFormContainer({
-    userData,
-    handleFieldChange, handleEditActionField }: ProfileFormContainerProps) {
+    userData, handleFieldChange, handleEditActionField, cancelChanges, submitChanges
+}: ProfileFormContainerProps) {
 
 
 
@@ -109,8 +111,8 @@ function ProfileFormContainer({
                 />
             </PasswordFieldsGroup >
             <ButtonsGroup>
-                <DefaultButton>Save Changes</DefaultButton>
-                <DefaultButton bgColor='danger'>Cancel</DefaultButton>
+                <DefaultButton onClick={submitChanges}>Save Changes</DefaultButton>
+                <DefaultButton bgColor='danger' onClick={cancelChanges}>Cancel</DefaultButton>
             </ButtonsGroup>
 
         </FormContainer>

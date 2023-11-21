@@ -1,9 +1,12 @@
 import React, { ChangeEvent, useState } from "react";
 import { GetServerSideProps } from "next";
-import { fetchProfileData } from "../api/profile";
+import { changeProfileData, fetchProfileData } from "../api/profile";
 import { User } from "@/store/types";
 import * as cookie from 'cookie'
 import ProfileFormContainer from "@/components/ProfileFormContainer";
+import { simplifyUserData } from "../../../utils";
+import { useDispatch } from "react-redux";
+import { setUser } from "@/store/user/actions";
 
 type ProfilePageProps = {
     user: User;
@@ -14,12 +17,13 @@ type ProfilePageProps = {
 
 
 function ProfilePage({ user }: ProfilePageProps) {
+    const dispatch = useDispatch();
     const [userData, setUserData] = useState({
         firstname: { value: user.firstname, isEditing: false },
         lastname: { value: user.lastname, isEditing: false },
         location: { value: user.location, isEditing: false },
         bio: { value: user.bio, isEditing: false },
-        password: { value: "password", isEditing: false },
+        password: { value: "", isEditing: false },
     });
 
     type UserDataKeys = keyof typeof userData;
@@ -64,7 +68,7 @@ function ProfilePage({ user }: ProfilePageProps) {
                         ...prevUserData,
                         [fieldname]: {
                             ...prevUserData[fieldname],
-                            value: "password",
+                            value: "",
                             isEditing: false,
                         },
                     }));
@@ -85,14 +89,12 @@ function ProfilePage({ user }: ProfilePageProps) {
     }
 
     const submitChanges = async () => {
+        const newUserData = simplifyUserData(userData);
         try {
-            console.log("submit")
-            // Logic to update the user's profile data on the server
-            // await updateProfileData(user.id, updatedData);
+            const response = await changeProfileData(user.id, newUserData);
 
-            // After updating on the server, update the local state
-            // setUserData(updatedData);
-            // setIsEditing(false);
+            console.log(response)
+            dispatch(setUser(response));
         } catch (error) {
             console.error("Error updating profile data: ", error);
             // Handle error, show a message to the user, etc.
@@ -105,7 +107,7 @@ function ProfilePage({ user }: ProfilePageProps) {
             lastname: { value: user.lastname, isEditing: false },
             location: { value: user.location, isEditing: false },
             bio: { value: user.bio, isEditing: false },
-            password: { value: "password", isEditing: false },
+            password: { value: "", isEditing: false },
         })
     }
 
@@ -113,7 +115,12 @@ function ProfilePage({ user }: ProfilePageProps) {
         <>
             <h1>{user.firstname}&apos;s Profile</h1>
 
-            <ProfileFormContainer userData={userData} handleFieldChange={handleFieldChange} handleEditActionField={handleEditActionField} />
+            <ProfileFormContainer
+                userData={userData}
+                handleFieldChange={handleFieldChange}
+                handleEditActionField={handleEditActionField}
+                cancelChanges={cancelChanges} submitChanges={submitChanges}
+            />
         </>
     );
 }

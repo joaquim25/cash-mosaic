@@ -10,11 +10,12 @@ export interface Action {
 
 // userReducer
 export interface User {
-    id: number | null;
+    id?: number | null;
     firstname: string;
     lastname: string;
     location: string;
     bio: string;
     authToken?: string;
-    isLoggedIn: boolean;
+    isLoggedIn?: boolean;
+    password?: string;
 }

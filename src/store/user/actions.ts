@@ -2,17 +2,16 @@ import { Action, RootState, User } from "../types";
 import { fetchProfileData } from "@/pages/api/profile";
 import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
-import Cookies from 'js-cookie';
 import { removeAuthTokenFromCookies, setAuthTokenInCookies } from "../../../utils/cookies";
 
 const LOGIN = "LOGIN";
 const LOGOUT = "LOGOUT";
-const GET_PROFILE_INFO = "GET_PROFILE_INFO";
+const SET_PROFILE_INFO = "SET_PROFILE_INFO";
 
 export const actions = {
     LOGIN,
     LOGOUT,
-    GET_PROFILE_INFO,
+    SET_PROFILE_INFO,
 };
 
 export const logIn = (authToken: string): AnyAction => {
@@ -52,4 +51,4 @@ export const setProfileInfo = () => {
     };
 };
 
-export const setUser = (user: User) => ({ type: GET_PROFILE_INFO, payload: user });
+export const setUser = (user: User) => ({ type: SET_PROFILE_INFO, payload: user });

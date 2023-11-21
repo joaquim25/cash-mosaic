@@ -27,7 +27,7 @@ export const userReducer = (state: User = initialState, action: Action) => {
                 authToken: null,
                 isLoggedIn: false,
             };
-        case actions.GET_PROFILE_INFO:
+        case actions.SET_PROFILE_INFO:
             const { id, firstname, lastname, location, bio } = action.payload;
             return {
                 ...state,
