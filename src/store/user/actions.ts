@@ -39,16 +39,4 @@ export const logOut = () => {
     };
 };
 
-export const setProfileInfo = () => {
-    return async (dispatch: ThunkDispatch<any, any, AnyAction>, getState: () => RootState) => {
-        try {
-            const authToken = getState().user.isLoggedIn ? getState().user.authToken : undefined;
-            const user = await fetchProfileData(authToken);
-            dispatch(setUser(user));
-        } catch (error) {
-            console.error(error);
-        }
-    };
-};
-
 export const setUser = (user: User) => ({ type: SET_PROFILE_INFO, payload: user });

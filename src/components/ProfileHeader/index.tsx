@@ -1,12 +1,12 @@
 import React from 'react'
 import { Background, UserAvatar, UserAvatarContainer, UserBalance, UserName, UserProfileSection } from './styles'
-import { User } from '@/store/types';
+import { RootState } from '@/store/types';
+import { useSelector } from 'react-redux';
 
-type ProfileHeaderProps = {
-    user: User;
-};
 
-function ProfileHeader({ user }: ProfileHeaderProps) {
+function ProfileHeader() {
+    const user = useSelector((state: RootState) => state.user);
+
     return (
         <>
             <Background />
