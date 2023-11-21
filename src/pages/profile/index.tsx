@@ -71,7 +71,7 @@ function ProfilePage({ user }: ProfilePageProps) {
                 }));
                 break;
             case "dismiss":
-                //return to prevValue
+                // Return to previous values
                 if (fieldname === "password") {
                     setUserData((prevUserData) => ({
                         ...prevUserData,
