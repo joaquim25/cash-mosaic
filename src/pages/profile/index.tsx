@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "@/store/user/actions";
 import { Alert, Snackbar } from "@mui/material";
 import axios from "axios";
+import ProfileHeader from "@/components/ProfileHeader";
 
 type ProfilePageProps = {
     user: User;
@@ -154,7 +155,7 @@ function ProfilePage({ user }: ProfilePageProps) {
 
     return (
         <>
-            <h1>{user.firstname}&apos;s Profile</h1>
+            <ProfileHeader user={user} />
 
             <ProfileFormContainer
                 userData={userData}
@@ -166,7 +167,7 @@ function ProfilePage({ user }: ProfilePageProps) {
             <Snackbar
                 anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
                 open={submitChangesRequestState.error}
-                autoHideDuration={5000}
+                autoHideDuration={3000}
             >
                 <Alert severity="error">{submitChangesRequestState.errorMessage}</Alert>
             </Snackbar>
@@ -174,7 +175,7 @@ function ProfilePage({ user }: ProfilePageProps) {
             <Snackbar
                 anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
                 open={submitChangesRequestState.success}
-                autoHideDuration={5000}
+                autoHideDuration={4000}
             >
                 <Alert severity="success">Success!! Your profile changes were sent!</Alert>
             </Snackbar>
