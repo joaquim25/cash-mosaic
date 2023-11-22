@@ -25,7 +25,6 @@ export const Input = styled.input`
     outline: none;
     font-size: 1.1rem;
 
-    // TO-DO: CHANGE TO NOT DISABLED: :not(disabled)
     :focus {
         background-color: #B7B7B740;
     }
@@ -42,7 +41,6 @@ export const TextArea = styled.textarea`
     outline: none;
     font-size: 1.1rem;
 
-    // TO-DO: CHANGE TO NOT DISABLED: :not(disabled)
     :focus {
         background-color: #B7B7B740;
     }

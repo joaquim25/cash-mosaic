@@ -13,7 +13,7 @@ export const fetchProfileData = async (token: string | null | undefined) => {
 
         return response.data;
     } catch (error) {
-        console.log("fetchProfileData error: ", error);
+        console.error("fetchProfileData error: ", error);
 
         throw error;
     }
@@ -32,7 +32,7 @@ export const changeProfileData = async (id: number | null | undefined, userData:
 
         return response.data;
     } catch (error) {
-        console.log("changeProfileData error: ", error);
+        console.error("changeProfileData error: ", error);
 
         throw error;
     }
