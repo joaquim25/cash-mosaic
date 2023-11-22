@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { GetServerSideProps } from "next";
 import { changeProfileData, fetchProfileData } from "../api/profile";
 import { User } from "@/store/types";
@@ -18,6 +18,7 @@ type ProfilePageProps = {
 function ProfilePage({ user }: ProfilePageProps) {
     const dispatch = useDispatch();
     const [submitChangesRequestState, setSubmitChangesRequestState] = useState({ success: false, error: false, errorMessage: "" });
+    // Local data to manipulate in ProfileForm
     const [userData, setUserData] = useState({
         firstname: { value: user.firstname, isEditing: false },
         lastname: { value: user.lastname, isEditing: false },
@@ -25,6 +26,14 @@ function ProfilePage({ user }: ProfilePageProps) {
         bio: { value: user.bio, isEditing: false },
         password: { value: "", isEditing: false },
     });
+
+    // Set the global user state
+    useEffect(() => {
+        dispatch(setUser(user))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
+
 
     type UserDataKeys = keyof typeof userData;
 
@@ -62,7 +71,7 @@ function ProfilePage({ user }: ProfilePageProps) {
                 }));
                 break;
             case "dismiss":
-                //return to prevValue
+                // Return to previous values
                 if (fieldname === "password") {
                     setUserData((prevUserData) => ({
                         ...prevUserData,
@@ -155,7 +164,7 @@ function ProfilePage({ user }: ProfilePageProps) {
 
     return (
         <>
-            <ProfileHeader user={user} />
+            <ProfileHeader />
 
             <ProfileFormContainer
                 userData={userData}

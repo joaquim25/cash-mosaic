@@ -3,10 +3,16 @@ import { styled } from 'styled-components';
 export const FormContainer = styled.div`
     margin: 0 auto;
     padding: 0 2rem;
-    max-width: 900px;
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
+    max-width: 560px;
+    display: flex;
+    flex-direction: column;
     gap: 20px;
+
+    @media (min-width: 1024px) {
+        max-width: 900px;
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+    }
 `
 
 export const FieldsIcon = styled.div`
@@ -30,13 +36,19 @@ export const FieldsGroup = styled.div`
     display: flex;
     column-gap: 50px;
     row-gap: 20px;
-    padding: 6rem 1rem 1rem 1rem;
-    border-radius: 24px;
+    padding: 6rem 2rem 1rem 2rem;
+    border-radius: 14px;
 `
 
 export const NameFieldsGroup = styled(FieldsGroup)`
-    grid-column-start: span 2;
+    display: flex;
+    flex-direction: column;
     background-color: #BAC2CD;
+
+    @media (min-width: 1024px){
+        flex-direction: row;
+        grid-column-start: span 2;
+    }
 
     ${FieldsIcon} {
         background-color: #81B2CA;
@@ -68,5 +80,6 @@ export const PasswordFieldsGroup = styled(FieldsGroup)`
 export const ButtonsGroup = styled.div`
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
 `
 

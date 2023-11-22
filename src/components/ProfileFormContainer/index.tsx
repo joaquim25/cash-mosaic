@@ -110,6 +110,8 @@ function ProfileFormContainer({
                     handleEditActionField={handleEditActionField}
                 />
             </PasswordFieldsGroup >
+
+
             <ButtonsGroup>
                 <DefaultButton onClick={submitChanges}>Save Changes</DefaultButton>
                 <DefaultButton bgColor='danger' onClick={cancelChanges}>Cancel</DefaultButton>

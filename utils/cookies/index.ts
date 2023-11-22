@@ -1,13 +1,13 @@
-import Cookies from 'js-cookie';
+import { setCookie, getCookie, deleteCookie } from 'cookies-next';
 
 export const getAuthTokenFromCookies = (): string | null => {
-    return Cookies.get('authToken') || null;
+    return getCookie('authToken') || null;
 };
 
 export const setAuthTokenInCookies = (authToken: string): void => {
-    Cookies.set('authToken', authToken, { expires: 7 });
+    setCookie('authToken', authToken);
 };
 
 export const removeAuthTokenFromCookies = (): void => {
-    Cookies.remove('authToken');
+    deleteCookie('authToken');
 };
