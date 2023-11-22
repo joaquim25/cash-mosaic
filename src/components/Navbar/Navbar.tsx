@@ -42,7 +42,7 @@ function Navbar() {
             setNavItems([
                 { href: "/", content: "Homepage" },
                 { href: "/dashboard", content: "Dashboard" },
-                { href: "/profile", icon: <LiaUser /> },
+                { href: "/profile", icon: <LiaUser />, action: handleSideBarItemClick },
                 { href: "#", class: "logout-icon", icon: <MdOutlineLogout />, action: onLogoutClick },
             ])
         } else {
@@ -59,7 +59,6 @@ function Navbar() {
         setShowLogoutConfirmation(true);
         setAnchorEl(event.currentTarget);
     }
-
 
     const toggleShowSidebar = () => {
         setShowSidebar(prevVal => !prevVal);
@@ -81,6 +80,7 @@ function Navbar() {
 
                 <DesktopNavItemsContainer>
                     {navItems && navItems.map((item, index) => {
+                        console.log(item)
                         if (!item.icon) {
                             return (
                                 <NavItemLink key={index} >
