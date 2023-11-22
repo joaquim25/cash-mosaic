@@ -80,7 +80,6 @@ function Navbar() {
 
                 <DesktopNavItemsContainer>
                     {navItems && navItems.map((item, index) => {
-                        console.log(item)
                         if (!item.icon) {
                             return (
                                 <NavItemLink key={index} >
