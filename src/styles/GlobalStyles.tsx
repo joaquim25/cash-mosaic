@@ -33,6 +33,7 @@ export const DefaultButton = styled.button<{ bgColor?: ThemeColors }>`
     color: white;
     font-size: 1rem;
     transition: all .2s ease-in-out;
+    width: 100%;
 
     :hover{
         box-shadow: 0 2px 8px 1px ${props => (props.bgColor ? THEME_COLORS[props.bgColor] : THEME_COLORS.success)};

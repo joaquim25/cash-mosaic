@@ -19,7 +19,7 @@ function DashboardTabs() {
 
     return (
         <DashboardTabsContainer>
-            <Box sx={{ width: '100vw', marginTop: '40px' }}>
+            <Box sx={{ width: '100%', marginTop: '40px' }}>
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                     <Tabs
                         sx={{ padding: "0 10px" }}
@@ -28,10 +28,10 @@ function DashboardTabs() {
                         aria-label="Tabs for dashboard functionalities"
                         centered
                     >
-                        <Tab label="Add Records" {...a11yProps(0)} wrapped />
-                        <Tab label="Statistics" {...a11yProps(1)} />
-                        <Tab label="Overview" {...a11yProps(2)} />
-                        <Tab label="Transactions" {...a11yProps(3)} />
+                        <Tab sx={{ fontSize: "13px" }} label="Add Record" {...a11yProps(0)} wrapped />
+                        <Tab sx={{ fontSize: "13px" }} label="Statistics" {...a11yProps(1)} />
+                        <Tab sx={{ fontSize: "13px" }} label="Overview" {...a11yProps(2)} />
+                        <Tab sx={{ fontSize: "13px" }} label="Transactions" {...a11yProps(3)} />
                     </Tabs>
                 </Box>
                 <CustomTabPanel currentTab={currentTab} index={0}>

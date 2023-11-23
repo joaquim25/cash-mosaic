@@ -1,0 +1,101 @@
+{
+    "expenses": [
+        {
+            "label": "Bills",
+            "src": "/icons/expenses/bills.png",
+            "bgColor": "#A2D7A5"
+        },
+        {
+            "label": "Car",
+            "src": "/icons/expenses/car.png",
+            "bgColor": "#FF1744"
+        },
+        {
+            "label": "Clothes",
+            "src": "/icons/expenses/clothes.png",
+            "bgColor": "#80DEEA"
+        },
+        {
+            "label": "Communications",
+            "src": "/icons/expenses/communications.png",
+            "bgColor": "#009688"
+        },
+        {
+            "label": "Entertainment",
+            "src": "/icons/expenses/entertainment.png",
+            "bgColor": "#E1F5FE"
+        },
+        {
+            "label": "Gift",
+            "src": "/icons/expenses/gift.png",
+            "bgColor": "#D32F2F"
+        },
+        {
+            "label": "Grocery",
+            "src": "/icons/expenses/grocery.png",
+            "bgColor": "#FFAB40"
+        },
+        {
+            "label": "Health",
+            "src": "/icons/expenses/health.png",
+            "bgColor": "#FEF74D"
+        },
+        {
+            "label": "Home",
+            "src": "/icons/expenses/home.png",
+            "bgColor": "#C5CAFF"
+        },
+        {
+            "label": "Personal Hygiene",
+            "src": "/icons/expenses/personal-hygiene.png",
+            "bgColor": "#086AC3"
+        },
+        {
+            "label": "Pet",
+            "src": "/icons/expenses/pet.png",
+            "bgColor": "#6E360F"
+        },
+        {
+            "label": "Restaurant",
+            "src": "/icons/expenses/restaurant.png",
+            "bgColor": "#64B5F6"
+        },
+        {
+            "label": "Sports",
+            "src": "/icons/expenses/sports.png",
+            "bgColor": "#768D87"
+        },
+        {
+            "label": "Transportation",
+            "src": "/icons/expenses/transportation.png",
+            "bgColor": "#AB47BC"
+        },
+        {
+            "label": "Other",
+            "src": "/icons/expenses/other.png",
+            "bgColor": "#475B65"
+        }
+    ],
+    "income": [
+        {
+            "label": "Deposit",
+            "src": "/icons/income/deposit.png",
+            "bgColor": "#FFF4D1"
+        },
+        {
+            "label": "Salary",
+            "src": "/icons/income/salary.png",
+            "bgColor": "#A5D6A7"
+        },
+        {
+            "label": "Savings",
+            "src": "/icons/income/savings.png",
+            "bgColor": "#F8BBD0"
+        },
+        {
+            "label": "Other",
+            "src": "/icons/income/other.png",
+            "bgColor": "#475B65"
+        }
+    ]
+}
