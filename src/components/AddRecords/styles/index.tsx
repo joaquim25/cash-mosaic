@@ -1,34 +1,80 @@
 import { THEME_COLORS } from "@/styles/GlobalStyles";
 import styled from "@emotion/styled";
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
-export const IncomeExpenseSelectorContainer = styled.div`
+export const RecordTypeSelectorContainer = styled.div`
     margin: 20px 0 10px 0;
     display: flex;
     justify-content: center;
     gap: 50px;
+`
 
-    & div {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 14px;
+export const RecordTypeSelector = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    padding: 10px 14px;
+    transition: all .2s ease-in-out;
+    border-radius: 5px;
 
-        & svg {
-            color: #4A5050;
-            width: 16px;
-            height: 16px;
-            opacity: .8;
-        }
+    & svg {
+        color: #4A5050;
+        width: 16px;
+        height: 16px;
+        opacity: .8;
+    }
 
-        & p {
-            color: #A4A5A5;
-            font-size: 11px;
-        }
+    & p {
+        color: #A4A5A5;
+        font-size: 11px;
+    }
+`
+
+export const RecordTypeIncome = styled(RecordTypeSelector) <{ isSelected: boolean }>`
+    ${props => props.isSelected && `
+        background-color: #90C0A750;
+        border-radius: 20px;
+    `}
+
+    & svg {
+        ${props => props.isSelected && `
+            color: #1B5E20;
+            opacity: 1;
+        `}
+    }
+
+    & p {
+        ${props => props.isSelected && `
+            color: #1B5E20;
+        `}
+    }
+`
+
+export const RecordTypeExpense = styled(RecordTypeSelector) <{ isSelected: boolean }>`
+    ${props => props.isSelected && `
+        background-color: #FF174430;
+        border-radius: 20px;
+    `}
+
+    & svg {
+        ${props => props.isSelected && `
+            color: #D32F2F;
+            opacity: 1;
+        `}
+    }
+
+    & p {
+        ${props => props.isSelected && `
+            color: #D32F2F;
+        `}
     }
 `
 
 export const InputContainer = styled.div`
     display: flex;
+    flex-direction: column;
     gap: 40px;
 `
 
@@ -53,12 +99,13 @@ export const AmountInput = styled.div`
         outline: none;
         width: 100%;
         padding: 4px 0;
-
         text-align: center;
+        font-size: 1.2rem;
     }
 `
 
 export const DateInput = styled.div`
+    position: relative;
     flex: 0 1 70px;
     display: flex;
     gap: 2px;
@@ -79,10 +126,14 @@ export const DateInput = styled.div`
     }
 `
 
+export const StyledDatePicker = styled(DatePicker)`
+
+`
+
 export const CategoryContainer = styled.div`
     margin: 30px 0;
-    background-color: ${THEME_COLORS.green_normal};
-    border-radius: 20px;
+    background-color: #BAC2CD70;
+    border-radius: 10px;
     padding: 16px;
 
     & h3 {

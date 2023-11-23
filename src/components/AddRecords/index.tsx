@@ -1,46 +1,66 @@
 import React, { useState } from 'react'
-import { IoArrowDown, IoArrowUp, IoCalendarOutline } from "react-icons/io5";
-import { AmountInput, CategoryContainer, DateInput, IncomeExpenseSelectorContainer, InputContainer } from './styles'
+import { IoArrowDown, IoArrowUp } from "react-icons/io5";
+import { AmountInput, CategoryContainer, DateInput, RecordTypeSelectorContainer, InputContainer, StyledDatePicker, RecordTypeIncome, RecordTypeExpense } from './styles'
 import { DefaultButton } from '@/styles/GlobalStyles';
 import CategoriesGrid from '../CategoriesGrid';
 import HydrationSafety from '../HydrationSafety/HydrationSafety';
-
-
+import CurrencyInput from 'react-currency-input-field';
+import dayjs from 'dayjs';
 
 function AddRecordsComponent() {
-    const [selectedCategoryType, setSelectedCategoryType] = useState<"expenses" | "income">("expenses");
+    const [selectedRecordType, setSelectedRecordType] = useState<"expenses" | "income">("expenses");
+    const [selectedDate, setSelectedDate] = useState<string | number | dayjs.Dayjs | Date | null | undefined | unknown>(dayjs());
+    const [amount, setAmount] = useState<string | undefined>();
+    const [selectedCategory, setSelectedCategory] = useState<string | undefined>();
 
-    const handleCategorySelection = (type: "expenses" | "income") => {
-        setSelectedCategoryType(type);
+    const onRecordTypeSelection = (type: "expenses" | "income") => {
+        setSelectedRecordType(type);
+    }
+
+    const onCategorySelection = (name: string) => {
+        setSelectedCategory(name)
     }
 
     return (
         <HydrationSafety>
-            <IncomeExpenseSelectorContainer>
-                <div onClick={() => handleCategorySelection("income")}>
+            <RecordTypeSelectorContainer>
+                <RecordTypeIncome isSelected={selectedRecordType === "income"} onClick={() => onRecordTypeSelection("income")}>
                     <IoArrowDown />
                     <p>Income</p>
-                </div>
-                <div onClick={() => handleCategorySelection("expenses")}>
+                </RecordTypeIncome>
+                <RecordTypeExpense isSelected={selectedRecordType === "expenses"} onClick={() => onRecordTypeSelection("expenses")}>
                     <IoArrowUp />
                     <p>Expense</p>
-                </div>
-            </IncomeExpenseSelectorContainer>
+                </RecordTypeExpense>
+            </RecordTypeSelectorContainer>
 
             <InputContainer>
+                <DateInput>
+                    <StyledDatePicker label="Date"
+                        value={selectedDate}
+                        onChange={(newValue) => setSelectedDate(newValue)}
+                        defaultValue={dayjs()}
+                    />
+                </DateInput>
                 <AmountInput>
                     <label>Amount</label>
-                    <input placeholder="0,00€" />
+                    <CurrencyInput
+                        id="input-amount"
+                        name="amount"
+                        defaultValue={"0.00"}
+                        decimalsLimit={2}
+                        value={amount}
+                        onValueChange={(value) => setAmount(value)}
+                        fixedDecimalLength={2}
+                        suffix='€'
+                        disableAbbreviations={true}
+                    />
                 </AmountInput>
-                <DateInput>
-                    <IoCalendarOutline />
-                    <p>Date</p>
-                </DateInput>
             </InputContainer>
 
             <CategoryContainer>
                 <h3>Category</h3>
-                <CategoriesGrid type={selectedCategoryType} />
+                <CategoriesGrid type={selectedRecordType} onCategorySelection={onCategorySelection} selectedCategory={selectedCategory} />
                 <DefaultButton>Add</DefaultButton>
             </CategoryContainer>
 

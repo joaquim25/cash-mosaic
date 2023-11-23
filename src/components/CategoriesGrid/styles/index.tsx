@@ -11,17 +11,31 @@ export const CategoriesGridContainer = styled.div`
     grid-template-columns: repeat(3,1fr);
 `
 
-export const CategorieCard = styled.div <{ squareColor: string }>`
+export const CategorieCard = styled.div <{ squareColor: string, isSelected: boolean }>`
     padding: 10px 4px;
     display: flex;
     gap: 7px;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: ${props => props.squareColor}70;
     border-radius: 10px;
     cursor: pointer;
     max-width: 110px;
+    border: 1px solid transparent;
+
+    ${props => props.isSelected
+        ?
+        `
+            background-color: ${props.squareColor}80;
+            box-shadow: 0 0 8px 4px ${props.squareColor}40;
+            border: 1px solid #FFFFFF50;
+        `
+        :
+        `
+            background-color: rgba(33,33,33,.1);
+        `
+    }
+
 
     & img {
         width: 40px;
@@ -31,7 +45,7 @@ export const CategorieCard = styled.div <{ squareColor: string }>`
 
     & p {
         text-align: center;
-        font-size: 9px;
+        font-size: 10px;
         color: ${THEME_COLORS.text_prim};
     }
 `

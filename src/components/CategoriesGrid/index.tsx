@@ -5,7 +5,9 @@ import React, { useEffect, useState } from 'react'
 import { CategorieCard, CategoriesGridContainer } from "./styles";
 
 type CategoriesGridProps = {
-    type: "income" | "expenses"
+    type: "income" | "expenses";
+    onCategorySelection: (name: string) => void;
+    selectedCategory: string | undefined;
 }
 
 type CategoriesData = {
@@ -14,7 +16,7 @@ type CategoriesData = {
     bgColor: string,
 }[]
 
-function CategoriesGrid({ type }: CategoriesGridProps) {
+function CategoriesGrid({ type, onCategorySelection, selectedCategory }: CategoriesGridProps) {
     const [categoriesData, setCategoriesData] = useState<CategoriesData>([]);
 
     useEffect(() => {
@@ -25,7 +27,12 @@ function CategoriesGrid({ type }: CategoriesGridProps) {
     return (
         <CategoriesGridContainer>
             {categoriesData.map((categoryInfo, index) => (
-                <CategorieCard key={index} squareColor={categoryInfo.bgColor}>
+                <CategorieCard
+                    key={index}
+                    squareColor={categoryInfo.bgColor}
+                    onClick={() => onCategorySelection(categoryInfo.label)}
+                    isSelected={selectedCategory == categoryInfo.label}
+                >
                     <img src={categoryInfo.src} />
                     <p>{categoryInfo.label}</p>
                 </CategorieCard>
