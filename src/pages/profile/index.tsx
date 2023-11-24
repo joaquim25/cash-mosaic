@@ -6,7 +6,7 @@ import * as cookie from 'cookie'
 import ProfileFormContainer from "@/components/ProfileFormContainer";
 import { simplifyUserData } from "../../../utils";
 import { useDispatch } from "react-redux";
-import { setUser } from "@/store/user/actions";
+import { setUserProfile } from "@/store/user/actions";
 import { Alert, Snackbar } from "@mui/material";
 import axios from "axios";
 import ProfileHeader from "@/components/ProfileHeader";
@@ -29,7 +29,7 @@ function ProfilePage({ user }: ProfilePageProps) {
 
     // Set the global user state
     useEffect(() => {
-        dispatch(setUser(user))
+        dispatch(setUserProfile(user))
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -102,8 +102,7 @@ function ProfilePage({ user }: ProfilePageProps) {
         try {
             const response = await changeProfileData(user.id, newUserData);
             //update the user local state
-            dispatch(setUser(response));
-
+            dispatch(setUserProfile(response));
             //show a success message
             setSubmitChangesRequestState(
                 {

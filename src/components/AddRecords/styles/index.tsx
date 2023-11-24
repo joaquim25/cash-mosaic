@@ -1,4 +1,3 @@
-import { THEME_COLORS } from "@/styles/GlobalStyles";
 import styled from "@emotion/styled";
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 

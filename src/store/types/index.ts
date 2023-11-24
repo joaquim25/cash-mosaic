@@ -18,4 +18,19 @@ export interface User {
     authToken?: string;
     isLoggedIn?: boolean;
     password?: string;
+    balance?: number;
+    totalIncome?: number;
+    totalExpenses?: number;
+    transactions_expenses?: {
+        id: number;
+        date: string;
+        amount: string;
+        category: string;
+    }[];
+    transactions_income?: {
+        id: number;
+        date: string;
+        amount: string;
+        category: string;
+    }[];
 }

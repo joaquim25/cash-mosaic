@@ -1,17 +1,18 @@
-import { Action, RootState, User } from "../types";
-import { fetchProfileData } from "@/pages/api/profile";
-import { ThunkDispatch } from "redux-thunk";
+import { Action, User } from "../types";
 import { AnyAction } from "redux";
 import { removeAuthTokenFromCookies, setAuthTokenInCookies } from "../../../utils/cookies";
+import { getTotalExpenses, getTotalIncome } from "../../../utils/budgetUtils";
 
 const LOGIN = "LOGIN";
 const LOGOUT = "LOGOUT";
 const SET_PROFILE_INFO = "SET_PROFILE_INFO";
+const SET_DASHBOARD_INFO = "SET_DASHBOARD_INFO";
 
 export const actions = {
     LOGIN,
     LOGOUT,
     SET_PROFILE_INFO,
+    SET_DASHBOARD_INFO,
 };
 
 export const logIn = (authToken: string): AnyAction => {
@@ -39,4 +40,16 @@ export const logOut = () => {
     };
 };
 
-export const setUser = (user: User) => ({ type: SET_PROFILE_INFO, payload: user });
+export const setUserProfile = (user: User) => {
+    return { type: SET_PROFILE_INFO, payload: user }
+};
+
+export const setUserDashboard = (user: User) => {
+    const totalIncome = getTotalIncome(user);
+    const totalExpenses = getTotalExpenses(user);
+    const balance = totalIncome - totalExpenses;
+
+    return {
+        type: SET_DASHBOARD_INFO, payload: { ...user, balance, totalIncome, totalExpenses }
+    }
+}
