@@ -10,7 +10,7 @@ export interface Action {
 
 // userReducer
 export interface User {
-    id: number;
+    id?: number | null;
     firstname: string;
     lastname: string;
     location: string;

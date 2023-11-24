@@ -32,17 +32,18 @@ function AddRecordsComponent({ user }: AddRecordsComponentProps) {
     }
 
     const onAddRecord = async () => {
+
+        //prepare data for post request
+        const cashmosaic_user_id = user.id;
+        const params = { cashmosaic_user_id, date, amount, category }
         try {
             switch (selectedRecordType) {
                 case "income":
-                    //prepare data for post request
-                    const cashmosaic_user_id = user.id;
-                    const params = { cashmosaic_user_id, date, amount, category }
-                    //post request on cashMosaic-transactions_income table
+                    // Post request on cashMosaic-transactions_income table
                     const response = await addIncome(params);
 
-
-                    //Modify the local user state accordingly
+                    // Modify the local user state accordingly
+                    // 1. prepare data of the new record
                     const newIncomeRecord = {
                         id: response.data.cashmosaic_user_id,
                         date: response.data.date,
@@ -50,14 +51,15 @@ function AddRecordsComponent({ user }: AddRecordsComponentProps) {
                         category: response.data.category
                     }
 
-                    //update the icome transactions object
+                    // 2. Create a newUser object with the updated transactions_income property
                     const newUser = {
                         ...user,
                         transactions_income: [...user.transactions_income!, newIncomeRecord]
                     }
 
-                    //dispatch an action that updates the totalIncome, totalExpenses, balance and transaction_income array
+                    // 3. Dispatch an action that updates the global state and calcultate the new totalIncome, totalExpenses, balance values
                     dispatch(setUserDashboard(newUser));
+
                     break;
                 case "expenses":
 
