@@ -1,11 +1,15 @@
 import React from 'react'
 import { BalanceText, BalanceValue, HeaderContainer, HeaderOverviewContainer, OverviewExpensesSectionContainer, OverviewIncomeSectionContainer, OverviewSectionTitle, OverviewSectionValue } from './styles'
 import { IoArrowDownCircleOutline, IoArrowUpCircleOutline } from "react-icons/io5";
-import { RootState } from '@/store/types';
+import { RootState, User } from '@/store/types';
 import { useSelector } from 'react-redux';
 
-function DashboardHeader() {
-    const { balance, totalIncome, totalExpenses } = useSelector((state: RootState) => state.user);
+type DashboardHeaderProps = {
+    user: User;
+}
+
+function DashboardHeader({ user }: DashboardHeaderProps) {
+    const { balance, totalIncome, totalExpenses } = user;
 
     return (
         <HeaderContainer>

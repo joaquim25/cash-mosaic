@@ -196,16 +196,6 @@ export const getServerSideProps: GetServerSideProps<ProfilePageProps> = async (c
         const cookieHeader = context.req.headers.cookie;
         const parsedCookies = cookie.parse(cookieHeader!);
 
-        if (!parsedCookies.authToken) {
-            // If there is no authToken, redirect to login page
-            return {
-                redirect: {
-                    destination: '/login',
-                    permanent: false,
-                },
-            };
-        }
-
         const user = await fetchProfileData(parsedCookies.authToken);
 
         return {
@@ -213,6 +203,7 @@ export const getServerSideProps: GetServerSideProps<ProfilePageProps> = async (c
                 user,
             },
         };
+
     } catch (error) {
         console.error("Error in getServerSideProps[profile page]: ", error);
 

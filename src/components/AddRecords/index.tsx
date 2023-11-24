@@ -7,9 +7,9 @@ import CategoriesGrid from '../CategoriesGrid';
 import HydrationSafety from '../HydrationSafety/HydrationSafety';
 import CurrencyInput from 'react-currency-input-field';
 import dayjs from 'dayjs';
-import { addIncome } from '@/pages/api/dashboard';
-import { useDispatch } from 'react-redux';
-import { User } from '@/store/types';
+import { addExpense, addIncome } from '@/pages/api/dashboard';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState, User } from '@/store/types';
 import { setUserDashboard } from '@/store/user/actions';
 
 type AddRecordsComponentProps = {
@@ -23,6 +23,7 @@ function AddRecordsComponent({ user }: AddRecordsComponentProps) {
     const [amount, setAmount] = useState<string | undefined>();
     const [category, setCategory] = useState<string | undefined>();
 
+
     const onRecordTypeSelection = (type: "expenses" | "income") => {
         setSelectedRecordType(type);
     }
@@ -32,7 +33,6 @@ function AddRecordsComponent({ user }: AddRecordsComponentProps) {
     }
 
     const onAddRecord = async () => {
-
         //prepare data for post request
         const cashmosaic_user_id = user.id;
         const params = { cashmosaic_user_id, date, amount, category }
@@ -40,15 +40,15 @@ function AddRecordsComponent({ user }: AddRecordsComponentProps) {
             switch (selectedRecordType) {
                 case "income":
                     // Post request on cashMosaic-transactions_income table
-                    const response = await addIncome(params);
+                    const responseIncome = await addIncome(params);
 
                     // Modify the local user state accordingly
                     // 1. prepare data of the new record
                     const newIncomeRecord = {
-                        id: response.data.cashmosaic_user_id,
-                        date: response.data.date,
-                        amount: response.data.amount,
-                        category: response.data.category
+                        id: responseIncome.data.id,
+                        date: responseIncome.data.date,
+                        amount: responseIncome.data.amount,
+                        category: responseIncome.data.category
                     }
 
                     // 2. Create a newUser object with the updated transactions_income property
@@ -57,12 +57,40 @@ function AddRecordsComponent({ user }: AddRecordsComponentProps) {
                         transactions_income: [...user.transactions_income!, newIncomeRecord]
                     }
 
+
                     // 3. Dispatch an action that updates the global state and calcultate the new totalIncome, totalExpenses, balance values
                     dispatch(setUserDashboard(newUser));
 
+                    setDate(dayjs());
+                    setAmount(undefined);
+                    setCategory(undefined);
+
                     break;
                 case "expenses":
+                    // Post request on cashMosaic-transactions_expenses table
+                    const responseExpense = await addExpense(params);
 
+                    // Modify the local user state accordingly
+                    // 1. prepare data of the new record
+                    const newExpenseRecord = {
+                        id: responseExpense.data.id,
+                        date: responseExpense.data.date,
+                        amount: responseExpense.data.amount,
+                        category: responseExpense.data.category
+                    }
+
+                    // 2. Create a newUser object with the updated transactions_income property
+                    const newUser1 = {
+                        ...user,
+                        transactions_expenses: [...user.transactions_expenses!, newExpenseRecord]
+                    }
+
+                    // 3. Dispatch an action that updates the global state and calcultate the new totalIncome, totalExpenses, balance values
+                    dispatch(setUserDashboard(newUser1));
+
+                    setDate(dayjs());
+                    setAmount(undefined);
+                    setCategory(undefined);
 
                     break;
                 default:

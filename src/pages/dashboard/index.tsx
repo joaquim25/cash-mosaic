@@ -1,32 +1,33 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import DashboardHeader from '@/components/DashboardHeader'
 import DashboardTabs from '@/components/DashboardTabs'
-import { User } from '@/store/types';
+import { RootState, User } from '@/store/types';
 import { GetServerSidePropsContext, PreviewData } from 'next';
 import React, { useEffect } from 'react'
 import * as cookie from 'cookie'
 import { fetchProfileData } from '../api/profile';
 import { ParsedUrlQuery } from 'querystring';
 import { setUserDashboard } from '@/store/user/actions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 type DashboardPageProps = {
-    user: User;
+    initialUser: User;
     totalExpenses: number;
     totalIncome: number;
     balance: number;
 };
 
-function Dashboard({ user }: DashboardPageProps) {
-    const dispatch = useDispatch()
+function Dashboard({ initialUser }: DashboardPageProps) {
+    const dispatch = useDispatch();
+    const user = useSelector((state: RootState) => state.user);
 
     useEffect(() => {
-        dispatch(setUserDashboard(user));
-    }, [user])
+        dispatch(setUserDashboard(initialUser));
+    }, [])
 
     return (
         <>
-            <DashboardHeader />
+            <DashboardHeader user={user} />
             <DashboardTabs user={user} />
         </>
     )
@@ -47,12 +48,11 @@ export const getServerSideProps: (context: GetServerSidePropsContext<ParsedUrlQu
             };
         }
 
-        const user = await fetchProfileData(parsedCookies.authToken);
-        setUserDashboard(user);
+        const initialUser = await fetchProfileData(parsedCookies.authToken);
 
         return {
             props: {
-                user
+                initialUser
             },
         };
     } catch (error) {
@@ -60,7 +60,7 @@ export const getServerSideProps: (context: GetServerSidePropsContext<ParsedUrlQu
 
         return {
             props: {
-                user: {},
+                initialUser: {},
             },
         };
     }

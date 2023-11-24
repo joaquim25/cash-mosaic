@@ -38,7 +38,6 @@ export const userReducer = (state: User = initialState, action: Action) => {
             };
         case actions.SET_DASHBOARD_INFO:
             const { balance, totalIncome, totalExpenses, transactions_expenses, transactions_income } = action.payload;
-
             return {
                 ...state,
                 balance,

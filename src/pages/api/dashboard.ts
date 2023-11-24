@@ -19,3 +19,14 @@ export const addIncome = async ({ cashmosaic_user_id, date, amount, category }: 
 
     return response;
 }
+
+export const addExpense = async ({ cashmosaic_user_id, date, amount, category }: DashboardAPIProps) => {
+
+    const response = await axios.post(`${BASE_URL}/cashmosaic_transactions_expenses`,
+        {
+            cashmosaic_user_id, date, amount, category
+        }
+    )
+
+    return response;
+}

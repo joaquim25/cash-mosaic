@@ -45,9 +45,13 @@ export const setUserProfile = (user: User) => {
 };
 
 export const setUserDashboard = (user: User) => {
+    console.log("Geral state: ", user);
     const totalIncome = getTotalIncome(user);
+    console.log("income: ", totalIncome);
     const totalExpenses = getTotalExpenses(user);
+    console.log("expenses: ", totalExpenses);
     const balance = totalIncome - totalExpenses;
+    console.log("balance: ", balance);
 
     return {
         type: SET_DASHBOARD_INFO, payload: { ...user, balance, totalIncome, totalExpenses }
