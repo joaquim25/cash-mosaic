@@ -7,7 +7,7 @@ import { CategorieCard, CategoriesGridContainer } from "./styles";
 type CategoriesGridProps = {
     type: "income" | "expenses";
     onCategorySelection: (name: string) => void;
-    selectedCategory: string | undefined;
+    category: string | undefined;
 }
 
 type CategoriesData = {
@@ -16,7 +16,7 @@ type CategoriesData = {
     bgColor: string,
 }[]
 
-function CategoriesGrid({ type, onCategorySelection, selectedCategory }: CategoriesGridProps) {
+function CategoriesGrid({ type, onCategorySelection, category }: CategoriesGridProps) {
     const [categoriesData, setCategoriesData] = useState<CategoriesData>([]);
 
     useEffect(() => {
@@ -31,7 +31,7 @@ function CategoriesGrid({ type, onCategorySelection, selectedCategory }: Categor
                     key={index}
                     squareColor={categoryInfo.bgColor}
                     onClick={() => onCategorySelection(categoryInfo.label)}
-                    isSelected={selectedCategory == categoryInfo.label}
+                    isSelected={category == categoryInfo.label}
                 >
                     <img src={categoryInfo.src} />
                     <p>{categoryInfo.label}</p>

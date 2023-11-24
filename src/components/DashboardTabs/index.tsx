@@ -9,8 +9,13 @@ import AddRecordsComponent from '../AddRecords';
 import StatisticsComponent from '../Statistics';
 import OverviewComponent from '../Overview';
 import TransactionsComponent from '../Transactions';
+import { User } from '@/store/types';
 
-function DashboardTabs() {
+type DashboardTabsProps = {
+    user: User;
+}
+
+function DashboardTabs({ user }: DashboardTabsProps) {
     const [currentTab, setCurrentTab] = React.useState(0);
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -35,7 +40,7 @@ function DashboardTabs() {
                     </Tabs>
                 </Box>
                 <CustomTabPanel currentTab={currentTab} index={0}>
-                    <AddRecordsComponent />
+                    <AddRecordsComponent user={user} />
                 </CustomTabPanel>
                 <CustomTabPanel currentTab={currentTab} index={1}>
                     <StatisticsComponent />

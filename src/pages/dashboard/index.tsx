@@ -18,20 +18,16 @@ type DashboardPageProps = {
 };
 
 function Dashboard({ user }: DashboardPageProps) {
-    // TO-DO: update the user global state so it holds the correct transactions
-    // & dispatch an action to the global user state at each user input as well
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(setUserDashboard(user));
-    }, [])
-
-
+    }, [user])
 
     return (
         <>
             <DashboardHeader />
-            <DashboardTabs />
+            <DashboardTabs user={user} />
         </>
     )
 }
@@ -52,27 +48,15 @@ export const getServerSideProps: (context: GetServerSidePropsContext<ParsedUrlQu
         }
 
         const user = await fetchProfileData(parsedCookies.authToken);
-        setUserDashboard(user); //change
-
-        // // Calculate total expenses
-        // const totalExpenses = getTotalExpenses(user);
-
-        // // Calculate total income
-        // const totalIncome = getTotalIncome(user);
-
-        // // Calculate total balance
-        // const balance = totalIncome - totalExpenses;
+        setUserDashboard(user);
 
         return {
             props: {
-                user,
-                // totalExpenses,
-                // totalIncome,
-                // balance,
+                user
             },
         };
     } catch (error) {
-        console.error("Error in getServerSideProps[dashboard page]: ", error);
+        console.error("Error in getServerSideProps[dashboard page]: ");
 
         return {
             props: {
