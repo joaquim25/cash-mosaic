@@ -4,6 +4,7 @@ export const THEME_COLORS = {
   danger: "rgb(179, 53, 86)",
   success: "rgb(0,101,85)",
   grey_text: "rgb(100,100,100)",
+  white: "#FFFFFF",
 
   green_light: "rgb(228,236,220)",
   green_normal: "rgb(129,174,167)",
@@ -32,6 +33,7 @@ export const DefaultButton = styled.button<{ bgColor?: ThemeColors }>`
     color: white;
     font-size: 1rem;
     transition: all .2s ease-in-out;
+    width: 100%;
 
     :hover{
         box-shadow: 0 2px 8px 1px ${props => (props.bgColor ? THEME_COLORS[props.bgColor] : THEME_COLORS.success)};

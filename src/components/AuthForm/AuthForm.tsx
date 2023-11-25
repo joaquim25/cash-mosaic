@@ -47,8 +47,7 @@ export const AuthForm = ({ fields, title }: propTypes) => {
 
             // Redirect the user to the Dashboard after success login/signup
             setTimeout(() => {
-                //!!! TO-DO Redirect to dashboard instead of home
-                router.push('/');
+                router.push('/dashboard');
             }, 3000);
 
         } catch (error: any) {

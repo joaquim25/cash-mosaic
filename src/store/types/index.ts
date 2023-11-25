@@ -16,6 +16,21 @@ export interface User {
     location: string;
     bio: string;
     authToken?: string;
-    isLoggedIn?: boolean;
+    isLoggedIn: boolean;
     password?: string;
+    balance?: number;
+    totalIncome?: number;
+    totalExpenses?: number;
+    transactions_expenses?: {
+        id: number;
+        date: string;
+        amount: string;
+        category: string;
+    }[];
+    transactions_income?: {
+        id: number;
+        date: string;
+        amount: string;
+        category: string;
+    }[];
 }

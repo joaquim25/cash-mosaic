@@ -1,7 +1,29 @@
 import { CardsContainer, FeatureContainer, FeatureHeading, FeatureImg, FeatureSubHeading, FeatureText, SectionInfoCol } from "@/components/FeatureSection/styles/FeatureSectionStyles";
 import FeatureCard from "../FeatureCard/FeatureCard";
 
-function FeatureSection({ cardInfo, index }: { cardInfo: FeatureCard, index: number }) {
+type FeatureSectionProps = {
+  cardInfo: {
+    title: string;
+    subHeading: string;
+    heading: string;
+    text: string;
+    image: {
+      src: string;
+      alt: string;
+      height: number;
+      width: number;
+    };
+    sidePanels?: {
+      size: string;
+      icon: string;
+      color: string;
+      content: string[] | string;
+    }[];
+  },
+  index: number;
+};
+
+function FeatureSection({ cardInfo, index }: FeatureSectionProps) {
 
 
   return (

@@ -10,22 +10,14 @@ import {
 } from './styles';
 import { DefaultButton } from '@/styles/GlobalStyles';
 import { IoMdSettings } from 'react-icons/io';
+import { EditActionFieldProps, FieldChangeProps, UserData } from './types';
 
-type UserData = {
-    firstname: { value: string; isEditing: boolean };
-    lastname: { value: string; isEditing: boolean };
-    location: { value: string; isEditing: boolean };
-    bio: { value: string; isEditing: boolean };
-    password: { value: string; isEditing: boolean };
-};
+
 
 type ProfileFormContainerProps = {
     userData: UserData;
-    handleFieldChange: (
-        fieldname: 'firstname' | 'lastname' | 'location' | 'bio' | 'password',
-        e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
-    ) => void;
-    handleEditActionField: (action: "edit" | "save" | "dismiss", fieldname: "firstname" | "lastname" | "location" | "bio" | "password") => void;
+    handleFieldChange: FieldChangeProps;
+    handleEditActionField: EditActionFieldProps;
     cancelChanges: () => void;
     submitChanges: () => Promise<void>;
 };
@@ -38,7 +30,7 @@ function ProfileFormContainer({
 
     return (
         <FormContainer>
-
+            {/* Name & Last Name group */}
             <NameFieldsGroup>
                 <FieldsIcon>
                     <IoMdSettings />
@@ -65,6 +57,7 @@ function ProfileFormContainer({
                 />
             </NameFieldsGroup>
 
+            {/* Location & Bio group */}
             <ExtraInfoFieldsGroup>
                 <FieldsIcon>
                     <IoMdSettings />
@@ -92,6 +85,7 @@ function ProfileFormContainer({
                 />
             </ExtraInfoFieldsGroup>
 
+            {/* Password group */}
             <PasswordFieldsGroup>
                 <FieldsIcon>
                     <IoMdSettings />
@@ -111,7 +105,7 @@ function ProfileFormContainer({
                 />
             </PasswordFieldsGroup >
 
-
+            {/* General Form buttons */}
             <ButtonsGroup>
                 <DefaultButton onClick={submitChanges}>Save Changes</DefaultButton>
                 <DefaultButton bgColor='danger' onClick={cancelChanges}>Cancel</DefaultButton>

@@ -1,8 +1,6 @@
 import { Action, User } from "../types";
 import { actions } from "./actions";
 
-const authToken = typeof localStorage !== 'undefined' ? localStorage.getItem("authToken") : null;
-
 const initialState: User = {
     id: null,
     firstname: "",
@@ -10,7 +8,7 @@ const initialState: User = {
     location: "",
     bio: "",
     authToken: undefined,
-    isLoggedIn: authToken ? true : false,
+    isLoggedIn: false,
 };
 
 export const userReducer = (state: User = initialState, action: Action) => {
@@ -36,6 +34,17 @@ export const userReducer = (state: User = initialState, action: Action) => {
                 lastname,
                 location,
                 bio,
+                isLoggedIn: true,
+            };
+        case actions.SET_DASHBOARD_INFO:
+            const { balance, totalIncome, totalExpenses, transactions_expenses, transactions_income } = action.payload;
+            return {
+                ...state,
+                balance,
+                totalIncome,
+                totalExpenses,
+                transactions_expenses,
+                transactions_income,
                 isLoggedIn: true,
             };
         default:

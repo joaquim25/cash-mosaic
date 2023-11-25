@@ -30,6 +30,10 @@ export const NavbarContainer = styled.div`
 `
 
 export const HambuguerIcon = styled.div`
+    & svg{
+        color: #B3B3B3;
+    }
+
     @media (min-width: 1024px){
         display: none;
     }

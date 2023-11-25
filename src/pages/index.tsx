@@ -1,4 +1,4 @@
-import features from '../data/features.json';
+import features from '../../public/data/features.json';
 import Head from 'next/head'
 import { FeatureSectionHeading, FeatureSectionSubHeading, HeroHeader, HeroSection, HeroText, HomeHeroImg, HomepageContainer, LeftHeroContainer, RightHeroContainer } from '@/styles/HomeStyles'
 import { DefaultButton } from '@/styles/GlobalStyles';
