@@ -3,7 +3,7 @@ import DashboardHeader from '@/components/DashboardHeader'
 import DashboardTabs from '@/components/DashboardTabs'
 import { RootState, User } from '@/store/types';
 import { GetServerSidePropsContext, PreviewData } from 'next';
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import * as cookie from 'cookie'
 import { ParsedUrlQuery } from 'querystring';
 import { setUserDashboard } from '@/store/user/actions';
@@ -22,7 +22,7 @@ function Dashboard({ initialUser }: DashboardPageProps) {
     const user = useSelector((state: RootState) => state.user);
 
     useEffect(() => {
-        user && dispatch(setUserDashboard(initialUser));
+        dispatch(setUserDashboard(initialUser));
     }, [])
 
     return (

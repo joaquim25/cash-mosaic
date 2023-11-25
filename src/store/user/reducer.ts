@@ -40,6 +40,7 @@ export const userReducer = (state: User = initialState, action: Action) => {
             const { balance, totalIncome, totalExpenses, transactions_expenses, transactions_income } = action.payload;
             return {
                 ...state,
+                id: action.payload.id,
                 balance,
                 totalIncome,
                 totalExpenses,

@@ -41,7 +41,6 @@ export const logOut = () => {
 };
 
 export const setUserProfile = (user: User) => {
-    console.log("setUserProfile", user)
     return { type: SET_PROFILE_INFO, payload: user }
 };
 
@@ -49,10 +48,9 @@ export const setUserDashboard = (user: User) => {
     const totalIncome = getTotalIncome(user);
     const totalExpenses = getTotalExpenses(user);
     const balance = totalIncome - totalExpenses;
-
-    console.log("setUserDashboard", user, balance, totalIncome, totalExpenses);
+    const id = user.id;
 
     return {
-        type: SET_DASHBOARD_INFO, payload: { ...user, balance, totalIncome, totalExpenses }
+        type: SET_DASHBOARD_INFO, payload: { ...user, id, balance, totalIncome, totalExpenses }
     }
 }
