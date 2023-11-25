@@ -3,7 +3,7 @@ import axios from "axios"
 const BASE_URL = "https://x8ki-letl-twmt.n7.xano.io/api:8Mli9063";
 
 type DashboardAPIProps = {
-    cashmosaic_user_id: number | null | undefined;
+    user_id: number | null | undefined;
     date: unknown;
     amount: string | undefined;
     category: string | undefined;
@@ -25,22 +25,27 @@ export const fetchDashboardData = async (token: string | null | undefined) => {
     }
 };
 
-export const addIncome = async ({ cashmosaic_user_id, date, amount, category }: DashboardAPIProps) => {
+export const addIncome = async ({ user_id, date, amount, category }: DashboardAPIProps) => {
+    let parsedAmount = parseFloat(amount!.replace(',', '.'));
 
-    const response = await axios.post(`${BASE_URL}/cashmosaic_transactions_income`,
+    const response = await axios.post(`${BASE_URL}/cashmosaic_transactions`,
         {
-            cashmosaic_user_id, date, amount, category
+            user_id, date, amount: parsedAmount, category
         }
     )
 
     return response;
 }
 
-export const addExpense = async ({ cashmosaic_user_id, date, amount, category }: DashboardAPIProps) => {
+export const addExpense = async ({ user_id, date, amount, category }: DashboardAPIProps) => {
+    let parsedAmount = parseFloat(amount!.replace(',', '.'))
+    if (typeof parsedAmount === "number") {
+        parsedAmount = parsedAmount * -1;
+    }
 
-    const response = await axios.post(`${BASE_URL}/cashmosaic_transactions_expenses`,
+    const response = await axios.post(`${BASE_URL}/cashmosaic_transactions`,
         {
-            cashmosaic_user_id, date, amount, category
+            user_id, date, amount: parsedAmount, category
         }
     )
 

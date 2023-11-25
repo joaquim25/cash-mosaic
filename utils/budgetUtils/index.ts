@@ -2,8 +2,15 @@ import { User } from "@/store/types";
 
 // Calculate total expenses when given user object
 export const getTotalExpenses = (user: User) => {
-    const totalExpenses = user.transactions_expenses!.reduce((total: number, expense: { amount: string; }) => {
-        return total + parseFloat(expense.amount.replace(',', '.')); // (check later if needed) Convert comma to dot and parse as float
+    const totalExpenses = user.transactions!.reduce((total: number, transaction: { amount: string; }) => {
+        const amount = parseFloat(transaction.amount.replace(',', '.'));
+
+        // Only consider negative amounts as expenses
+        if (amount < 0) {
+            total += amount;
+        }
+
+        return total;
     }, 0);
 
     return totalExpenses;
@@ -11,8 +18,15 @@ export const getTotalExpenses = (user: User) => {
 
 // Calculate total income when given user object
 export const getTotalIncome = (user: User) => {
-    const totalIncome = user.transactions_income!.reduce((total: number, income: { amount: string; }) => {
-        return total + parseFloat(income.amount.replace(',', '.')); // (check later if needed) Convert comma to dot and parse as float
+    const totalIncome = user.transactions!.reduce((total: number, transaction: { amount: string; }) => {
+        const amount = parseFloat(transaction.amount.replace(',', '.'));
+
+        // Only consider positive amounts as income
+        if (amount > 0) {
+            total += amount;
+        }
+
+        return total;
     }, 0);
 
     return totalIncome;

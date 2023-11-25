@@ -34,8 +34,9 @@ function AddRecordsComponent({ user }: AddRecordsComponentProps) {
 
     const onAddRecord = async () => {
         //prepare data for post request
-        const cashmosaic_user_id = user.id;
-        const params = { cashmosaic_user_id, date, amount, category }
+        const user_id = user.id;
+        const params = { user_id, date, amount, category }
+        let newUser;
         try {
             switch (selectedRecordType) {
                 case "income":
@@ -52,17 +53,15 @@ function AddRecordsComponent({ user }: AddRecordsComponentProps) {
                     }
 
                     // 2. Create a newUser object with the updated transactions_income property
-                    const newUser = {
+                    newUser = {
                         ...user,
-                        transactions_income: [...user.transactions_income!, newIncomeRecord]
+                        transactions: [...user.transactions!, newIncomeRecord]
                     }
-
 
                     // 3. Dispatch an action that updates the global state and calcultate the new totalIncome, totalExpenses, balance values
                     dispatch(setUserDashboard(newUser));
 
                     setDate(dayjs());
-                    setAmount(undefined);
                     setCategory(undefined);
 
                     break;
@@ -80,16 +79,15 @@ function AddRecordsComponent({ user }: AddRecordsComponentProps) {
                     }
 
                     // 2. Create a newUser object with the updated transactions_income property
-                    const newUser1 = {
+                    newUser = {
                         ...user,
-                        transactions_expenses: [...user.transactions_expenses!, newExpenseRecord]
+                        transactions: [...user.transactions!, newExpenseRecord]
                     }
 
                     // 3. Dispatch an action that updates the global state and calcultate the new totalIncome, totalExpenses, balance values
-                    dispatch(setUserDashboard(newUser1));
+                    dispatch(setUserDashboard(newUser));
 
                     setDate(dayjs());
-                    setAmount(undefined);
                     setCategory(undefined);
 
                     break;
@@ -98,6 +96,7 @@ function AddRecordsComponent({ user }: AddRecordsComponentProps) {
             }
 
         } catch (error) {
+            //TO-DO display a snackbar with error
             console.error(error);
         }
 

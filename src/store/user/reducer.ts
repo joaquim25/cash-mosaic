@@ -37,15 +37,14 @@ export const userReducer = (state: User = initialState, action: Action) => {
                 isLoggedIn: true,
             };
         case actions.SET_DASHBOARD_INFO:
-            const { balance, totalIncome, totalExpenses, transactions_expenses, transactions_income } = action.payload;
+            const { balance, totalIncome, totalExpenses, transactions} = action.payload;
             return {
                 ...state,
                 id: action.payload.id,
                 balance,
                 totalIncome,
                 totalExpenses,
-                transactions_expenses,
-                transactions_income,
+                transactions,
                 isLoggedIn: true,
             };
         default:
