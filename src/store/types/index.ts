@@ -16,7 +16,7 @@ export interface User {
     location: string;
     bio: string;
     authToken?: string;
-    isLoggedIn?: boolean;
+    isLoggedIn: boolean;
     password?: string;
     balance?: number;
     totalIncome?: number;

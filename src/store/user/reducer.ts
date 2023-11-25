@@ -44,7 +44,8 @@ export const userReducer = (state: User = initialState, action: Action) => {
                 totalIncome,
                 totalExpenses,
                 transactions_expenses,
-                transactions_income
+                transactions_income,
+                isLoggedIn: true,
             };
         default:
             return state;

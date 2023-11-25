@@ -41,17 +41,16 @@ export const logOut = () => {
 };
 
 export const setUserProfile = (user: User) => {
+    console.log("setUserProfile", user)
     return { type: SET_PROFILE_INFO, payload: user }
 };
 
 export const setUserDashboard = (user: User) => {
-    console.log("Geral state: ", user);
     const totalIncome = getTotalIncome(user);
-    console.log("income: ", totalIncome);
     const totalExpenses = getTotalExpenses(user);
-    console.log("expenses: ", totalExpenses);
     const balance = totalIncome - totalExpenses;
-    console.log("balance: ", balance);
+
+    console.log("setUserDashboard", user, balance, totalIncome, totalExpenses);
 
     return {
         type: SET_DASHBOARD_INFO, payload: { ...user, balance, totalIncome, totalExpenses }

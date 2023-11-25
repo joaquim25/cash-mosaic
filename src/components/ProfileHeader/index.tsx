@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 
 function ProfileHeader() {
     const user = useSelector((state: RootState) => state.user);
+    const userBalance = user.totalIncome && user.totalExpenses ? user.totalIncome - user.totalExpenses : null;
 
     return (
         <>
@@ -15,7 +16,7 @@ function ProfileHeader() {
                     <UserAvatar src='/images/profile-img.png' />
                     <div>
                         <UserName>{user.firstname}, {user.lastname}</UserName>
-                        <UserBalance>5700,00€</UserBalance>
+                        <UserBalance>{userBalance ? `${userBalance.toFixed(2)}€` : null}</UserBalance>
                     </div>
                 </UserAvatarContainer>
 

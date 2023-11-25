@@ -1,8 +1,7 @@
 import React from 'react'
 import { BalanceText, BalanceValue, HeaderContainer, HeaderOverviewContainer, OverviewExpensesSectionContainer, OverviewIncomeSectionContainer, OverviewSectionTitle, OverviewSectionValue } from './styles'
 import { IoArrowDownCircleOutline, IoArrowUpCircleOutline } from "react-icons/io5";
-import { RootState, User } from '@/store/types';
-import { useSelector } from 'react-redux';
+import { User } from '@/store/types';
 
 type DashboardHeaderProps = {
     user: User;

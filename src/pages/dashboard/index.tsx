@@ -5,10 +5,10 @@ import { RootState, User } from '@/store/types';
 import { GetServerSidePropsContext, PreviewData } from 'next';
 import React, { useEffect } from 'react'
 import * as cookie from 'cookie'
-import { fetchProfileData } from '../api/profile';
 import { ParsedUrlQuery } from 'querystring';
 import { setUserDashboard } from '@/store/user/actions';
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchDashboardData } from '../api/dashboard';
 
 type DashboardPageProps = {
     initialUser: User;
@@ -22,7 +22,7 @@ function Dashboard({ initialUser }: DashboardPageProps) {
     const user = useSelector((state: RootState) => state.user);
 
     useEffect(() => {
-        dispatch(setUserDashboard(initialUser));
+        user && dispatch(setUserDashboard(initialUser));
     }, [])
 
     return (
@@ -35,20 +35,22 @@ function Dashboard({ initialUser }: DashboardPageProps) {
 
 export const getServerSideProps: (context: GetServerSidePropsContext<ParsedUrlQuery, PreviewData>) => Promise<{ redirect?: { destination?: string; permanent?: false; }; props?: any; }> = async (context) => {
     try {
-        const cookieHeader = context.req.headers.cookie;
+        const cookieHeader = context.req.headers.cookie || '';
         const parsedCookies = cookie.parse(cookieHeader!);
 
         if (!parsedCookies.authToken) {
             // If there is no authToken, redirect to login page
+
             return {
                 redirect: {
-                    destination: '/login',
                     permanent: false,
+                    destination: "/login",
                 },
+                props: {},
             };
         }
 
-        const initialUser = await fetchProfileData(parsedCookies.authToken);
+        const initialUser = await fetchDashboardData(parsedCookies.authToken);
 
         return {
             props: {
@@ -56,7 +58,7 @@ export const getServerSideProps: (context: GetServerSidePropsContext<ParsedUrlQu
             },
         };
     } catch (error) {
-        console.error("Error in getServerSideProps[dashboard page]: ");
+        console.error("Error in getServerSideProps[dashboard page]: ", error);
 
         return {
             props: {

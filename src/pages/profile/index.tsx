@@ -193,8 +193,20 @@ function ProfilePage({ user }: ProfilePageProps) {
 
 export const getServerSideProps: GetServerSideProps<ProfilePageProps> = async (context) => {
     try {
-        const cookieHeader = context.req.headers.cookie;
+        const cookieHeader = context.req.headers.cookie || '';
         const parsedCookies = cookie.parse(cookieHeader!);
+
+        if (!parsedCookies.authToken) {
+            // If there is no authToken, redirect to login page
+
+            return {
+                redirect: {
+                    permanent: false,
+                    destination: "/login",
+                },
+                props: {},
+            };
+        }
 
         const user = await fetchProfileData(parsedCookies.authToken);
 

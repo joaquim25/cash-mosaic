@@ -1,7 +1,16 @@
 import { CardContainer, CardIcon, CardText, CardUnList } from "@/components/FeatureCard/styles/FeatureCardStyles"
 import Image from "next/image"
 
-function FeatureCard({ card }: { card: Card }) {
+type FeatureCardProps = {
+    card: {
+        size: string;
+        icon: string;
+        color: string;
+        content: string | string[];
+    }
+}
+
+function FeatureCard({ card }: FeatureCardProps) {
     return (
         <CardContainer size={card.size} bgColor={card.color}>
             <CardIcon bgColor={card.color}>

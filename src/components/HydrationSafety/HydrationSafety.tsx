@@ -8,7 +8,7 @@ const HydrationSafety = ({ children }: any) => {
         setIsHydrated(true)
     }, [])
 
-    return <>{isHydrated ? <div>{children}</div> : null}</>
+    return isHydrated ? <div>{children}</div> : null;
 }
 
 export default HydrationSafety
