@@ -21,6 +21,12 @@ export interface User {
     balance?: number;
     totalIncome?: number;
     totalExpenses?: number;
+    transactions?: {
+        id: number;
+        date: string;
+        amount: string;
+        category: string;
+    }[];
     transactions_expenses?: {
         id: number;
         date: string;
