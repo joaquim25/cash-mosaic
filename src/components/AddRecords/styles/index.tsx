@@ -1,11 +1,30 @@
 import styled from "@emotion/styled";
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
+export const ParametersInputContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    @media(min-width: 768px){
+        display: grid;
+        grid-template-areas:
+        "typeSelect date"
+        "amount amount";
+        max-width: 600px;
+        margin: 0 auto;
+    }
+`
+
 export const RecordTypeSelectorContainer = styled.div`
     margin: 20px 0 10px 0;
     display: flex;
     justify-content: center;
     gap: 50px;
+
+    @media(min-width: 768px){
+        grid-area: typeSelect;
+    }
 `
 
 export const RecordTypeSelector = styled.div`
@@ -71,12 +90,6 @@ export const RecordTypeExpense = styled(RecordTypeSelector) <{ isSelected: boole
     }
 `
 
-export const InputContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-`
-
 export const AmountInput = styled.div`
     flex: 1 0 auto;
     display: flex;
@@ -86,6 +99,8 @@ export const AmountInput = styled.div`
     background-color: #C6C5C5;
     padding: 3px 10px 6px 10px;
     border-radius: 5px;
+    max-width: 500px;
+    margin: 0 auto;
 
     & label {
         font-size: 9px;
@@ -100,6 +115,10 @@ export const AmountInput = styled.div`
         padding: 4px 0;
         text-align: center;
         font-size: 1.2rem;
+    }
+
+    @media(min-width: 768px){
+        grid-area: amount;
     }
 `
 
@@ -123,6 +142,10 @@ export const DateInput = styled.div`
         font-size: 10px;
         color: #7E7676;
     }
+
+    @media(min-width: 768px){
+        grid-area: date;
+    }
 `
 
 export const StyledDatePicker = styled(DatePicker)`
@@ -130,14 +153,25 @@ export const StyledDatePicker = styled(DatePicker)`
 `
 
 export const CategoryContainer = styled.div`
-    margin: 30px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 30px auto;
     background-color: #BAC2CD70;
     border-radius: 10px;
     padding: 16px;
+    max-width: 1000px;
 
     & h3 {
+        align-self: flex-start;
         font-size: 13px;
         font-weight: 600;
         font-family: "Quicksand";
+    }
+
+    & button {
+        margin-top: 60px;
+        max-width: 500px;
+        justify-self: center;
     }
 `

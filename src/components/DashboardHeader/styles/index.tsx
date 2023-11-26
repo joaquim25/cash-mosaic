@@ -2,7 +2,11 @@ import { THEME_COLORS } from "@/styles/GlobalStyles";
 import styled from "@emotion/styled";
 
 export const HeaderContainer = styled.div`
-    background-color: #4A5050;
+    background-color: #555;
+    background-image: url("/images/dashboardHeader-fadeBg.png");
+    background-blend-mode: color-dodge;
+    background-position: 10% 50%;
+    background-size: cover;
     padding: 100px 24px 24px 24px;
     position: relative;
     margin-top: -70px;
@@ -32,6 +36,10 @@ export const HeaderOverviewContainer = styled.div`
     height: 91px;
     border-radius: 14px;
     margin-top: 40px;
+
+    @media (min-width: 1024px){
+        max-width: 400px;
+    }
 `
 
 export const OverviewIncomeSectionContainer = styled.div`

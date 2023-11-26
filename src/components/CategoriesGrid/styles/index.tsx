@@ -9,6 +9,14 @@ export const CategoriesGridContainer = styled.div`
     row-gap: 20px;
     column-gap: 30px;
     grid-template-columns: repeat(3,1fr);
+
+    @media (min-width: 768px){
+        grid-template-columns: repeat(4,1fr);
+    }
+
+    @media (min-width: 1024px){
+        grid-template-columns: repeat(5,1fr);
+    }   
 `
 
 export const CategorieCard = styled.div <{ squareColor: string, isSelected: boolean }>`

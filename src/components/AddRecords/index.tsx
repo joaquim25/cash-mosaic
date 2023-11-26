@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState } from 'react'
 import { IoArrowDown, IoArrowUp } from "react-icons/io5";
-import { AmountInput, CategoryContainer, DateInput, RecordTypeSelectorContainer, InputContainer, StyledDatePicker, RecordTypeIncome, RecordTypeExpense } from './styles'
+import { AmountInput, CategoryContainer, DateInput, RecordTypeSelectorContainer, ParametersInputContainer, StyledDatePicker, RecordTypeIncome, RecordTypeExpense } from './styles'
 import { DefaultButton } from '@/styles/GlobalStyles';
 import CategoriesGrid from '../CategoriesGrid';
 import HydrationSafety from '../HydrationSafety/HydrationSafety';
@@ -197,18 +197,18 @@ function AddRecordsComponent({ user }: AddRecordsComponentProps) {
 
     return (
         <HydrationSafety>
-            <RecordTypeSelectorContainer>
-                <RecordTypeIncome isSelected={selectedRecordType === "income"} onClick={() => onRecordTypeSelection("income")}>
-                    <IoArrowDown />
-                    <p>Income</p>
-                </RecordTypeIncome>
-                <RecordTypeExpense isSelected={selectedRecordType === "expenses"} onClick={() => onRecordTypeSelection("expenses")}>
-                    <IoArrowUp />
-                    <p>Expense</p>
-                </RecordTypeExpense>
-            </RecordTypeSelectorContainer>
+            <ParametersInputContainer>
+                <RecordTypeSelectorContainer>
+                    <RecordTypeIncome isSelected={selectedRecordType === "income"} onClick={() => onRecordTypeSelection("income")}>
+                        <IoArrowDown />
+                        <p>Income</p>
+                    </RecordTypeIncome>
+                    <RecordTypeExpense isSelected={selectedRecordType === "expenses"} onClick={() => onRecordTypeSelection("expenses")}>
+                        <IoArrowUp />
+                        <p>Expense</p>
+                    </RecordTypeExpense>
+                </RecordTypeSelectorContainer>
 
-            <InputContainer>
                 <DateInput>
                     <StyledDatePicker label="Date"
                         value={date}
@@ -230,7 +230,7 @@ function AddRecordsComponent({ user }: AddRecordsComponentProps) {
                         disableAbbreviations={true}
                     />
                 </AmountInput>
-            </InputContainer>
+            </ParametersInputContainer>
 
             <CategoryContainer>
                 <h3>Category</h3>
@@ -252,7 +252,7 @@ function AddRecordsComponent({ user }: AddRecordsComponentProps) {
                 open={submitRecordRequestState.success}
                 autoHideDuration={4000}
             >
-                <Alert severity="success">`Success!! Your new record was created!`</Alert>
+                <Alert severity="success">Success!! Your new record was created!</Alert>
             </Snackbar>
 
         </HydrationSafety>
