@@ -11,6 +11,8 @@ import { addExpense, addIncome } from '@/pages/api/dashboard';
 import { useDispatch } from 'react-redux';
 import { User } from '@/store/types';
 import { setUserDashboard } from '@/store/user/actions';
+import axios from 'axios';
+import { Alert, Snackbar } from '@mui/material';
 
 type AddRecordsComponentProps = {
     user: User;
@@ -18,10 +20,13 @@ type AddRecordsComponentProps = {
 
 function AddRecordsComponent({ user }: AddRecordsComponentProps) {
     const dispatch = useDispatch();
+    // record type selections, date, amount, category
     const [selectedRecordType, setSelectedRecordType] = useState<"expenses" | "income">("expenses");
     const [date, setDate] = useState<string | number | dayjs.Dayjs | Date | null | undefined | unknown>(dayjs());
     const [amount, setAmount] = useState<string | undefined>();
     const [category, setCategory] = useState<string | undefined>();
+    // submit record state
+    const [submitRecordRequestState, setSubmitRecordRequestState] = useState({ success: false, error: false, errorMessage: "" });
 
 
     const onRecordTypeSelection = (type: "expenses" | "income") => {
@@ -38,6 +43,11 @@ function AddRecordsComponent({ user }: AddRecordsComponentProps) {
         const params = { user_id, date, amount, category }
         let newUser;
         try {
+            const parsedAmount = parseFloat(amount!.replace(',', '.'));
+            if (parsedAmount === 0) {
+                throw (Error("missing param: amount"))
+            }
+
             switch (selectedRecordType) {
                 case "income":
                     // Post request on cashMosaic-transactions_income table
@@ -61,6 +71,23 @@ function AddRecordsComponent({ user }: AddRecordsComponentProps) {
                     // 3. Dispatch an action that updates the global state and calcultate the new totalIncome, totalExpenses, balance values
                     dispatch(setUserDashboard(newUser));
 
+                    setSubmitRecordRequestState(
+                        {
+                            ...submitRecordRequestState,
+                            success: true,
+                        }
+                    )
+
+                    setTimeout(() => {
+                        setSubmitRecordRequestState(
+                            {
+                                ...submitRecordRequestState,
+                                success: false,
+                            }
+                        )
+                    }, 3000);
+
+                    setAmount("0,00");
                     setDate(dayjs());
                     setCategory(undefined);
 
@@ -87,6 +114,23 @@ function AddRecordsComponent({ user }: AddRecordsComponentProps) {
                     // 3. Dispatch an action that updates the global state and calcultate the new totalIncome, totalExpenses, balance values
                     dispatch(setUserDashboard(newUser));
 
+                    setSubmitRecordRequestState(
+                        {
+                            ...submitRecordRequestState,
+                            success: true,
+                        }
+                    )
+
+                    setTimeout(() => {
+                        setSubmitRecordRequestState(
+                            {
+                                ...submitRecordRequestState,
+                                success: false,
+                            }
+                        )
+                    }, 3000);
+
+                    setAmount("0,00");
                     setDate(dayjs());
                     setCategory(undefined);
 
@@ -96,8 +140,57 @@ function AddRecordsComponent({ user }: AddRecordsComponentProps) {
             }
 
         } catch (error) {
-            //TO-DO display a snackbar with error
-            console.error(error);
+            let parsedAmount;
+            if (typeof amount !== "undefined") {
+                parsedAmount = parseFloat(amount.replace(',', '.'));
+            } else {
+                parsedAmount = null;
+            }
+
+            if (parsedAmount === 0 || parsedAmount === null) {
+                setSubmitRecordRequestState(
+                    {
+                        ...submitRecordRequestState,
+                        error: true,
+                        errorMessage: "Sorry, Amount should be greater than 0."
+                    }
+                )
+            } else if (typeof category === "undefined") {
+                setSubmitRecordRequestState(
+                    {
+                        ...submitRecordRequestState,
+                        error: true,
+                        errorMessage: "Sorry, Please select a Category."
+                    }
+                )
+            }
+            else if (axios.isAxiosError(error)) {
+                setSubmitRecordRequestState(
+                    {
+                        ...submitRecordRequestState,
+                        error: true,
+                        errorMessage: error!.response?.data?.message
+                    }
+                )
+            } else {
+                setSubmitRecordRequestState(
+                    {
+                        ...submitRecordRequestState,
+                        error: true,
+                        errorMessage: "Sorry, an error ocurred."
+                    }
+                )
+            }
+
+            setTimeout(() => {
+                setSubmitRecordRequestState(
+                    {
+                        ...submitRecordRequestState,
+                        error: false,
+                        errorMessage: "",
+                    }
+                )
+            }, 4000);
         }
 
     }
@@ -144,6 +237,23 @@ function AddRecordsComponent({ user }: AddRecordsComponentProps) {
                 <CategoriesGrid type={selectedRecordType} onCategorySelection={onCategorySelection} category={category} />
                 <DefaultButton onClick={onAddRecord}>Add</DefaultButton>
             </CategoryContainer>
+
+
+            <Snackbar
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                open={submitRecordRequestState.error}
+                autoHideDuration={3000}
+            >
+                <Alert severity="error">{submitRecordRequestState.errorMessage}</Alert>
+            </Snackbar>
+
+            <Snackbar
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                open={submitRecordRequestState.success}
+                autoHideDuration={4000}
+            >
+                <Alert severity="success">`Success!! Your new record was created!`</Alert>
+            </Snackbar>
 
         </HydrationSafety>
     )
