@@ -21,7 +21,7 @@ export default function Home() {
           <LeftHeroContainer>
             <HeroHeader>Take back control of your own money</HeroHeader>
             <HeroText>Cash Mosaic is a <span>personal finance application</span> that makes money management easy. The app is designed to streamline <span>expense tracking</span> and help you <span>save money</span>.</HeroText>
-            <DefaultButton>Create your account</DefaultButton>
+            <DefaultButton onClick={() => window.location.href = "/signup"}>Create your account</DefaultButton>
           </LeftHeroContainer>
           <RightHeroContainer>
             <HomeHeroImg src="/images/ipad.png" alt="An Ipad showing a finance web app" height={771} width={899} />

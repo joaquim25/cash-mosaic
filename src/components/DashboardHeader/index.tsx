@@ -26,7 +26,7 @@ function DashboardHeader({ user }: DashboardHeaderProps) {
                     <IoArrowUpCircleOutline />
                     <div>
                         <OverviewSectionTitle>Expenses</OverviewSectionTitle>
-                        <OverviewSectionValue>{totalExpenses ? totalExpenses.toFixed(2) : "-.--"}€</OverviewSectionValue>
+                        <OverviewSectionValue>{totalExpenses ? totalExpenses.toFixed(2).replace("-", "") : "-.--"}€</OverviewSectionValue>
                     </div>
 
                 </OverviewExpensesSectionContainer>
