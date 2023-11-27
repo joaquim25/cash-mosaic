@@ -9,15 +9,17 @@ import { ParsedUrlQuery } from 'querystring';
 import { setUserDashboard } from '@/store/user/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchDashboardData } from '../api/dashboard';
+import { fetchDayData } from '../api/statistics';
 
 type DashboardPageProps = {
     initialUser: User;
+    statisticsData: { label: string, value: number }[];
     totalExpenses: number;
     totalIncome: number;
     balance: number;
 };
 
-function Dashboard({ initialUser }: DashboardPageProps) {
+function Dashboard({ initialUser, statisticsData }: DashboardPageProps) {
     const dispatch = useDispatch();
     const user = useSelector((state: RootState) => state.user);
 
@@ -28,7 +30,7 @@ function Dashboard({ initialUser }: DashboardPageProps) {
     return (
         <>
             <DashboardHeader user={user} />
-            <DashboardTabs user={user} />
+            <DashboardTabs user={user} statisticsData={statisticsData} />
         </>
     )
 }
@@ -51,10 +53,13 @@ export const getServerSideProps: (context: GetServerSidePropsContext<ParsedUrlQu
         }
 
         const initialUser = await fetchDashboardData(parsedCookies.authToken);
+        const statisticsData = await fetchDayData(parsedCookies.authToken);
+
 
         return {
             props: {
-                initialUser
+                initialUser,
+                statisticsData: statisticsData.user_transactions
             },
         };
     } catch (error) {
@@ -63,6 +68,7 @@ export const getServerSideProps: (context: GetServerSidePropsContext<ParsedUrlQu
         return {
             props: {
                 initialUser: {},
+                statisticsData: [],
             },
         };
     }
