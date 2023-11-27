@@ -45,7 +45,6 @@ export const setUserProfile = (user: User) => {
 };
 
 export const setUserDashboard = (user: User) => {
-    console.log("triggered setUserDashboard")
     const totalIncome = getTotalIncome(user);
     const totalExpenses = getTotalExpenses(user);
     const balance = totalExpenses + totalIncome;
