@@ -10,7 +10,8 @@ export function CustomTabPanel(props: TabPanelProps) {
     const { children, currentTab, index, ...other } = props;
 
     return (
-        <div
+        <Typography
+            component="div"
             role="tabpanel"
             hidden={currentTab !== index}
             id={`simple-tabpanel-${index}`}
@@ -19,9 +20,9 @@ export function CustomTabPanel(props: TabPanelProps) {
         >
             {currentTab === index && (
                 <Box sx={{ p: 3 }}>
-                    <Typography>{children}</Typography>
+                    <>{children}</>
                 </Box>
             )}
-        </div>
+        </Typography>
     );
 }

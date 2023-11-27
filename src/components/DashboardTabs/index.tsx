@@ -8,7 +8,7 @@ import { DashboardTabsContainer } from './styles';
 import AddRecordsComponent from '../AddRecords';
 import TransactionsComponent from '../Transactions';
 import { User } from '@/store/types';
-import StatisticsComponent from '../statistics';
+import StatisticsComponent from '../StatisticsComponent';
 
 type DashboardTabsProps = {
     user: User;

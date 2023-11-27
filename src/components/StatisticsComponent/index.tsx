@@ -41,19 +41,19 @@ function StatisticsComponent({ data }: StatisticsPageProps) {
                             </StatisticsTabs>
                         </Box>
                         <CustomTabPanel currentTab={currentTab} index={0}>
-                            <StatisticsChart data={data} type="day" />
+                            {currentTab === 0 && <StatisticsChart data={data} type="day" />}
                         </CustomTabPanel>
                         <CustomTabPanel currentTab={currentTab} index={1}>
-                            <StatisticsChart data={data} type="week" />
+                            {currentTab === 1 && <StatisticsChart data={data} type="week" />}
                         </CustomTabPanel>
                         <CustomTabPanel currentTab={currentTab} index={2}>
-                            <StatisticsChart data={data} type="month" />
+                            {currentTab === 2 && <StatisticsChart data={data} type="month" />}
                         </CustomTabPanel>
                         <CustomTabPanel currentTab={currentTab} index={3}>
-                            <StatisticsChart data={data} type="year" />
+                            {currentTab === 3 && <StatisticsChart data={data} type="year" />}
                         </CustomTabPanel>
                         <CustomTabPanel currentTab={currentTab} index={4}>
-                            <StatisticsChart data={data} type="range" />
+                            {currentTab === 4 && <StatisticsChart data={data} type="range" />}
                         </CustomTabPanel>
                     </Box>
                 </StatisticsTabsContainer>

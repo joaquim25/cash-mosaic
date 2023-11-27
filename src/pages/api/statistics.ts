@@ -3,6 +3,7 @@ import { get7DaysPriorDate, getCurrentDate, getPriorMonthDate, getPriorYearDate 
 
 const BASE_URL = "https://x8ki-letl-twmt.n7.xano.io/api:8Mli9063";
 
+
 export const fetchDayData = async (token: string) => {
     const today = getCurrentDate();
     try {

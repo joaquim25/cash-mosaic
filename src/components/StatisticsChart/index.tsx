@@ -1,5 +1,8 @@
-import React from 'react'
+
+import React, { useEffect, useMemo, useState } from 'react'
 import { StatisticsChartContainer, StatisticsPieChart } from './styles';
+import { fetchMonthData, fetchWeekData, fetchYearData } from '@/pages/api/statistics';
+import { getAuthTokenFromCookies } from '../../../utils/cookies';
 
 
 type StatisticsChartProps = {
@@ -7,16 +10,51 @@ type StatisticsChartProps = {
     data: any;
 }
 
-function StatisticsChart({ data }: StatisticsChartProps) {
-    data.forEach((item: { value: number; }) => {
+function StatisticsChart({ type, data }: StatisticsChartProps) {
+    const [clientData, setClientData] = useState(data);
+    const authToken = getAuthTokenFromCookies();
+
+    useEffect(() => {
+        const fetchData = async () => {
+            let response;
+            switch (type) {
+                case 'week':
+                    response = authToken && (await fetchWeekData(authToken));
+                    break;
+                case 'month':
+                    response = authToken && (await fetchMonthData(authToken));
+                    break;
+                case 'year':
+                    response = authToken && (await fetchYearData(authToken));
+                    break;
+                case 'range':
+                    // TO-DO to replace (this one should have a range selector and submit btn)
+                    response = authToken && (await fetchYearData(authToken));
+                    break;
+                default:
+                    break;
+            }
+
+            if (response && typeof window !== 'undefined') {
+                setClientData(response.user_transactions);
+            }
+        };
+
+        fetchData();
+    }, [type, authToken]);
+
+    const displayData = type !== "day" ? clientData : data;
+
+    displayData.forEach((item: { value: number; }) => {
         item.value = Math.abs(item.value);
     });
+
     return (
         <StatisticsChartContainer>
             <StatisticsPieChart
                 series={[
                     {
-                        data,
+                        data: displayData,
                         innerRadius: 60,
                         outerRadius: 90,
                         paddingAngle: 2,
