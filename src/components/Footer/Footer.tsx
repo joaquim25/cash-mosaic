@@ -39,7 +39,7 @@ function Footer() {
         <FooterContainer>
             <FooterLogo>
                 <a href='#'>
-                    <Image src="/images/logo.svg" width={100} height={45} alt="menu icon" />
+                    <Image src="/images/cash-mosaic-logo.svg" width={50} height={50} alt="menu icon" />
                 </a>
             </FooterLogo>
             <FooterLinks>

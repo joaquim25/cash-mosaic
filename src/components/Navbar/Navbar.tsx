@@ -75,7 +75,7 @@ function Navbar() {
                     <IoIosMenu onClick={toggleShowSidebar} />
                 </HambuguerIcon>
                 <Link href="/">
-                    <Image src="/images/logo.svg" width={100} height={45} alt="menu icon" />
+                    <Image src="/images/logo.svg" width={150} height={45} alt="menu icon" />
                 </Link>
 
                 <DesktopNavItemsContainer>

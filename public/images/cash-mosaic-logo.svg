@@ -1,0 +1,9 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 68 68" width="68" height="68">
+	<title>logo-footer-svg</title>
+	<defs>
+		<image  width="68" height="68" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEQAAABEAgMAAABFfXshAAAAAXNSR0IB2cksfwAAAAxQTFRFAAAA2u3Rf/9/f/9/rt6ykAAAAAR0Uk5TAP8DAVEhMSIAAADtSURBVHicnZSxEcMwCEWh0AiMkBHSM4IL0WX/OWIbEBh0l7tQ4XfoS2AA4LYhIgckQ7mMExG1AC8jnxoSQWMRF6dFZj3kxzARLjIuRInMKqNC+CBcZFSIHmRuiXtjSS+HzMEl6GXDyIeUjHgqafSIdMylIKjhFEWARKDFXF8mMMEuP1X9rXZ5ZOdEKsGf5PiL7JT77RvS33zmhYncuTM8STSJEs6E9Imr8tMLV4l0wqvZvCXivx+pSUiedWBzuDTmrVhIbeck6Lbv1d7hfQr6pGymqU9cn8o+uZvp7hugbwl4G4hN0rfNZiPlrfUF4H4JiI+RBgwAAAAASUVORK5CYII="/>
+	</defs>
+	<style>
+	</style>
+	<use id="Camada 1" href="#img1" x="0" y="0"/>
+</svg>
