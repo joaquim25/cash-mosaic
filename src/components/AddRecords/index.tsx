@@ -254,7 +254,6 @@ function AddRecordsComponent({ user }: AddRecordsComponentProps) {
             >
                 <Alert severity="success">Success!! Your new record was created!</Alert>
             </Snackbar>
-
         </HydrationSafety>
     )
 }

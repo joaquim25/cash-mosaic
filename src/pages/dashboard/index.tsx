@@ -1,17 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import DashboardHeader from '@/components/DashboardHeader'
-import DashboardTabs from '@/components/DashboardTabs'
 import { RootState, User } from '@/store/types';
 import { GetServerSidePropsContext, PreviewData } from 'next';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import * as cookie from 'cookie'
 import { ParsedUrlQuery } from 'querystring';
 import { setUserDashboard } from '@/store/user/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchDashboardData } from '../api/dashboard';
-import { fetchDayData } from '../api/statistics';
 import DashboardLayout from '@/components/DashboardLayout';
 import AddRecordsComponent from '@/components/AddRecords';
+import axios from 'axios';
+import DataLoadingError from '@/components/Error/DataLoading';
 
 type DashboardPageProps = {
     initialUser: User;
@@ -23,15 +22,20 @@ type DashboardPageProps = {
 
 function Dashboard({ initialUser }: DashboardPageProps) {
     const dispatch = useDispatch();
+    //2. Get hold of redux user state
     const user = useSelector((state: RootState) => state.user);
 
+    //1. populate the redux user state with the SSP info
     useEffect(() => {
         dispatch(setUserDashboard(initialUser));
     }, [])
-
+    console.log(initialUser)
     return (
         <DashboardLayout user={user} >
-            <AddRecordsComponent user={user} />
+            {initialUser
+                ? <AddRecordsComponent user={user} />
+                : <DataLoadingError />
+            }
         </DashboardLayout>
     )
 }
@@ -41,9 +45,8 @@ export const getServerSideProps: (context: GetServerSidePropsContext<ParsedUrlQu
         const cookieHeader = context.req.headers.cookie || '';
         const parsedCookies = cookie.parse(cookieHeader!);
 
+        //If authToken does not exist, redirect to login page
         if (!parsedCookies.authToken) {
-            // If there is no authToken, redirect to login page
-
             return {
                 redirect: {
                     permanent: false,
@@ -55,7 +58,6 @@ export const getServerSideProps: (context: GetServerSidePropsContext<ParsedUrlQu
 
         const initialUser = await fetchDashboardData(parsedCookies.authToken);
 
-
         return {
             props: {
                 initialUser,
@@ -64,9 +66,20 @@ export const getServerSideProps: (context: GetServerSidePropsContext<ParsedUrlQu
     } catch (error) {
         console.error("Error in getServerSideProps[dashboard page]: ", error);
 
+        //If authtoken exists but is not set by the app (therefore is invalid), redirect to login page
+        if (axios.isAxiosError(error) && error.response!.status === 401) {
+            return {
+                redirect: {
+                    permanent: false,
+                    destination: "/login",
+                },
+                props: {},
+            };
+        }
+
         return {
             props: {
-                initialUser: undefined,
+                initialUser: null,
             },
         };
     }

@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 
 export const FooterContainer = styled.div`
     position: relative;
+    bottom: 0;
     background-color: #94BE9B;
     display: flex;
     justify-content: space-between;

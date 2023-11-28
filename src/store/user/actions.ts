@@ -45,12 +45,21 @@ export const setUserProfile = (user: User) => {
 };
 
 export const setUserDashboard = (user: User) => {
-    const totalIncome = getTotalIncome(user);
-    const totalExpenses = getTotalExpenses(user);
-    const balance = totalExpenses + totalIncome;
-    const id = user.id;
+    if (user) {
+        const totalIncome = getTotalIncome(user);
+        const totalExpenses = getTotalExpenses(user);
+        let balance;
+        if (totalExpenses && totalIncome) {
+            balance = totalExpenses + totalIncome;
+        }
+        const id = user.id;
 
-    return {
-        type: SET_DASHBOARD_INFO, payload: { ...user, id, balance, totalIncome, totalExpenses }
+        return {
+            type: SET_DASHBOARD_INFO, payload: { ...user, id, balance, totalIncome, totalExpenses }
+        }
+    } else {
+        return {
+            type: SET_DASHBOARD_INFO, payload: { id: 0, balance: 0, totalIncome: 0, totalExpenses: 0 }
+        }
     }
 }
