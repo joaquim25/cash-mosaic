@@ -10,6 +10,7 @@ import { setUserDashboard } from '@/store/user/actions';
 import { GetServerSidePropsContext, PreviewData } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 import { fetchTransactions } from '../api/transactions';
+import DataLoadingError from '@/components/Error/DataLoading';
 
 type TransactionsPageProps = {
     initialUser: User;
@@ -26,7 +27,10 @@ function Transactions({ initialUser, transactions_list }: TransactionsPageProps)
 
     return (
         <DashboardLayout user={user} >
-            <TransactionsComponent initialTransactions={transactions_list} />
+            {initialUser
+                ? <TransactionsComponent initialTransactions={transactions_list} />
+                : <DataLoadingError />
+            }
         </DashboardLayout>
     )
 }

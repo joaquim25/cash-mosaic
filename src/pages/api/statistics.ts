@@ -13,7 +13,7 @@ export const fetchDayData = async (token: string) => {
                     Authorization: `Bearer ${token}`,
                 },
                 params: {
-                    start: today, end: today
+                    start: today, end: today, isInitial: 1
                 }
             });
 
