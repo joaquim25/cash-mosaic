@@ -7,7 +7,7 @@ const BASE_URL = "https://x8ki-letl-twmt.n7.xano.io/api:8Mli9063";
 export const fetchDayData = async (token: string) => {
     const today = getCurrentDate();
     try {
-        const response = await axios.get(`${BASE_URL}/overview_day`,
+        const response = await axios.get(`${BASE_URL}/transactions_by_range`,
             {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -30,7 +30,7 @@ export const fetchWeekData = async (token: string) => {
     const start = get7DaysPriorDate();
 
     try {
-        const response = await axios.get(`${BASE_URL}/overview_day`,
+        const response = await axios.get(`${BASE_URL}/transactions_by_range`,
             {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -40,7 +40,7 @@ export const fetchWeekData = async (token: string) => {
                 }
             });
 
-        return response.data;
+        return response.data.statisticsData;
     } catch (error) {
         console.error("fetchProfileData error: ", error);
 
@@ -53,7 +53,7 @@ export const fetchMonthData = async (token: string) => {
     const start = getPriorMonthDate();
 
     try {
-        const response = await axios.get(`${BASE_URL}/overview_day`,
+        const response = await axios.get(`${BASE_URL}/transactions_by_range`,
             {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -63,7 +63,7 @@ export const fetchMonthData = async (token: string) => {
                 }
             });
 
-        return response.data;
+        return response.data.statisticsData;
     } catch (error) {
         console.error("fetchProfileData error: ", error);
 
@@ -76,7 +76,7 @@ export const fetchYearData = async (token: string) => {
     const start = getPriorYearDate();
 
     try {
-        const response = await axios.get(`${BASE_URL}/overview_day`,
+        const response = await axios.get(`${BASE_URL}/transactions_by_range`,
             {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -86,7 +86,7 @@ export const fetchYearData = async (token: string) => {
                 }
             });
 
-        return response.data;
+        return response.data.statisticsData;
     } catch (error) {
         console.error("fetchProfileData error: ", error);
 

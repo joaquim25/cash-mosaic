@@ -1,15 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import DashboardLayout from '@/components/DashboardLayout'
-import React, { useEffect } from 'react'
-import { fetchDashboardData } from '../api/dashboard';
-import StatisticsComponent from '@/components/StatisticsComponent';
 import * as cookie from 'cookie'
-import { RootState, User } from '@/store/types';
+import axios from 'axios';
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { setUserDashboard } from '@/store/user/actions';
 import { GetServerSidePropsContext, PreviewData } from 'next';
 import { ParsedUrlQuery } from 'querystring';
+import { RootState, User } from '@/store/types';
 import { fetchDayData } from '../api/statistics';
+import DashboardLayout from '@/components/DashboardLayout'
+import StatisticsComponent from '@/components/StatisticsComponent';
+import { setUserDashboard } from '@/store/user/actions';
+import DataLoadingError from '@/components/Error/DataLoading';
 
 type StatisticsPageProps = {
     initialUser: User;
@@ -17,7 +18,6 @@ type StatisticsPageProps = {
 };
 
 function Statistics({ initialUser, data }: StatisticsPageProps) {
-    // function Statistics({ data }: StatisticsPageProps) {
     const dispatch = useDispatch();
     const user = useSelector((state: RootState) => state.user);
 
@@ -27,7 +27,10 @@ function Statistics({ initialUser, data }: StatisticsPageProps) {
 
     return (
         <DashboardLayout user={user} >
-            <StatisticsComponent data={data} />
+            {initialUser
+                ? <StatisticsComponent data={data} />
+                : <DataLoadingError />
+            }
         </DashboardLayout>
     )
 }
@@ -50,23 +53,31 @@ export const getServerSideProps: (context: GetServerSidePropsContext<ParsedUrlQu
             };
         }
 
-        const initialUser = await fetchDashboardData(parsedCookies.authToken);
-        const statisticsData = await fetchDayData(parsedCookies.authToken);
-
+        const { statisticsData, initialUser } = await fetchDayData(parsedCookies.authToken);
 
         return {
             props: {
                 initialUser,
-                data: statisticsData.user_transactions
+                data: statisticsData
             },
         };
     } catch (error) {
-        console.error("Error in getServerSideProps[dashboard page]: ", error);
+        console.error("Error in getServerSideProps[statistics page]: ", error);
+
+        if (axios.isAxiosError(error) && error.response!.status === 401) {
+            return {
+                redirect: {
+                    permanent: false,
+                    destination: "/login",
+                },
+                props: {},
+            };
+        }
 
         return {
             props: {
                 initialUser: null,
-                data: undefined,
+                data: null,
             },
         };
     }

@@ -28,7 +28,7 @@ function StatisticsChart({ type, data }: StatisticsChartProps) {
                     response = authToken && (await fetchYearData(authToken));
                     break;
                 case 'range':
-                    // TO-DO to replace (this one should have a range selector and submit btn)
+                    // TO-DO: Refactor (this one should have a range selector and submit btn)
                     response = authToken && (await fetchYearData(authToken));
                     break;
                 default:
@@ -36,7 +36,7 @@ function StatisticsChart({ type, data }: StatisticsChartProps) {
             }
 
             if (response && typeof window !== 'undefined') {
-                setClientData(response.user_transactions);
+                setClientData(response);
             }
         };
 
