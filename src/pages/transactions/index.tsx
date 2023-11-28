@@ -1,27 +1,21 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import DashboardHeader from '@/components/DashboardHeader'
-import DashboardTabs from '@/components/DashboardTabs'
-import { RootState, User } from '@/store/types';
-import { GetServerSidePropsContext, PreviewData } from 'next';
-import React, { useEffect, useState } from 'react'
-import * as cookie from 'cookie'
-import { ParsedUrlQuery } from 'querystring';
-import { setUserDashboard } from '@/store/user/actions';
-import { useDispatch, useSelector } from 'react-redux';
+import DashboardLayout from '@/components/DashboardLayout'
+import TransactionsComponent from '@/components/Transactions'
+import React, { useEffect } from 'react'
 import { fetchDashboardData } from '../api/dashboard';
-import { fetchDayData } from '../api/statistics';
-import DashboardLayout from '@/components/DashboardLayout';
-import AddRecordsComponent from '@/components/AddRecords';
+import * as cookie from 'cookie'
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState, User } from '@/store/types';
+import { setUserDashboard } from '@/store/user/actions';
+import { GetServerSidePropsContext, PreviewData } from 'next';
+import { ParsedUrlQuery } from 'querystring';
 
-type DashboardPageProps = {
+type TransactionsPageProps = {
     initialUser: User;
-    statisticsData: { label: string, value: number }[];
-    totalExpenses: number;
-    totalIncome: number;
-    balance: number;
+    // data: { label: string, value: number }[];
 };
 
-function Dashboard({ initialUser }: DashboardPageProps) {
+function Transactions({ initialUser }: TransactionsPageProps) {
     const dispatch = useDispatch();
     const user = useSelector((state: RootState) => state.user);
 
@@ -31,10 +25,11 @@ function Dashboard({ initialUser }: DashboardPageProps) {
 
     return (
         <DashboardLayout user={user} >
-            <AddRecordsComponent user={user} />
+            <TransactionsComponent />
         </DashboardLayout>
     )
 }
+
 
 export const getServerSideProps: (context: GetServerSidePropsContext<ParsedUrlQuery, PreviewData>) => Promise<{ redirect?: { destination?: string; permanent?: false; }; props?: any; }> = async (context) => {
     try {
@@ -54,11 +49,13 @@ export const getServerSideProps: (context: GetServerSidePropsContext<ParsedUrlQu
         }
 
         const initialUser = await fetchDashboardData(parsedCookies.authToken);
+        // const statisticsData = await fetchDayData(parsedCookies.authToken);
 
 
         return {
             props: {
                 initialUser,
+                // data: statisticsData.user_transactions
             },
         };
     } catch (error) {
@@ -66,11 +63,11 @@ export const getServerSideProps: (context: GetServerSidePropsContext<ParsedUrlQu
 
         return {
             props: {
-                initialUser: undefined,
+                initialUser: null,
+                // data: undefined,
             },
         };
     }
 };
 
-export default Dashboard
-
+export default Transactions
