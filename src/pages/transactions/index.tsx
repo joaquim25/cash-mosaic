@@ -13,11 +13,10 @@ import { fetchTransactions } from '../api/transactions';
 
 type TransactionsPageProps = {
     initialUser: User;
-    initialTransactions: any;
-    // data: { label: string, value: number }[];
+    transactions_list: any;
 };
 
-function Transactions({ initialUser, initialTransactions }: TransactionsPageProps) {
+function Transactions({ initialUser, transactions_list }: TransactionsPageProps) {
     const dispatch = useDispatch();
     const user = useSelector((state: RootState) => state.user);
 
@@ -27,7 +26,7 @@ function Transactions({ initialUser, initialTransactions }: TransactionsPageProp
 
     return (
         <DashboardLayout user={user} >
-            <TransactionsComponent initialTransactions={initialTransactions} />
+            <TransactionsComponent initialTransactions={transactions_list} />
         </DashboardLayout>
     )
 }
@@ -50,16 +49,14 @@ export const getServerSideProps: (context: GetServerSidePropsContext<ParsedUrlQu
             };
         }
 
-        const initialUser = await fetchDashboardData(parsedCookies.authToken);
-        const initialTransactions = await fetchTransactions(parsedCookies.authToken)
-        // const statisticsData = await fetchDayData(parsedCookies.authToken);
+        // const initialUser = await fetchDashboardData(parsedCookies.authToken);
+        const { transactions_list, initialUser } = await fetchTransactions(parsedCookies.authToken)
 
 
         return {
             props: {
                 initialUser,
-                initialTransactions
-                // data: statisticsData.user_transactions
+                transactions_list
             },
         };
     } catch (error) {
@@ -68,7 +65,7 @@ export const getServerSideProps: (context: GetServerSidePropsContext<ParsedUrlQu
         return {
             props: {
                 initialUser: null,
-                // data: undefined,
+                transactions_list: null
             },
         };
     }

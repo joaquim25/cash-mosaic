@@ -24,7 +24,7 @@ function TransactionsComponent({ initialTransactions }: TransactionsComponentPro
 
     const handlePageChange = async (event: React.ChangeEvent<unknown>, value: number) => {
         const response = await fetchTransactions(authToken, value);
-        setItems(response.items)
+        setItems(response.transactions_list.items)
         setPage(value)
     }
 
