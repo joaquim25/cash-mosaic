@@ -9,13 +9,15 @@ import { RootState, User } from '@/store/types';
 import { setUserDashboard } from '@/store/user/actions';
 import { GetServerSidePropsContext, PreviewData } from 'next';
 import { ParsedUrlQuery } from 'querystring';
+import { fetchTransactions } from '../api/transactions';
 
 type TransactionsPageProps = {
     initialUser: User;
+    initialTransactions: any;
     // data: { label: string, value: number }[];
 };
 
-function Transactions({ initialUser }: TransactionsPageProps) {
+function Transactions({ initialUser, initialTransactions }: TransactionsPageProps) {
     const dispatch = useDispatch();
     const user = useSelector((state: RootState) => state.user);
 
@@ -25,7 +27,7 @@ function Transactions({ initialUser }: TransactionsPageProps) {
 
     return (
         <DashboardLayout user={user} >
-            <TransactionsComponent />
+            <TransactionsComponent initialTransactions={initialTransactions} />
         </DashboardLayout>
     )
 }
@@ -49,12 +51,14 @@ export const getServerSideProps: (context: GetServerSidePropsContext<ParsedUrlQu
         }
 
         const initialUser = await fetchDashboardData(parsedCookies.authToken);
+        const initialTransactions = await fetchTransactions(parsedCookies.authToken)
         // const statisticsData = await fetchDayData(parsedCookies.authToken);
 
 
         return {
             props: {
                 initialUser,
+                initialTransactions
                 // data: statisticsData.user_transactions
             },
         };
