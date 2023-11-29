@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import { styled } from 'styled-components';
 
 export const THEME_COLORS = {
   danger: "rgb(179, 53, 86)",

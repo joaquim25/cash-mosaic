@@ -1,5 +1,5 @@
 import { THEME_COLORS } from "@/styles/GlobalStyles";
-import styled from "@emotion/styled";
+import { styled } from 'styled-components';
 
 export const CategoriesGridContainer = styled.div`
     width: 100%;
@@ -16,7 +16,7 @@ export const CategoriesGridContainer = styled.div`
 
     @media (min-width: 1024px){
         grid-template-columns: repeat(5,1fr);
-    }   
+    }
 `
 
 export const CategorieCard = styled.div <{ squareColor: string, isSelected: boolean }>`

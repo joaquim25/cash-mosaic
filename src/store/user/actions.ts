@@ -48,10 +48,12 @@ export const setUserDashboard = (user: User) => {
     if (user) {
         const totalIncome = getTotalIncome(user);
         const totalExpenses = getTotalExpenses(user);
+
         let balance;
-        if (totalExpenses && totalIncome) {
+        if (typeof totalIncome == "number" && typeof totalExpenses == "number") {
             balance = totalExpenses + totalIncome;
         }
+
         const id = user.id;
 
         return {

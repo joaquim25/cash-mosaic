@@ -27,7 +27,6 @@ type TransactionsPageProps = {
 
 
 function Transactions({ initialUser, transactions_list }: TransactionsPageProps) {
-    console.log(transactions_list)
     const dispatch = useDispatch();
     const user = useSelector((state: RootState) => state.user);
 

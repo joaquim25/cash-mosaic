@@ -43,11 +43,13 @@ function StatisticsChart({ type, data }: StatisticsChartProps) {
         fetchData();
     }, [type, authToken]);
 
-    const displayData = type !== "day" ? clientData : data;
+    let displayData = type !== "day" ? clientData : data;
 
     displayData.forEach((item: { value: number; }) => {
         item.value = Math.abs(item.value);
     });
+
+    displayData = displayData.length > 0 ? displayData : [{ label: `${type !== "range" ? `No data for ${type} period` : `No data for this range`}`, value: 1 }];
 
     return (
         <StatisticsChartContainer>

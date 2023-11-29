@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import { styled } from 'styled-components';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 export const ParametersInputContainer = styled.div`

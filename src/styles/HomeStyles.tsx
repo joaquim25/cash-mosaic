@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import { styled } from 'styled-components';
 import { THEME_COLORS } from "./GlobalStyles";
 
 export const HomepageContainer = styled.div`

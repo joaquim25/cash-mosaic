@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import { styled } from 'styled-components';
 import { PieChart } from '@mui/x-charts/PieChart';
 
 export const StatisticsChartContainer = styled.div`

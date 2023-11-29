@@ -2,7 +2,7 @@ import { User } from '@/store/types';
 import React, { ReactNode } from 'react'
 import DashboardHeader from './DashboardHeader';
 import DashboardTabs from './DashboardTabs';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
 type DashboardLayoutProps = {
     children: ReactNode;
