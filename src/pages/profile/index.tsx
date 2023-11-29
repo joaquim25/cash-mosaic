@@ -10,6 +10,7 @@ import { setUserProfile } from "@/store/user/actions";
 import { Alert, Snackbar } from "@mui/material";
 import axios from "axios";
 import ProfileHeader from "@/components/ProfileHeader";
+import { UserData } from "@/components/ProfileFormContainer/types";
 
 type ProfilePageProps = {
     user: User;
@@ -19,11 +20,11 @@ function ProfilePage({ user }: ProfilePageProps) {
     const dispatch = useDispatch();
     const [submitChangesRequestState, setSubmitChangesRequestState] = useState({ success: false, error: false, errorMessage: "" });
     // Local data to manipulate in ProfileForm
-    const [userData, setUserData] = useState({
-        firstname: { value: user.firstname, isEditing: false },
-        lastname: { value: user.lastname, isEditing: false },
-        location: { value: user.location, isEditing: false },
-        bio: { value: user.bio, isEditing: false },
+    const [userData, setUserData] = useState<UserData>({
+        firstname: { value: user.firstname || "", isEditing: false },
+        lastname: { value: user.lastname || "", isEditing: false },
+        location: { value: user.location || "", isEditing: false },
+        bio: { value: user.bio || "", isEditing: false },
         password: { value: "", isEditing: false },
     });
 
@@ -153,10 +154,10 @@ function ProfilePage({ user }: ProfilePageProps) {
 
     const cancelChanges = () => {
         setUserData({
-            firstname: { value: user.firstname, isEditing: false },
-            lastname: { value: user.lastname, isEditing: false },
-            location: { value: user.location, isEditing: false },
-            bio: { value: user.bio, isEditing: false },
+            firstname: { value: user.firstname || "", isEditing: false },
+            lastname: { value: user.lastname || "", isEditing: false },
+            location: { value: user.location || "", isEditing: false },
+            bio: { value: user.bio || "", isEditing: false },
             password: { value: "", isEditing: false },
         })
     }

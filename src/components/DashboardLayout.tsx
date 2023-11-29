@@ -1,11 +1,11 @@
 import { User } from '@/store/types';
-import React from 'react'
+import React, { ReactNode } from 'react'
 import DashboardHeader from './DashboardHeader';
 import DashboardTabs from './DashboardTabs';
 import styled from 'styled-components';
 
 type DashboardLayoutProps = {
-    children: any;
+    children: ReactNode;
     user: User;
 };
 

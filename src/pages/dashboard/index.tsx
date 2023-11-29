@@ -29,7 +29,7 @@ function Dashboard({ initialUser }: DashboardPageProps) {
     useEffect(() => {
         dispatch(setUserDashboard(initialUser));
     }, [])
-    console.log(initialUser)
+
     return (
         <DashboardLayout user={user} >
             {initialUser

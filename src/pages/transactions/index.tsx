@@ -11,13 +11,23 @@ import { ParsedUrlQuery } from 'querystring';
 import { fetchTransactions } from '../api/transactions';
 import DataLoadingError from '@/components/Error/DataLoading';
 import axios from 'axios';
+import { TransactionRecordItem } from '@/components/Transactions/types';
 
 type TransactionsPageProps = {
     initialUser: User;
-    transactions_list: any;
+    transactions_list: {
+        itemsReceived: number;
+        currPage: number;
+        nextPage: number | null;
+        prevPage: number | null;
+        pageTotal: number;
+        items: TransactionRecordItem[]
+    };
 };
 
+
 function Transactions({ initialUser, transactions_list }: TransactionsPageProps) {
+    console.log(transactions_list)
     const dispatch = useDispatch();
     const user = useSelector((state: RootState) => state.user);
 

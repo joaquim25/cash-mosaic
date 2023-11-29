@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { ButtonsContainer, CancelButton, ConfimationModalText, ConfirmButton, StyledPopover } from './styles/ConfirmationModalStyles';
+import { AnyAction } from 'redux';
 
 interface ConfirmationModalProps {
     open: boolean;
     anchorEl: HTMLButtonElement | null;
     onClose: () => void;
-    action: any;
+    action: () => AnyAction;
 }
 
 function ConfirmationModal({ open, anchorEl, onClose, action }: ConfirmationModalProps) {

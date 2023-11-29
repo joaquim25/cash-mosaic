@@ -7,7 +7,7 @@ import { getAuthTokenFromCookies } from '../../../utils/cookies';
 
 type StatisticsChartProps = {
     type: "day" | "week" | "month" | "year" | "range";
-    data: any;
+    data: { label: string, value: number }[];
 }
 
 function StatisticsChart({ type, data }: StatisticsChartProps) {

@@ -7,7 +7,7 @@ import StatisticsChart from '../../components/StatisticsChart';
 import HydrationSafety from '@/components/HydrationSafety/HydrationSafety';
 
 type StatisticsPageProps = {
-    data: any;
+    data: { label: string, value: number }[];
 };
 
 function StatisticsComponent({ data }: StatisticsPageProps) {

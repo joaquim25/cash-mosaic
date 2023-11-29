@@ -1,6 +1,10 @@
-import { useEffect, useState } from "react"
+import { ReactNode, useEffect, useState } from "react"
 
-const HydrationSafety = ({ children }: any) => {
+type HydrationSafetyProps = {
+    children: ReactNode
+}
+
+const HydrationSafety = ({ children }: HydrationSafetyProps) => {
     const [isHydrated, setIsHydrated] = useState(false)
 
     // Wait till Next.js rehydration completes

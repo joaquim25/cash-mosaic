@@ -12,9 +12,17 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { getAuthTokenFromCookies } from '../../../utils/cookies';
 import { fetchTransactions } from '@/pages/api/transactions';
+import { TransactionRecordItem } from './types';
 
 type TransactionsComponentProps = {
-    initialTransactions: any;
+    initialTransactions: {
+        itemsReceived: number;
+        currPage: number;
+        nextPage: number | null;
+        prevPage: number | null;
+        pageTotal: number;
+        items: TransactionRecordItem[]
+    };
 };
 
 function TransactionsComponent({ initialTransactions }: TransactionsComponentProps) {
@@ -41,7 +49,7 @@ function TransactionsComponent({ initialTransactions }: TransactionsComponentPro
                         </TableRow>
                     </TableHead>
                     <TableBody sx={{ backgroundColor: "#33333315" }}>
-                        {items.map((item: any) => (
+                        {items.map((item: TransactionRecordItem) => (
                             <TableRow key={item.id}>
                                 <TableCell sx={{ textAlign: "center" }}>{item.date}</TableCell>
                                 <AmountTableCell isIncome={item.amount > 0} sx={{ textAlign: "right" }}>{item.amount.toFixed(2)}€</AmountTableCell>
