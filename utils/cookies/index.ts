@@ -5,7 +5,9 @@ export const getAuthTokenFromCookies = (): string | null => {
 };
 
 export const setAuthTokenInCookies = (authToken: string): void => {
-    setCookie('authToken', authToken);
+    var currentDate = new Date();
+    var sevenHoursLater = new Date(currentDate.getTime() + 7 * 60 * 60 * 1000);
+    setCookie('authToken', authToken, {expires: sevenHoursLater});
 };
 
 export const removeAuthTokenFromCookies = (): void => {

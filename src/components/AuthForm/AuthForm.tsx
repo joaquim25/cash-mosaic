@@ -89,7 +89,7 @@ export const AuthForm = ({ fields, title }: propTypes) => {
                             />
                         </FieldContainer>
                     ))}
-                    <DefaultButton bgColor="danger" type='submit'>{title}</DefaultButton>
+                    <DefaultButton $bgColor="danger" type='submit'>{title}</DefaultButton>
 
                     {/* Extra links to switch between login and sign-up page */}
                     <ExtraFormLinks>

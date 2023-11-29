@@ -40,6 +40,10 @@ export const logOut = () => {
     };
 };
 
+export const cleanUser = () => {
+    return { type: actions.LOGOUT }
+}
+
 export const setUserProfile = (user: User) => {
     return { type: SET_PROFILE_INFO, payload: user }
 };

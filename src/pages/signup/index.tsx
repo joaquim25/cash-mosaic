@@ -1,9 +1,22 @@
+import * as cookie from 'cookie'
 import { AuthForm } from '@/components/AuthForm/AuthForm';
 import { Fields } from '@/components/AuthForm/types';
+import { GetServerSidePropsContext, PreviewData } from 'next';
+import { ParsedUrlQuery } from 'querystring';
+import { useDispatch } from 'react-redux';
+import { cleanUser } from '@/store/user/actions';
+
+type SignupPageProps = {
+    isLogged: boolean;
+}
+
+function SignupPage({ isLogged }: SignupPageProps) {
+    const dispatch = useDispatch();
+    if (!isLogged) {
+        dispatch(cleanUser())
+    }
 
 
-
-function SignupPage() {
     const fields: Fields = [
         { name: "firstname", label: "First Name", type: "text" },
         { name: "lastname", label: "Last Name", type: "text" },
@@ -17,6 +30,26 @@ function SignupPage() {
             title="Signup"
         />
     )
+}
+
+export const getServerSideProps = (context: GetServerSidePropsContext<ParsedUrlQuery, PreviewData>) => {
+    // In case of token expiration, will trigger redux logOut action
+    const cookieHeader = context.req.headers.cookie || '';
+    const parsedCookies = cookie.parse(cookieHeader!);
+
+    if (!parsedCookies.authToken) {
+        return {
+            props: {
+                isLogged: false
+            }
+        }
+    } else {
+        return {
+            props: {
+                isLogged: true
+            }
+        }
+    }
 }
 
 export default SignupPage;

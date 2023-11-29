@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
 import { THEME_COLORS } from "../../../styles/GlobalStyles";
 
-export const FeatureContainer = styled.div<{ isInverted: boolean }>`
+export const FeatureContainer = styled.div<{ $isInverted: boolean }>`
     display: grid;
     align-items: center;
     max-width: 1000px;
@@ -14,7 +14,7 @@ export const FeatureContainer = styled.div<{ isInverted: boolean }>`
         "header header"
         "img cards";
 
-    ${({ isInverted }) => isInverted && `
+    ${({ $isInverted }) => $isInverted && `
         padding-top: 20px;
         border-top: 2px solid ${THEME_COLORS.green_normal};
         grid-template-areas:
@@ -28,7 +28,7 @@ export const FeatureContainer = styled.div<{ isInverted: boolean }>`
                 "header img"
                 "cards img";
 
-        ${({ isInverted }) => isInverted && `
+        ${({ $isInverted }) => $isInverted && `
         grid-template-columns: 40% 60%;
             grid-template-areas:
             "img header"
@@ -66,7 +66,7 @@ export const FeatureText = styled.p`
     margin: 0 auto;
 `
 
-export const FeatureImg = styled.img<{ isInverted: boolean }>`
+export const FeatureImg = styled.img<{ $isInverted: boolean }>`
     width: 100%;
     height: 100%;
     max-width: 300px;
@@ -74,7 +74,7 @@ export const FeatureImg = styled.img<{ isInverted: boolean }>`
     grid-area: img;
     margin-left: auto;
 
-    ${({ isInverted }) => isInverted && `
+    ${({ $isInverted }) => $isInverted && `
     margin-left: 0; margin-right: auto;
     `}
 

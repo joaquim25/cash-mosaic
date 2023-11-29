@@ -23,19 +23,19 @@ export const THEME_COLORS = {
 type ThemeColors = keyof typeof THEME_COLORS;
 
 
-export const DefaultButton = styled.button<{ bgColor?: ThemeColors }>`
+export const DefaultButton = styled.button<{ $bgColor?: ThemeColors }>`
     cursor: pointer;
     margin-top: 2rem;
     padding: 15px 0;
     border-radius: 30px;
     border: 1px solid ${THEME_COLORS.grey_border};
-    background-color: ${props => (props.bgColor ? THEME_COLORS[props.bgColor] : THEME_COLORS.success)};
+    background-color: ${props => (props.$bgColor ? THEME_COLORS[props.$bgColor] : THEME_COLORS.success)};
     color: white;
     font-size: 1rem;
     transition: all .2s ease-in-out;
     width: 100%;
 
     :hover{
-        box-shadow: 0 2px 8px 1px ${props => (props.bgColor ? THEME_COLORS[props.bgColor] : THEME_COLORS.success)};
+        box-shadow: 0 2px 8px 1px ${props => (props.$bgColor ? THEME_COLORS[props.$bgColor] : THEME_COLORS.success)};
     }
 `

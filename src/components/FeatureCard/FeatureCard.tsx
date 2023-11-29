@@ -12,8 +12,8 @@ type FeatureCardProps = {
 
 function FeatureCard({ card }: FeatureCardProps) {
     return (
-        <CardContainer size={card.size} bgColor={card.color}>
-            <CardIcon bgColor={card.color}>
+        <CardContainer size={card.size} $bgColor={card.color}>
+            <CardIcon $bgColor={card.color}>
                 <Image src={card.icon} alt="sada" height={20} width={20} />
             </CardIcon>
             {

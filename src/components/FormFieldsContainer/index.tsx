@@ -49,10 +49,10 @@ function FormFieldsContainer({ fields, handleFieldChange, handleEditActionField 
 
                     }
 
-                    <EditIconContainer isEditing={field.isEditing} onClick={() => handleEditActionField("edit", field.name)}>
+                    <EditIconContainer $isEditing={field.isEditing} onClick={() => handleEditActionField("edit", field.name)}>
                         <FaRegEdit />
                     </EditIconContainer>
-                    <EditingIconsContainer isEditing={field.isEditing}>
+                    <EditingIconsContainer $isEditing={field.isEditing}>
                         <CheckIconContainer onClick={() => handleEditActionField("save", field.name)}>
                             <IoMdCheckmark />
                         </CheckIconContainer>

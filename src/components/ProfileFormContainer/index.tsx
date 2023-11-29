@@ -108,7 +108,7 @@ function ProfileFormContainer({
             {/* General Form buttons */}
             <ButtonsGroup>
                 <DefaultButton onClick={submitChanges}>Save Changes</DefaultButton>
-                <DefaultButton bgColor='danger' onClick={cancelChanges}>Cancel</DefaultButton>
+                <DefaultButton $bgColor='danger' onClick={cancelChanges}>Cancel</DefaultButton>
             </ButtonsGroup>
 
         </FormContainer>

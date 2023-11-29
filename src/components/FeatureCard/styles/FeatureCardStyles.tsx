@@ -1,14 +1,14 @@
 import { styled } from 'styled-components';
 import { THEME_COLORS } from "../../../styles/GlobalStyles";
 
-export const CardContainer = styled.div <{ size: string; bgColor: string }>`
+export const CardContainer = styled.div <{ size: string; $bgColor: string }>`
     border-radius: 24px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
-    background-color: ${props => props.bgColor}55;
+    background-color: ${props => props.$bgColor}55;
     max-width: 200px;
     max-height: 190px;
     position: relative;
@@ -54,13 +54,13 @@ export const CardUnList = styled.ul`
     }
 `
 
-export const CardIcon = styled.div <{ bgColor: string }> `
+export const CardIcon = styled.div <{ $bgColor: string }> `
     position: absolute;
     margin-bottom: auto;
     margin-right: auto;
     left: 15px;
     top: 15px;
-    background-color: ${props => props.bgColor};
+    background-color: ${props => props.$bgColor};
     padding: 4px 7px;
     border-radius: 50%;
 

@@ -46,8 +46,8 @@ export const TextArea = styled.textarea`
     }
 `
 
-export const EditIconContainer = styled.div<{ isEditing: boolean }>`
-    display: ${props => props.isEditing ? "none" : "flex"};
+export const EditIconContainer = styled.div<{ $isEditing: boolean }>`
+    display: ${props => props.$isEditing ? "none" : "flex"};
     position: absolute;
     right: 5px;
     top: 5px;
@@ -62,9 +62,9 @@ export const EditIconContainer = styled.div<{ isEditing: boolean }>`
     }
 `
 
-export const EditingIconsContainer = styled.div < { isEditing: boolean }> `
+export const EditingIconsContainer = styled.div < { $isEditing: boolean }> `
     position: absolute;
-    display: ${props => props.isEditing ? "flex" : "none"};
+    display: ${props => props.$isEditing ? "flex" : "none"};
     top: 5px;
     right: 5px;
     gap: 5px;

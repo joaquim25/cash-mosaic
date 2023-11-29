@@ -19,7 +19,7 @@ export const CategoriesGridContainer = styled.div`
     }
 `
 
-export const CategorieCard = styled.div <{ squareColor: string, isSelected: boolean }>`
+export const CategorieCard = styled.div <{ $squareColor: string, $isSelected: boolean }>`
     padding: 10px 4px;
     display: flex;
     gap: 7px;
@@ -31,11 +31,11 @@ export const CategorieCard = styled.div <{ squareColor: string, isSelected: bool
     max-width: 110px;
     border: 1px solid transparent;
 
-    ${props => props.isSelected
+    ${props => props.$isSelected
         ?
         `
-            background-color: ${props.squareColor}80;
-            box-shadow: 0 0 8px 4px ${props.squareColor}40;
+            background-color: ${props.$squareColor}80;
+            box-shadow: 0 0 8px 4px ${props.$squareColor}40;
             border: 1px solid #FFFFFF50;
         `
         :

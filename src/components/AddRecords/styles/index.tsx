@@ -50,41 +50,41 @@ export const RecordTypeSelector = styled.div`
     }
 `
 
-export const RecordTypeIncome = styled(RecordTypeSelector) <{ isSelected: boolean }>`
-    ${props => props.isSelected && `
+export const RecordTypeIncome = styled(RecordTypeSelector) <{ $isSelected: boolean }>`
+    ${props => props.$isSelected && `
         background-color: #90C0A750;
         border-radius: 20px;
     `}
 
     & svg {
-        ${props => props.isSelected && `
+        ${props => props.$isSelected && `
             color: #1B5E20;
             opacity: 1;
         `}
     }
 
     & p {
-        ${props => props.isSelected && `
+        ${props => props.$isSelected && `
             color: #1B5E20;
         `}
     }
 `
 
-export const RecordTypeExpense = styled(RecordTypeSelector) <{ isSelected: boolean }>`
-    ${props => props.isSelected && `
+export const RecordTypeExpense = styled(RecordTypeSelector) <{ $isSelected: boolean }>`
+    ${props => props.$isSelected && `
         background-color: #FF174430;
         border-radius: 20px;
     `}
 
     & svg {
-        ${props => props.isSelected && `
+        ${props => props.$isSelected && `
             color: #D32F2F;
             opacity: 1;
         `}
     }
 
     & p {
-        ${props => props.isSelected && `
+        ${props => props.$isSelected && `
             color: #D32F2F;
         `}
     }

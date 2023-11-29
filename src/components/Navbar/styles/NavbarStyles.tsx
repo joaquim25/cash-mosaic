@@ -39,28 +39,21 @@ export const HambuguerIcon = styled.div`
     }
 `
 
-export const SidebarFadedBackground = styled.div<{ showSidebar: boolean }>`
-    display: flex;
-    position: fixed;
-    background-color: rgba(0,0,0,.7);
-    backdrop-filter: blur(10px);
-    height: 100vh;
-    left: 0;
-    top: 0;
+export const SidebarFadedBackground = styled.div<{ $showSidebar: boolean }>`
+  /* Existing styles */
 
-    z-index: 98;
-
-    ${({ showSidebar }) => (
-        showSidebar
+  ${({ $showSidebar }) => (
+        $showSidebar
             ? `width: 100vw;`
             : `width: 0;`
     )}
 
-    @media (min-width: 1024px){
-        display: none;
-    }
-`
-export const Sidebar = styled.div<{ showSidebar: boolean }>`
+  @media (min-width: 1024px){
+      display: none;
+  }
+`;
+
+export const Sidebar = styled.div<{ $showSidebar: boolean }>`
     position: fixed;
     padding: 0 30px;
     background-color: rgb(220,220,220);
@@ -71,8 +64,8 @@ export const Sidebar = styled.div<{ showSidebar: boolean }>`
     z-index: 99;
     transition: all 1s ease-in-out;
 
-    ${({ showSidebar }) => (
-        showSidebar
+    ${({ $showSidebar }) => (
+        $showSidebar
             ? `left: 0;`
             : ``
     )}

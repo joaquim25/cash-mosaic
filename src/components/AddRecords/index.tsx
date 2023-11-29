@@ -208,11 +208,11 @@ function AddRecordsComponent({ user }: AddRecordsComponentProps) {
         <HydrationSafety>
             <ParametersInputContainer>
                 <RecordTypeSelectorContainer>
-                    <RecordTypeIncome isSelected={selectedRecordType === "income"} onClick={() => onRecordTypeSelection("income")}>
+                    <RecordTypeIncome $isSelected={selectedRecordType === "income"} onClick={() => onRecordTypeSelection("income")}>
                         <IoArrowDown />
                         <p>Income</p>
                     </RecordTypeIncome>
-                    <RecordTypeExpense isSelected={selectedRecordType === "expenses"} onClick={() => onRecordTypeSelection("expenses")}>
+                    <RecordTypeExpense $isSelected={selectedRecordType === "expenses"} onClick={() => onRecordTypeSelection("expenses")}>
                         <IoArrowUp />
                         <p>Expense</p>
                     </RecordTypeExpense>

@@ -29,9 +29,9 @@ function CategoriesGrid({ type, onCategorySelection, category }: CategoriesGridP
             {categoriesData.map((categoryInfo, index) => (
                 <CategorieCard
                     key={index}
-                    squareColor={categoryInfo.bgColor}
+                    $squareColor={categoryInfo.bgColor}
                     onClick={() => onCategorySelection(categoryInfo.label)}
-                    isSelected={category == categoryInfo.label}
+                    $isSelected={category == categoryInfo.label}
                 >
                     <img src={categoryInfo.src} />
                     <p>{categoryInfo.label}</p>

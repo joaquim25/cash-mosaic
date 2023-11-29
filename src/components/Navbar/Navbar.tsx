@@ -75,7 +75,7 @@ function Navbar() {
                     <IoIosMenu onClick={toggleShowSidebar} />
                 </HambuguerIcon>
                 <Link href="/">
-                    <Image src="/images/logo.svg" width={150} height={45} alt="menu icon" />
+                    <Image src="/images/logo.svg" width={150} height={45} alt="menu icon" priority={true}/>
                 </Link>
 
                 <DesktopNavItemsContainer>
@@ -99,8 +99,8 @@ function Navbar() {
                 </DesktopNavItemsContainer>
 
             </NavbarContainer >
-            <SidebarFadedBackground showSidebar={showSidebar} onClick={toggleShowSidebar} />
-            <Sidebar showSidebar={showSidebar}>
+            <SidebarFadedBackground $showSidebar={showSidebar} onClick={toggleShowSidebar} />
+            <Sidebar $showSidebar={showSidebar}>
                 <CloseIconContainer>
                     <AiOutlineClose onClick={toggleShowSidebar} />
                 </CloseIconContainer>
