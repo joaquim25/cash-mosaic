@@ -66,7 +66,7 @@ function TransactionsComponent({ initialTransactions }: TransactionsComponentPro
         <TransactionsContainer>
             <TableContainer sx={{ borderRadius: "10px" }} component={Paper} elevation={5} >
                 <Table>
-                    <TableHead sx={{ backgroundColor: "#E4EDE5" }}>
+                    <TableHead sx={{ backgroundColor: "#c7c2c29c" }}>
                         <TableRow>
                             <TableCell sx={{ fontWeight: "600", textAlign: "center" }}>Date</TableCell>
                             <TableCell sx={{ fontWeight: "600", textAlign: "right" }}>Amount</TableCell>
@@ -77,7 +77,7 @@ function TransactionsComponent({ initialTransactions }: TransactionsComponentPro
                         {items.map((item: TransactionRecordItem) => (
                             <TableRow key={item.id}>
                                 <TableCell sx={{ textAlign: "center" }}>{item.date}</TableCell>
-                                <AmountTableCell isIncome={item.amount > 0} sx={{ textAlign: "right" }}>{item.amount.toFixed(2)}€</AmountTableCell>
+                                <AmountTableCell $isIncome={item.amount > 0} sx={{ textAlign: "right" }}>{item.amount.toFixed(2)}€</AmountTableCell>
                                 <TableCell sx={{ textAlign: "center" }}>{item.category}</TableCell>
                             </TableRow>
                         ))}

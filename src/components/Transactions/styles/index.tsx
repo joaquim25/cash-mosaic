@@ -1,8 +1,8 @@
-import { styled } from 'styled-components';
+import styled from 'styled-components';
 import TableCell from '@mui/material/TableCell';
 
 export const TransactionsContainer = styled.div`
-padding: 0 24px;
+    padding: 0 24px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -11,10 +11,10 @@ padding: 0 24px;
     margin: 0 auto;
 `
 
-export const AmountTableCell = styled(TableCell) <{ isIncome: boolean }>`
+export const AmountTableCell = styled(TableCell) <{ $isIncome: boolean }>`
     font-weight: 600;
 
-    ${props => props.isIncome
+    ${props => props.$isIncome
         ?
         `
             color: green;
