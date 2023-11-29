@@ -40,8 +40,6 @@ export const HambuguerIcon = styled.div`
 `
 
 export const SidebarFadedBackground = styled.div<{ $showSidebar: boolean }>`
-  /* Existing styles */
-
   ${({ $showSidebar }) => (
         $showSidebar
             ? `width: 100vw;`
@@ -166,6 +164,7 @@ export const DesktopNavItemsContainer = styled.ul`
     list-style-type: none;
     font-weight: 500;
     color: ${THEME_COLORS.text_prim};
+    text-shadow: 0 1px 5px #24232375;
 
     gap: 20px;
     justify-content: flex-end;
@@ -187,11 +186,12 @@ export const NavItemIcon = styled.div`
     & svg {
         width: 25px;
         height: 25px;
+        color: ${THEME_COLORS.text_prim};
     }
 
     .logout-icon{
         margin-left: -10px;
-        background-color: ${THEME_COLORS.danger};
+        background-color: #d20808;
         opacity: .8;
         width: 25px;
         height: 25px;
