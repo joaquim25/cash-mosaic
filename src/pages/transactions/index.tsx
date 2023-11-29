@@ -2,7 +2,6 @@
 import DashboardLayout from '@/components/DashboardLayout'
 import TransactionsComponent from '@/components/Transactions'
 import React, { useEffect } from 'react'
-import { fetchDashboardData } from '../api/dashboard';
 import * as cookie from 'cookie'
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, User } from '@/store/types';
@@ -11,6 +10,7 @@ import { GetServerSidePropsContext, PreviewData } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 import { fetchTransactions } from '../api/transactions';
 import DataLoadingError from '@/components/Error/DataLoading';
+import axios from 'axios';
 
 type TransactionsPageProps = {
     initialUser: User;
@@ -53,7 +53,6 @@ export const getServerSideProps: (context: GetServerSidePropsContext<ParsedUrlQu
             };
         }
 
-        // const initialUser = await fetchDashboardData(parsedCookies.authToken);
         const { transactions_list, initialUser } = await fetchTransactions(parsedCookies.authToken)
 
 
@@ -65,6 +64,16 @@ export const getServerSideProps: (context: GetServerSidePropsContext<ParsedUrlQu
         };
     } catch (error) {
         console.error("Error in getServerSideProps[dashboard page]: ", error);
+
+        if (axios.isAxiosError(error) && error.response!.status === 401) {
+            return {
+                redirect: {
+                    permanent: false,
+                    destination: "/login",
+                },
+                props: {},
+            };
+        }
 
         return {
             props: {
