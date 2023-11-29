@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState } from 'react'
 import { IoArrowDown, IoArrowUp } from "react-icons/io5";
-import { AmountInput, CategoryContainer, DateInput, RecordTypeSelectorContainer, ParametersInputContainer, StyledDatePicker, RecordTypeIncome, RecordTypeExpense } from './styles'
+import { AmountInput, CategoryContainer, DateInput, RecordTypeSelectorContainer, ParametersInputContainer, StyledDatePicker, RecordTypeIncome, RecordTypeExpense, AddRecordsContainer } from './styles'
 import { DefaultButton } from '@/styles/GlobalStyles';
 import CategoriesGrid from '../CategoriesGrid';
 import HydrationSafety from '../HydrationSafety/HydrationSafety';
@@ -206,47 +206,48 @@ function AddRecordsComponent({ user }: AddRecordsComponentProps) {
 
     return (
         <HydrationSafety>
-            <ParametersInputContainer>
-                <RecordTypeSelectorContainer>
-                    <RecordTypeIncome $isSelected={selectedRecordType === "income"} onClick={() => onRecordTypeSelection("income")}>
-                        <IoArrowDown />
-                        <p>Income</p>
-                    </RecordTypeIncome>
-                    <RecordTypeExpense $isSelected={selectedRecordType === "expenses"} onClick={() => onRecordTypeSelection("expenses")}>
-                        <IoArrowUp />
-                        <p>Expense</p>
-                    </RecordTypeExpense>
-                </RecordTypeSelectorContainer>
+            <AddRecordsContainer>
+                <ParametersInputContainer>
+                    <RecordTypeSelectorContainer>
+                        <RecordTypeIncome $isSelected={selectedRecordType === "income"} onClick={() => onRecordTypeSelection("income")}>
+                            <IoArrowDown />
+                            <p>Income</p>
+                        </RecordTypeIncome>
+                        <RecordTypeExpense $isSelected={selectedRecordType === "expenses"} onClick={() => onRecordTypeSelection("expenses")}>
+                            <IoArrowUp />
+                            <p>Expense</p>
+                        </RecordTypeExpense>
+                    </RecordTypeSelectorContainer>
 
-                <DateInput>
-                    <StyledDatePicker label="Date"
-                        value={date}
-                        onChange={(newValue) => setDate(newValue)}
-                        defaultValue={dayjs()}
-                    />
-                </DateInput>
-                <AmountInput>
-                    <label>Amount</label>
-                    <CurrencyInput
-                        id="input-amount"
-                        name="amount"
-                        defaultValue={"0.00"}
-                        decimalsLimit={2}
-                        value={amount}
-                        onValueChange={(value) => setAmount(value)}
-                        fixedDecimalLength={2}
-                        suffix='€'
-                        disableAbbreviations={true}
-                    />
-                </AmountInput>
-            </ParametersInputContainer>
+                    <DateInput>
+                        <StyledDatePicker label="Date"
+                            value={date}
+                            onChange={(newValue) => setDate(newValue)}
+                            defaultValue={dayjs()}
+                        />
+                    </DateInput>
+                    <AmountInput>
+                        <label>Amount</label>
+                        <CurrencyInput
+                            id="input-amount"
+                            name="amount"
+                            defaultValue={"0.00"}
+                            decimalsLimit={2}
+                            value={amount}
+                            onValueChange={(value) => setAmount(value)}
+                            fixedDecimalLength={2}
+                            suffix='€'
+                            disableAbbreviations={true}
+                        />
+                    </AmountInput>
+                </ParametersInputContainer>
 
-            <CategoryContainer>
-                <h3>Category</h3>
-                <CategoriesGrid type={selectedRecordType} onCategorySelection={onCategorySelection} category={category} />
-                <DefaultButton onClick={onAddRecord}>Add</DefaultButton>
-            </CategoryContainer>
-
+                <CategoryContainer>
+                    <h3>Category</h3>
+                    <CategoriesGrid type={selectedRecordType} onCategorySelection={onCategorySelection} category={category} />
+                    <DefaultButton onClick={onAddRecord}>Add</DefaultButton>
+                </CategoryContainer>
+            </AddRecordsContainer>
 
             <Snackbar
                 anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}

@@ -1,6 +1,10 @@
 import { styled } from 'styled-components';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
+export const AddRecordsContainer = styled.div`
+    padding: 0 16px;
+`
+
 export const ParametersInputContainer = styled.div`
     display: flex;
     flex-direction: column;

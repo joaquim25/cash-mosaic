@@ -8,7 +8,11 @@ export const CategoriesGridContainer = styled.div`
     display: grid;
     row-gap: 20px;
     column-gap: 30px;
-    grid-template-columns: repeat(3,1fr);
+    grid-template-columns: repeat(2,1fr);
+
+    @media (min-width: 425px){
+        grid-template-columns: repeat(3,1fr);
+    }
 
     @media (min-width: 768px){
         grid-template-columns: repeat(4,1fr);
