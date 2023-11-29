@@ -68,3 +68,17 @@ export const fetchYearData = async (token: string) => {
 
     return response.data.statisticsData;
 }
+
+export const fetchRangeData = async (token: string, start: any, end: any) => {
+    const response = await axios.get(`${BASE_URL}/transactions_by_range`,
+        {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            params: {
+                start, end
+            }
+        });
+
+    return response.data.statisticsData;
+}

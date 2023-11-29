@@ -1,10 +1,14 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 
-import React, { useEffect, useMemo, useState } from 'react'
-import { StatisticsChartContainer, StatisticsPieChart } from './styles';
-import { fetchMonthData, fetchWeekData, fetchYearData } from '@/pages/api/statistics';
+import React, { useEffect, useState } from 'react'
+import { RangeSelectorContainer, RangeSubmitButton, StatisticsChartContainer, StatisticsPieChart } from './styles';
+import { fetchMonthData, fetchRangeData, fetchWeekData, fetchYearData } from '@/pages/api/statistics';
 import { getAuthTokenFromCookies } from '../../../utils/cookies';
 import axios from 'axios';
 import { Alert, Snackbar } from '@mui/material';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import dayjs from 'dayjs';
+import SearchIcon from '@mui/icons-material/Search';
 
 
 type StatisticsChartProps = {
@@ -16,6 +20,64 @@ function StatisticsChart({ type, data }: StatisticsChartProps) {
     const [errorStatus, setErrorStatus] = useState({ error: false, errorMessage: "" });
     const [clientData, setClientData] = useState(data);
     const authToken = getAuthTokenFromCookies();
+    const [dateRange, setDateRange] = useState({
+        start: dayjs(),
+        end: dayjs()
+    });
+
+    const onRangeChange = (value: any, param: string) => {
+        setDateRange({
+            ...dateRange,
+            [param]: value
+        })
+    }
+
+    const onRangeSubmit = async () => {
+        if (dateRange.end.isBefore(dateRange.start, 'day')) {
+            setErrorStatus({
+                error: true,
+                errorMessage: "The End date cannot be before Start date."
+            })
+
+            setTimeout(() => {
+                setErrorStatus(
+                    {
+                        error: false,
+                        errorMessage: "",
+                    }
+                )
+            }, 4000);
+
+            return;
+        }
+
+        try {
+            const response = authToken && (await fetchRangeData(authToken, dateRange.start, dateRange.end));
+            console.log(response)
+            setClientData(response)
+        } catch (error) {
+            if (axios.isAxiosError(error) && error.response?.status === 429) {
+                setErrorStatus({
+                    error: true,
+                    errorMessage: "You can only make 10 requests every 20 Seconds, wait a few moments and try again."
+                })
+            } else {
+                setErrorStatus({
+                    error: true,
+                    errorMessage: "An unknown Error ocurred. Refresh and try again."
+                })
+            }
+
+            setTimeout(() => {
+                setErrorStatus(
+                    {
+                        error: false,
+                        errorMessage: "",
+                    }
+                )
+            }, 4000);
+        }
+    }
 
     useEffect(() => {
         const fetchData = async () => {
@@ -33,7 +95,7 @@ function StatisticsChart({ type, data }: StatisticsChartProps) {
                         break;
                     case 'range':
                         // TO-DO: Refactor (this one should have a range selector and submit btn)
-                        response = authToken && (await fetchYearData(authToken));
+                        response = authToken && (await fetchRangeData(authToken, dateRange.start, dateRange.end));
                         break;
                     default:
                         break;
@@ -69,7 +131,7 @@ function StatisticsChart({ type, data }: StatisticsChartProps) {
 
         };
         fetchData();
-    }, [type, authToken]);
+    }, []);
 
     let displayData = type !== "day" ? clientData : data;
 
@@ -80,23 +142,44 @@ function StatisticsChart({ type, data }: StatisticsChartProps) {
     displayData = displayData.length > 0 ? displayData : [{ label: `${type !== "range" ? `No data for ${type} period` : `No data for this range`}`, value: 1 }];
 
     return (
-        <StatisticsChartContainer>
-            <StatisticsPieChart
-                series={[
-                    {
-                        data: displayData,
-                        innerRadius: 60,
-                        outerRadius: 90,
-                        paddingAngle: 2,
-                        cornerRadius: 2,
-                        highlightScope: { faded: 'global', highlighted: 'item' },
-                        faded: { innerRadius: 40, additionalRadius: -20, color: 'gray' },
-                    },
-                ]}
-                width={500}
-                height={300}
+        <>
+            {type === "range" &&
+                <RangeSelectorContainer>
+                    <DateTimePicker
+                        label="Start"
+                        value={dateRange.start}
+                        onChange={(value) => onRangeChange(value, "start")}
+                        views={['year', 'month', 'day']}
+                    />
+                    <DateTimePicker
+                        label="End"
+                        value={dateRange.end}
+                        onChange={(value) => onRangeChange(value, "end")}
+                        views={['year', 'month', 'day']}
+                    />
+                    <RangeSubmitButton onClick={onRangeSubmit}><SearchIcon /></RangeSubmitButton>
+                </RangeSelectorContainer>
+            }
+            <StatisticsChartContainer>
+                <StatisticsPieChart
+                    series={[
+                        {
+                            data: displayData,
+                            innerRadius: 60,
+                            outerRadius: 90,
+                            paddingAngle: 2,
+                            cornerRadius: 2,
+                            highlightScope: { faded: 'global', highlighted: 'item' },
+                            faded: { innerRadius: 40, additionalRadius: -20, color: 'gray' },
+                        },
+                    ]}
+                    width={500}
+                    height={300}
 
-            />
+                />
+
+            </StatisticsChartContainer>
+
             <Snackbar
                 anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
                 open={errorStatus.error}
@@ -104,7 +187,7 @@ function StatisticsChart({ type, data }: StatisticsChartProps) {
             >
                 <Alert severity="error">{errorStatus.errorMessage}</Alert>
             </Snackbar>
-        </StatisticsChartContainer>
+        </>
     )
 }
 
