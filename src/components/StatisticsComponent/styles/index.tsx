@@ -2,11 +2,14 @@ import { styled } from 'styled-components';
 import { Tabs, Tab } from "@mui/material";
 
 export const StatisticsContainer = styled.div`
-    max-width: 1000px;
+    padding: 16px;
+`
+
+export const StatisticsCard = styled.div`
     margin: 20px auto 0 auto;
     background-color: #677379;
-    padding: 10px;
     border-radius: 24px;
+    max-width: 1000px;
 `
 
 export const StatisticsTabsContainer = styled.div`

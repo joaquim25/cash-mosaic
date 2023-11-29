@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import React, { useEffect, useState } from 'react'
-import { RangeSelectorContainer, RangeSubmitButton, StatisticsChartContainer, StatisticsPieChart } from './styles';
+import React, { useEffect, useRef, useState } from 'react'
+import { RangeSelectorContainer, RangeSubmitButton, StatisticsChartContainer } from './styles';
 import { fetchMonthData, fetchRangeData, fetchWeekData, fetchYearData } from '@/pages/api/statistics';
 import { getAuthTokenFromCookies } from '../../../utils/cookies';
 import axios from 'axios';
@@ -9,6 +9,7 @@ import { Alert, Snackbar } from '@mui/material';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import dayjs from 'dayjs';
 import SearchIcon from '@mui/icons-material/Search';
+import { PieChart } from '@mui/x-charts/PieChart';
 
 
 type StatisticsChartProps = {
@@ -17,6 +18,7 @@ type StatisticsChartProps = {
 }
 
 function StatisticsChart({ type, data }: StatisticsChartProps) {
+    const windowSize = useRef(window.innerWidth);
     const [errorStatus, setErrorStatus] = useState({ error: false, errorMessage: "" });
     const [clientData, setClientData] = useState(data);
     const authToken = getAuthTokenFromCookies();
@@ -133,6 +135,7 @@ function StatisticsChart({ type, data }: StatisticsChartProps) {
         fetchData();
     }, []);
 
+    // Data processment for pieChart dispay
     let displayData = type !== "day" ? clientData : data;
 
     displayData.forEach((item: { value: number; }) => {
@@ -140,6 +143,11 @@ function StatisticsChart({ type, data }: StatisticsChartProps) {
     });
 
     displayData = displayData.length > 0 ? displayData : [{ label: `${type !== "range" ? `No data for ${type} period` : `No data for this range`}`, value: 1 }];
+
+    // Mobile & Desktop dispositions for pieChart
+    const pieDisposition = windowSize.current > 600
+        ? { x: 115, y: 95, width: 600, height: 200 }
+        : { x: 50, y: 100, width: 130, height: 800 };
 
     return (
         <>
@@ -161,21 +169,22 @@ function StatisticsChart({ type, data }: StatisticsChartProps) {
                 </RangeSelectorContainer>
             }
             <StatisticsChartContainer>
-                <StatisticsPieChart
+                <PieChart
                     series={[
                         {
                             data: displayData,
-                            innerRadius: 60,
-                            outerRadius: 90,
+                            innerRadius: 50,
+                            outerRadius: 100,
                             paddingAngle: 2,
                             cornerRadius: 2,
+                            cx: pieDisposition.x,
+                            cy: pieDisposition.y,
                             highlightScope: { faded: 'global', highlighted: 'item' },
                             faded: { innerRadius: 40, additionalRadius: -20, color: 'gray' },
                         },
                     ]}
-                    width={500}
-                    height={300}
-
+                    width={pieDisposition.width}
+                    height={pieDisposition.height}
                 />
 
             </StatisticsChartContainer>
