@@ -6,90 +6,65 @@ const BASE_URL = "https://x8ki-letl-twmt.n7.xano.io/api:8Mli9063";
 
 export const fetchDayData = async (token: string) => {
     const today = getCurrentDate();
-    try {
-        const response = await axios.get(`${BASE_URL}/transactions_by_range`,
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-                params: {
-                    start: today, end: today, isInitial: 1
-                }
-            });
+    const response = await axios.get(`${BASE_URL}/transactions_by_range`,
+        {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            params: {
+                start: today, end: today, isInitial: 1
+            }
+        });
 
-        return response.data;
-    } catch (error) {
-        console.error("fetchProfileData error: ", error);
-
-        throw error;
-    }
+    return response.data;
 };
 
 export const fetchWeekData = async (token: string) => {
     const end = getCurrentDate();
     const start = get7DaysPriorDate();
 
-    try {
-        const response = await axios.get(`${BASE_URL}/transactions_by_range`,
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-                params: {
-                    start, end
-                }
-            });
+    const response = await axios.get(`${BASE_URL}/transactions_by_range`,
+        {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            params: {
+                start, end
+            }
+        });
 
-        return response.data.statisticsData;
-    } catch (error) {
-        console.error("fetchProfileData error: ", error);
-
-        throw error;
-    }
+    return response.data.statisticsData;
 }
 
 export const fetchMonthData = async (token: string) => {
     const end = getCurrentDate();
     const start = getPriorMonthDate();
 
-    try {
-        const response = await axios.get(`${BASE_URL}/transactions_by_range`,
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-                params: {
-                    start, end
-                }
-            });
+    const response = await axios.get(`${BASE_URL}/transactions_by_range`,
+        {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            params: {
+                start, end
+            }
+        });
 
-        return response.data.statisticsData;
-    } catch (error) {
-        console.error("fetchProfileData error: ", error);
-
-        throw error;
-    }
+    return response.data.statisticsData;
 }
 
 export const fetchYearData = async (token: string) => {
     const end = getCurrentDate();
     const start = getPriorYearDate();
+    const response = await axios.get(`${BASE_URL}/transactions_by_range`,
+        {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            params: {
+                start, end
+            }
+        });
 
-    try {
-        const response = await axios.get(`${BASE_URL}/transactions_by_range`,
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-                params: {
-                    start, end
-                }
-            });
-
-        return response.data.statisticsData;
-    } catch (error) {
-        console.error("fetchProfileData error: ", error);
-
-        throw error;
-    }
+    return response.data.statisticsData;
 }

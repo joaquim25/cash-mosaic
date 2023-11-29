@@ -164,6 +164,15 @@ function AddRecordsComponent({ user }: AddRecordsComponentProps) {
                     }
                 )
             }
+            else if (axios.isAxiosError(error) && error.response!.status === 429) {
+                setSubmitRecordRequestState(
+                    {
+                        ...submitRecordRequestState,
+                        error: true,
+                        errorMessage: "Sorry, you can only add 10 Records per 20 Seconds"
+                    }
+                )
+            }
             else if (axios.isAxiosError(error)) {
                 setSubmitRecordRequestState(
                     {
