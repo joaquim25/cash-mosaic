@@ -154,13 +154,13 @@ function StatisticsChart({ type, data }: StatisticsChartProps) {
             {type === "range" &&
                 <RangeSelectorContainer>
                     <DateTimePicker
-                        label="Start"
+                        label="From"
                         value={dateRange.start}
                         onChange={(value) => onRangeChange(value, "start")}
                         views={['year', 'month', 'day']}
                     />
                     <DateTimePicker
-                        label="End"
+                        label="To"
                         value={dateRange.end}
                         onChange={(value) => onRangeChange(value, "end")}
                         views={['year', 'month', 'day']}

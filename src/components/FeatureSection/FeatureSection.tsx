@@ -1,5 +1,6 @@
 import { CardsContainer, FeatureContainer, FeatureHeading, FeatureImg, FeatureSubHeading, FeatureText, SectionInfoCol } from "@/components/FeatureSection/styles/FeatureSectionStyles";
 import FeatureCard from "../FeatureCard/FeatureCard";
+import { motionAn_toLeft, motionAn_toRight } from "../../../utils/framer-motion-settings";
 
 type FeatureSectionProps = {
   cardInfo: {
@@ -27,14 +28,27 @@ function FeatureSection({ cardInfo, index }: FeatureSectionProps) {
 
 
   return (
-    <FeatureContainer $isInverted={index % 2 === 1}>
-      <SectionInfoCol>
+    <FeatureContainer
+      $isInverted={index % 2 === 1}
+    >
+      <SectionInfoCol
+        {...index % 2 === 1 ? motionAn_toLeft : motionAn_toRight}
+      >
         <FeatureSubHeading>{cardInfo.subHeading}</FeatureSubHeading>
         <FeatureHeading>{cardInfo.heading}</FeatureHeading>
         <FeatureText>{cardInfo.text}</FeatureText>
       </SectionInfoCol>
-      <FeatureImg $isInverted={index % 2 === 1} src={cardInfo.image.src} alt={cardInfo.image.alt} height={cardInfo.image.height} width={cardInfo.image.width} />
-      <CardsContainer>
+      <FeatureImg
+        $isInverted={index % 2 === 1}
+        src={cardInfo.image.src}
+        alt={cardInfo.image.alt}
+        height={cardInfo.image.height}
+        width={cardInfo.image.width}
+        {...index % 2 === 1 ? motionAn_toRight : motionAn_toLeft}
+      />
+      <CardsContainer
+        {...index % 2 === 1 ? motionAn_toLeft : motionAn_toRight}
+      >
         {cardInfo.sidePanels && cardInfo.sidePanels.map((card, index) => (
           <FeatureCard card={card} key={index} />
         ))}

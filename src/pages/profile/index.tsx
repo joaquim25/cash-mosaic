@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { GetServerSideProps } from "next";
 import { changeProfileData, fetchProfileData } from "../api/profile";
@@ -31,7 +32,6 @@ function ProfilePage({ user }: ProfilePageProps) {
     // Set the global user state
     useEffect(() => {
         dispatch(setUserProfile(user))
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
 

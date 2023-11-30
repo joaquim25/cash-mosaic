@@ -1,5 +1,6 @@
 import { styled } from 'styled-components';
 import { THEME_COLORS } from "../../../styles/GlobalStyles";
+import { motion } from "framer-motion";
 
 export const FeatureContainer = styled.div<{ $isInverted: boolean }>`
     display: grid;
@@ -37,7 +38,7 @@ export const FeatureContainer = styled.div<{ $isInverted: boolean }>`
     }
 `
 
-export const SectionInfoCol = styled.div`
+export const SectionInfoCol = styled(motion.div)`
     grid-area: header;
 `
 
@@ -66,7 +67,7 @@ export const FeatureText = styled.p`
     margin: 0 auto;
 `
 
-export const FeatureImg = styled.img<{ $isInverted: boolean }>`
+export const FeatureImg = styled(motion.img) <{ $isInverted: boolean }>`
     width: 100%;
     height: 100%;
     max-width: 300px;
@@ -85,7 +86,7 @@ export const FeatureImg = styled.img<{ $isInverted: boolean }>`
 
 //Features Cards
 
-export const CardsContainer = styled.div`
+export const CardsContainer = styled(motion.div)`
     display: flex;
     justify-content: center;
     align-items: center;

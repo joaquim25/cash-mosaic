@@ -1,5 +1,6 @@
 import { styled } from 'styled-components';
 import { THEME_COLORS } from "./GlobalStyles";
+import { motion } from "framer-motion";
 
 export const HomepageContainer = styled.div`
     width: 100vw;
@@ -23,7 +24,7 @@ export const HeroSection = styled.div`
     }
 `
 
-export const LeftHeroContainer = styled.div`
+export const LeftHeroContainer = styled(motion.div)`
     order: 1;
     display: flex;
     flex-direction: column;
@@ -65,7 +66,7 @@ export const HeroText = styled.p`
     }
 `
 
-export const RightHeroContainer = styled.div`
+export const RightHeroContainer = styled(motion.div)`
     display: flex;
     justify-content: center;
     align-items: center;

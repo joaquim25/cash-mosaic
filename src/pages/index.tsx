@@ -1,8 +1,12 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import features from '../../public/data/features.json';
 import Head from 'next/head'
 import { FeatureSectionHeading, FeatureSectionSubHeading, HeroHeader, HeroSection, HeroText, HomeHeroImg, HomepageContainer, LeftHeroContainer, RightHeroContainer } from '@/styles/HomeStyles'
 import { DefaultButton } from '@/styles/GlobalStyles';
 import FeatureSection from '../components/FeatureSection/FeatureSection';
+import { motionAn_toLeft, motionAn_toRight } from '../../utils/framer-motion-settings';
+
+
 
 
 export default function Home() {
@@ -18,12 +22,16 @@ export default function Home() {
       <HomepageContainer>
 
         <HeroSection>
-          <LeftHeroContainer>
+          <LeftHeroContainer
+            {...motionAn_toRight}
+          >
             <HeroHeader>Take back control of your own money</HeroHeader>
             <HeroText>Cash Mosaic is a <span>personal finance application</span> that makes money management easy. The app is designed to streamline <span>expense tracking</span> and help you <span>save money</span>.</HeroText>
             <DefaultButton onClick={() => window.location.href = "/signup"}>Create your account</DefaultButton>
           </LeftHeroContainer>
-          <RightHeroContainer>
+          <RightHeroContainer
+            {...motionAn_toLeft}
+          >
             <HomeHeroImg src="/images/ipad.png" alt="An Ipad showing a finance web app" height={771} width={899} />
           </RightHeroContainer>
         </HeroSection>

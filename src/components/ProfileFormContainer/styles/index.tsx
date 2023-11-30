@@ -37,7 +37,7 @@ export const FieldsGroup = styled.div`
     column-gap: 50px;
     row-gap: 20px;
     padding: 6rem 2rem 1rem 2rem;
-    border-radius: 14px;
+    border-radius: 10px;
 `
 
 export const NameFieldsGroup = styled(FieldsGroup)`
@@ -59,10 +59,10 @@ export const ExtraInfoFieldsGroup = styled(FieldsGroup)`
     display: flex;
     flex-direction: column;
     grid-row-start: span 2;
-    background-color: #E5CB93;
+    background-color: #117c3c42;
 
     ${FieldsIcon} {
-        background-color: #E1AE42;
+        background-color: #065e29a3;
     }
 `
 
@@ -70,7 +70,7 @@ export const PasswordFieldsGroup = styled(FieldsGroup)`
     display: flex;
     flex-direction: column;
     grid-row-start: span 1;
-    background-color: #D1AAAA;
+    background-color: #e2c3c3;
 
     ${FieldsIcon} {
         background-color: #BA6E6E;

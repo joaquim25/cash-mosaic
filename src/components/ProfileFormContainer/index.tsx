@@ -9,8 +9,12 @@ import {
     PasswordFieldsGroup,
 } from './styles';
 import { DefaultButton } from '@/styles/GlobalStyles';
-import { IoMdSettings } from 'react-icons/io';
 import { EditActionFieldProps, FieldChangeProps, UserData } from './types';
+import { CgProfile } from "react-icons/cg";
+import { TbListDetails } from "react-icons/tb";
+import { MdLockOutline } from "react-icons/md";
+
+
 
 
 
@@ -33,7 +37,7 @@ function ProfileFormContainer({
             {/* Name & Last Name group */}
             <NameFieldsGroup>
                 <FieldsIcon>
-                    <IoMdSettings />
+                    <CgProfile />
                 </FieldsIcon>
                 <FormFieldsContainer
                     fields={[
@@ -60,7 +64,7 @@ function ProfileFormContainer({
             {/* Location & Bio group */}
             <ExtraInfoFieldsGroup>
                 <FieldsIcon>
-                    <IoMdSettings />
+                    <TbListDetails />
                 </FieldsIcon>
 
                 <FormFieldsContainer
@@ -88,7 +92,7 @@ function ProfileFormContainer({
             {/* Password group */}
             <PasswordFieldsGroup>
                 <FieldsIcon>
-                    <IoMdSettings />
+                    <MdLockOutline />
                 </FieldsIcon>
                 <FormFieldsContainer
                     fields={[

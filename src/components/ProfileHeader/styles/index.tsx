@@ -12,7 +12,8 @@ export const Background = styled.div`
     background-size: 120%;
     margin-bottom: 100px;
     opacity: .7;
-    background-position: 95% 10%;
+    background-position: 95% 30%;
+    border-radius: 0 0 24px 24px;
 
     @media (min-width: 1024px){
         background-size: cover;
