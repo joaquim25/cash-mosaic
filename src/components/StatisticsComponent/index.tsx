@@ -21,10 +21,9 @@ function StatisticsComponent({ data }: StatisticsPageProps) {
     return (
         <HydrationSafety>
             <StatisticsContainer>
-
                 <StatisticsCard>
                     <StatisticsTabsContainer>
-                        <Box sx={{ width: '100%', marginTop: '10px' }}>
+                        <Box>
                             <Box>
                                 <StatisticsTabs
                                     variant='scrollable'
@@ -34,12 +33,13 @@ function StatisticsComponent({ data }: StatisticsPageProps) {
                                     value={currentTab}
                                     onChange={handleChange}
                                     aria-label="Tabs for dashboard functionalities"
+                                    textColor="inherit"
                                 >
-                                    <StatisticTab sx={{ fontSize: "14px", color: "#eee" }} label="Day" {...a11yProps(0)} />
-                                    <StatisticTab sx={{ fontSize: "14px", color: "#eee" }} label="Week" {...a11yProps(1)} />
-                                    <StatisticTab sx={{ fontSize: "14px", color: "#eee" }} label="Month" {...a11yProps(2)} />
-                                    <StatisticTab sx={{ fontSize: "14px", color: "#eee" }} label="Year" {...a11yProps(3)} />
-                                    <StatisticTab sx={{ fontSize: "14px", color: "#eee" }} label="Range" {...a11yProps(4)} />
+                                    <StatisticTab sx={{ fontSize: "14px" }} label="Day" {...a11yProps(0)} />
+                                    <StatisticTab sx={{ fontSize: "14px" }} label="Week" {...a11yProps(1)} />
+                                    <StatisticTab sx={{ fontSize: "14px" }} label="Month" {...a11yProps(2)} />
+                                    <StatisticTab sx={{ fontSize: "14px" }} label="Year" {...a11yProps(3)} />
+                                    <StatisticTab sx={{ fontSize: "14px" }} label="Range" {...a11yProps(4)} />
                                 </StatisticsTabs>
                             </Box>
                             <CustomTabPanel currentTab={currentTab} index={0}>

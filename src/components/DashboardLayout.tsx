@@ -3,6 +3,7 @@ import React, { ReactNode } from 'react'
 import DashboardHeader from './DashboardHeader';
 import DashboardTabs from './DashboardTabs';
 import { styled } from 'styled-components';
+import HydrationSafety from './HydrationSafety/HydrationSafety';
 
 type DashboardLayoutProps = {
     children: ReactNode;
@@ -15,11 +16,13 @@ const DashboardContainer = styled.div`
 
 function DashboardLayout({ children, user }: DashboardLayoutProps) {
     return (
-        <DashboardContainer>
-            <DashboardHeader user={user} />
-            <DashboardTabs />
-            {children}
-        </DashboardContainer>
+        <HydrationSafety>
+            <DashboardContainer>
+                <DashboardHeader user={user} />
+                <DashboardTabs />
+                {children}
+            </DashboardContainer>
+        </HydrationSafety>
     )
 }
 

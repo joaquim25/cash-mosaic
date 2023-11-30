@@ -14,6 +14,7 @@ export const StatisticsCard = styled.div`
 
 export const StatisticsTabsContainer = styled.div`
     width: 100%;
+    color: white;
 `
 
 export const StatisticsTabs = styled(Tabs)({
