@@ -42,6 +42,7 @@ function AddRecordsComponent({ user }: AddRecordsComponentProps) {
         const user_id = user.id;
         const params = { user_id, date, amount, category }
         let newUser;
+
         try {
             const parsedAmount = parseFloat(amount!.replace(',', '.'));
             if (parsedAmount === 0) {
@@ -231,13 +232,15 @@ function AddRecordsComponent({ user }: AddRecordsComponentProps) {
                         <CurrencyInput
                             id="input-amount"
                             name="amount"
-                            defaultValue={"0.00"}
+                            defaultValue={""}
                             decimalsLimit={2}
                             value={amount}
                             onValueChange={(value) => setAmount(value)}
-                            fixedDecimalLength={2}
                             suffix='€'
                             disableAbbreviations={true}
+                            allowDecimals={true}
+                            placeholder={'0.00€'}
+                            autoComplete={'off'}
                         />
                     </AmountInput>
                 </ParametersInputContainer>
