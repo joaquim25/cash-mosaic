@@ -1,4 +1,4 @@
-import { styled } from 'styled-components';
+import styled from "@emotion/styled"
 
 export const FormContainer = styled.form`
     margin: 0 auto;
@@ -50,7 +50,7 @@ export const NameFieldsGroup = styled(FieldsGroup)`
         grid-column-start: span 2;
     }
 
-    ${FieldsIcon} {
+    & div:not(:not(:last-child) ~ div) {
         background-color: #81B2CA;
     }
 `
@@ -61,7 +61,8 @@ export const ExtraInfoFieldsGroup = styled(FieldsGroup)`
     grid-row-start: span 2;
     background-color: #117c3c42;
 
-    ${FieldsIcon} {
+
+    & div:not(:not(:last-child) ~ div) {
         background-color: #065e29a3;
     }
 `
@@ -72,7 +73,7 @@ export const PasswordFieldsGroup = styled(FieldsGroup)`
     grid-row-start: span 1;
     background-color: #e2c3c3;
 
-    ${FieldsIcon} {
+    & div:not(:not(:last-child) ~ div) {
         background-color: #BA6E6E;
     }
 `

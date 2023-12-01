@@ -1,4 +1,4 @@
-import { styled } from 'styled-components';
+import styled from "@emotion/styled"
 
 export const RangeSelectorContainer = styled.div`
     padding: 10px 0 40px 0;
