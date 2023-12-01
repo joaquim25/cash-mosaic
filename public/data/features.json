@@ -3,8 +3,8 @@
         {
             "title": "Records Section",
             "subHeading": "LIGHTNING FAST TRACKING",
-            "heading": "Add records in a flash",
-            "text": "Monefy simplifies the process for entering transactions, making it quick, easy, and painless.",
+            "heading": "Add records in a Flash",
+            "text": "Cash Mosaic simplifies the process for entering transactions, making it quick, easy, and painless.",
             "image": {
                 "src": "/images/records-img.png",
                 "alt": "A smartphone showing a finances donut-chart",
@@ -18,7 +18,7 @@
                     "color": "#42887C",
                     "content": [
                         "Add income",
-                        "Remove income",
+                        "Add expenses",
                         "In 20+ Categories"
                     ]
                 },
@@ -28,7 +28,7 @@
                     "color": "#81B2CA",
                     "content": [
                         "Track your balance",
-                        "Chart overview",
+                        "Pie Chart overview",
                         "Easy",
                         "Safe & Secure"
                     ]
@@ -52,12 +52,12 @@
                     "icon": "/icons/wallet.svg",
                     "color": "#81B2CA",
                     "content": [
-                        "Add income",
-                        "Remove income",
-                        "20+ Categories",
-                        "Add income",
-                        "Add expenses",
-                        "Remove income"
+                        "Filter expenses by:",
+                        "-Day",
+                        "-Week",
+                        "-Month",
+                        "-Year",
+                        "-Custom periods"
                     ]
                 },
                 {

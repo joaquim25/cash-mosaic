@@ -27,7 +27,7 @@ export const CardContainer = styled.div <{ size: string; $bgColor: string }>`
 `
 
 export const CardText = styled.p`
-    margin-top: 40px;
+    margin-top: 50px;
     padding: 0 10px;
     text-align: center;
     flex: 1 0 auto;
@@ -41,7 +41,7 @@ export const CardText = styled.p`
 `
 
 export const CardUnList = styled.ul`
-    margin-top: 30px;
+    margin-top: 40px;
     padding: 10px 2px 20px 20px;
     flex: 1 0 auto;
     font-size: .8rem;
