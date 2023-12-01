@@ -5,12 +5,14 @@ import { getTotalExpenses, getTotalIncome } from "../../../utils/budgetUtils";
 
 const LOGIN = "LOGIN";
 const LOGOUT = "LOGOUT";
+const SETLOGGED = "SETLOGGED";
 const SET_PROFILE_INFO = "SET_PROFILE_INFO";
 const SET_DASHBOARD_INFO = "SET_DASHBOARD_INFO";
 
 export const actions = {
     LOGIN,
     LOGOUT,
+    SETLOGGED,
     SET_PROFILE_INFO,
     SET_DASHBOARD_INFO,
 };
@@ -39,6 +41,10 @@ export const logOut = () => {
         window.location.href = "/";
     };
 };
+
+export const setLogged = () => {
+    return { type: actions.SETLOGGED }
+}
 
 export const cleanUser = () => {
     return { type: actions.LOGOUT }

@@ -6,11 +6,22 @@ import { DefaultButton } from '@/styles/GlobalStyles';
 import FeatureSection from '../components/FeatureSection/FeatureSection';
 import { motionAn_toLeft, motionAn_toRight } from '../../utils/framer-motion-settings';
 import HydrationSafety from '@/components/HydrationSafety/HydrationSafety';
+import * as cookie from 'cookie'
+import { GetServerSideProps } from 'next';
+import { useDispatch } from 'react-redux';
+import { fetchisUserLogged } from './api/homepage';
+import { setLogged } from '@/store/user/actions';
 
 
+type HomePageProps = {
+  isLogged: boolean;
+};
 
-
-export default function Home() {
+export default function Home({ isLogged }: HomePageProps) {
+  const dispatch = useDispatch();
+  if (isLogged) {
+    dispatch(setLogged());
+  }
 
   return (
     <HydrationSafety>
@@ -50,3 +61,27 @@ export default function Home() {
     </HydrationSafety>
   )
 }
+
+export const getServerSideProps: GetServerSideProps<HomePageProps> = async (context) => {
+  try {
+    const cookieHeader = context.req.headers.cookie || '';
+    const parsedCookies = cookie.parse(cookieHeader!);
+
+    await fetchisUserLogged(parsedCookies.authToken);
+
+    return {
+      props: {
+        isLogged: true,
+      },
+    };
+
+  } catch (error) {
+    console.error("Error in getServerSideProps[profile page]: ", error);
+
+    return {
+      props: {
+        isLogged: false,
+      },
+    };
+  }
+};
