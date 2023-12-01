@@ -7,6 +7,8 @@ export const NavbarContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    max-width: 2000px;
+    margin: 0 auto;
 
     & svg {
         width: 30px;

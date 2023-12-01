@@ -14,6 +14,11 @@ export const HeaderContainer = styled.div`
     border-radius: 0 0 24px 24px;
 `
 
+export const HeaderInfoContainer = styled.div`
+    max-width: 1800px;
+    margin: 0 auto;
+`
+
 export const BalanceValue = styled.p`
     font-size: 22px;
     font-weight: 400;
