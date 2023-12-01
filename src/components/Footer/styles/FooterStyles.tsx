@@ -91,3 +91,11 @@ export const CopyrightText = styled.p`
         bottom: 16px;
     }
 `
+
+export const ExtraText = styled.p`
+    position: absolute;
+    font-size: .6rem;
+    right: 30px;
+    bottom: 8px;
+
+`
