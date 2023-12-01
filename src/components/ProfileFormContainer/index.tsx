@@ -36,7 +36,7 @@ function ProfileFormContainer({
         <FormContainer>
             {/* Name & Last Name group */}
             <NameFieldsGroup>
-                <FieldsIcon>
+                <FieldsIcon className='icon_profSection'>
                     <CgProfile />
                 </FieldsIcon>
                 <FormFieldsContainer

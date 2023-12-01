@@ -1,5 +1,5 @@
 import { THEME_COLORS } from "@/styles/GlobalStyles";
-import { styled } from 'styled-components';
+import styled from "@emotion/styled"
 
 export const HeaderContainer = styled.div`
     background-color: #555;
