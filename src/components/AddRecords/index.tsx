@@ -239,7 +239,7 @@ function AddRecordsComponent({ user }: AddRecordsComponentProps) {
                             suffix='€'
                             disableAbbreviations={true}
                             allowDecimals={true}
-                            placeholder={'0.00€'}
+                            placeholder={'0,00€'}
                             autoComplete={'off'}
                         />
                     </AmountInput>
