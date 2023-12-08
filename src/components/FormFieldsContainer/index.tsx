@@ -29,6 +29,7 @@ function FormFieldsContainer({ fields, handleFieldChange, handleEditActionField 
                             onChange={(e) => handleFieldChange(field.name, e)}
                             rows={8}
                             disabled={!field.isEditing}
+                            data-testid={`input-${field.name}`}
                         />
 
                         : field.type === "password" && field.isEditing === true ?
@@ -45,18 +46,19 @@ function FormFieldsContainer({ fields, handleFieldChange, handleEditActionField 
                                 value={field.value}
                                 onChange={(e) => handleFieldChange(field.name, e)}
                                 disabled={!field.isEditing}
+                                data-testid={`input-${field.name}`}
                             />
 
                     }
 
-                    <EditIconContainer $isEditing={field.isEditing} onClick={() => handleEditActionField("edit", field.name)}>
+                    <EditIconContainer data-testid={`edit-${field.name}`} $isEditing={field.isEditing} onClick={() => handleEditActionField("edit", field.name)}>
                         <FaRegEdit />
                     </EditIconContainer>
                     <EditingIconsContainer $isEditing={field.isEditing}>
-                        <CheckIconContainer onClick={() => handleEditActionField("save", field.name)}>
+                        <CheckIconContainer data-testid={`save-${field.name}`} onClick={() => handleEditActionField("save", field.name)}>
                             <IoMdCheckmark />
                         </CheckIconContainer>
-                        <DismissIconContainer onClick={() => handleEditActionField("dismiss", field.name)}>
+                        <DismissIconContainer data-testid={`cancel-${field.name}`} onClick={() => handleEditActionField("dismiss", field.name)}>
                             <IoMdClose />
                         </DismissIconContainer>
                     </EditingIconsContainer>
