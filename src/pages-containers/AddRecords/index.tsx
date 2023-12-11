@@ -5,7 +5,6 @@ import { PiCurrencyEurBold } from "react-icons/pi";
 import { AmountInput, CategoryContainer, DateInput, RecordTypeSelectorContainer, ParametersInputContainer, StyledDatePicker, RecordTypeIncome, RecordTypeExpense, AddRecordsContainer, CurrencyIconContainer } from './styles'
 import { DefaultButton } from '@/styles/GlobalStyles';
 import CategoriesGrid from '../../components/CategoriesGrid';
-import HydrationSafety from '../../components/HydrationSafety/HydrationSafety';
 import CurrencyInput from 'react-currency-input-field';
 import dayjs from 'dayjs';
 import { addExpense, addIncome } from '@/services/dashboard';
@@ -50,7 +49,7 @@ function AddRecords({ user }: AddRecordsProps) {
                 throw (Error("missing param: amount"))
             }
 
-            if(!category){
+            if (!category) {
                 throw (Error("missing param: category"))
             }
 
@@ -211,7 +210,7 @@ function AddRecords({ user }: AddRecordsProps) {
     }
 
     return (
-        <HydrationSafety>
+        <>
             <AddRecordsContainer>
                 <ParametersInputContainer>
                     <RecordTypeSelectorContainer>
@@ -274,7 +273,7 @@ function AddRecords({ user }: AddRecordsProps) {
             >
                 <Alert severity="success">Success!! Your new record was created!</Alert>
             </Snackbar>
-        </HydrationSafety>
+        </>
     )
 }
 

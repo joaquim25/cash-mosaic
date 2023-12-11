@@ -5,7 +5,6 @@ import { FeatureSectionHeading, FeatureSectionSubHeading, HeroHeader, HeroSectio
 import { DefaultButton } from '@/styles/GlobalStyles';
 import FeatureSection from '../components/FeatureSection';
 import { motionAn_toLeft, motionAn_toRight } from '../../utils/framer-motion-settings';
-import HydrationSafety from '@/components/HydrationSafety/HydrationSafety';
 import * as cookie from 'cookie'
 import { GetServerSideProps } from 'next';
 import { useDispatch } from 'react-redux';
@@ -24,7 +23,7 @@ export default function Home({ isLogged }: HomePageProps) {
   }
 
   return (
-    <HydrationSafety>
+    <>
       <Head>
         <title>Cash Mosaic</title>
         <meta name="description" content="A personal finance application." />
@@ -58,7 +57,7 @@ export default function Home({ isLogged }: HomePageProps) {
         </div>
 
       </HomepageContainer>
-    </HydrationSafety>
+    </>
   )
 }
 

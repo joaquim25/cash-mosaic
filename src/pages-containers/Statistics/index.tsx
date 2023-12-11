@@ -4,7 +4,6 @@ import { Box } from '@mui/material';
 import { CustomTabPanel } from '../../components/DashboardTabs/utils/CustomTabPanel';
 import { a11yProps } from '../../components/DashboardTabs/utils/al11yProps';
 import StatisticsChart from '../../components/StatisticsChart';
-import HydrationSafety from '@/components/HydrationSafety/HydrationSafety';
 
 type StatisticsPageProps = {
     data: { label: string, value: number }[];
@@ -19,7 +18,7 @@ function Statistics({ data }: StatisticsPageProps) {
 
 
     return (
-        <HydrationSafety>
+        <>
             <StatisticsContainer>
                 <StatisticsCard>
                     <StatisticsTabsContainer>
@@ -62,7 +61,7 @@ function Statistics({ data }: StatisticsPageProps) {
                 </StatisticsCard>
 
             </StatisticsContainer>
-        </HydrationSafety>
+        </>
     )
 }
 
