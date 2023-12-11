@@ -72,7 +72,7 @@ export const getServerSideProps: (context: GetServerSidePropsContext<ParsedUrlQu
             },
         };
     } catch (error) {
-        console.error("Error in getServerSideProps[dashboard page]: ", error);
+        console.error("Error in getServerSideProps[transactions]: ", error);
 
         if (axios.isAxiosError(error) && error.response!.status === 401) {
             return {

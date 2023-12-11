@@ -10,19 +10,13 @@ type DashboardAPIProps = {
 }
 
 export const fetchDashboardData = async (token: string | null | undefined) => {
-    try {
-        const response = await axios.get(`${BASE_URL}/auth/me_dashboard`, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
+    const response = await axios.get(`${BASE_URL}/auth/me_dashboard`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
 
-        return response.data;
-    } catch (error) {
-        console.error("fetchProfileData error: ", error);
-
-        throw error;
-    }
+    return response.data;
 };
 
 export const addIncome = async ({ user_id, date, amount, category }: DashboardAPIProps) => {
