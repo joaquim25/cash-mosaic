@@ -18,6 +18,8 @@
   <img alt="License" src="https://img.shields.io/github/license/joaquim25/cash-mosaic?color=56BEB8">
 </p>
 
+https://github.com/joaquim25/cash-mosaic/assets/115705731/42c51506-4c6d-4b76-85bc-6ab51a2a86ea
+
 <p align="center">
   <a href="#dart-about">About</a> &#xa0; | &#xa0; 
   <a href="#sparkles-features">Features</a> &#xa0; | &#xa0;
