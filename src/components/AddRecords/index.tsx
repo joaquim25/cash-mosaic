@@ -1,7 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState } from 'react'
 import { IoArrowDown, IoArrowUp } from "react-icons/io5";
-import { AmountInput, CategoryContainer, DateInput, RecordTypeSelectorContainer, ParametersInputContainer, StyledDatePicker, RecordTypeIncome, RecordTypeExpense, AddRecordsContainer } from './styles'
+import { PiCurrencyEurBold } from "react-icons/pi";
+import { AmountInput, CategoryContainer, DateInput, RecordTypeSelectorContainer, ParametersInputContainer, StyledDatePicker, RecordTypeIncome, RecordTypeExpense, AddRecordsContainer, CurrencyIconContainer } from './styles'
 import { DefaultButton } from '@/styles/GlobalStyles';
 import CategoriesGrid from '../CategoriesGrid';
 import HydrationSafety from '../HydrationSafety/HydrationSafety';
@@ -236,12 +237,14 @@ function AddRecords({ user }: AddRecordsProps) {
                             decimalsLimit={2}
                             value={amount}
                             onValueChange={(value) => setAmount(value)}
-                            suffix='€'
                             disableAbbreviations={true}
                             allowDecimals={true}
-                            placeholder={'0,00€'}
+                            placeholder={'0,00'}
                             autoComplete={'off'}
                         />
+                        <CurrencyIconContainer>
+                            <PiCurrencyEurBold />
+                        </CurrencyIconContainer>
                     </AmountInput>
                 </ParametersInputContainer>
 

@@ -105,6 +105,7 @@ export const AmountInput = styled.div`
     border-radius: 5px;
     max-width: 500px;
     margin: 0 auto;
+    position: relative;
 
     & label {
         font-size: 9px;
@@ -123,6 +124,18 @@ export const AmountInput = styled.div`
 
     @media(min-width: 768px){
         grid-area: amount;
+    }
+`
+
+export const CurrencyIconContainer = styled.div`
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+
+    & svg {
+        height: 20px;
+        width: 20px;
+        color: #333;
     }
 `
 
