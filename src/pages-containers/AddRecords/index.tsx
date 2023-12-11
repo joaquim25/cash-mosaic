@@ -50,6 +50,10 @@ function AddRecords({ user }: AddRecordsProps) {
                 throw (Error("missing param: amount"))
             }
 
+            if(!category){
+                throw (Error("missing param: category"))
+            }
+
             switch (selectedRecordType) {
                 case "income":
                     // Post request on cashMosaic-transactions_income table
