@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import DashboardLayout from '@/components/DashboardLayout'
-import TransactionsComponent from '@/components/Transactions'
 import React, { useEffect } from 'react'
 import * as cookie from 'cookie'
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,7 +10,8 @@ import { ParsedUrlQuery } from 'querystring';
 import { fetchTransactions } from '../../services/transactions';
 import DataLoadingError from '@/components/Error/DataLoading';
 import axios from 'axios';
-import { TransactionRecordItem } from '@/components/Transactions/types';
+import { TransactionRecordItem } from '@/pages-containers/Transactions/types';
+import Transactions from '@/pages-containers/Transactions';
 
 type TransactionsPageProps = {
     initialUser: User;
@@ -26,7 +26,7 @@ type TransactionsPageProps = {
 };
 
 
-function Transactions({ initialUser, transactions_list }: TransactionsPageProps) {
+function TransactionsPage({ initialUser, transactions_list }: TransactionsPageProps) {
     const dispatch = useDispatch();
     const user = useSelector((state: RootState) => state.user);
 
@@ -37,7 +37,7 @@ function Transactions({ initialUser, transactions_list }: TransactionsPageProps)
     return (
         <DashboardLayout user={user} >
             {initialUser
-                ? <TransactionsComponent initialTransactions={transactions_list} />
+                ? <Transactions initialTransactions={transactions_list} />
                 : <DataLoadingError />
             }
         </DashboardLayout>
@@ -93,4 +93,4 @@ export const getServerSideProps: (context: GetServerSidePropsContext<ParsedUrlQu
     }
 };
 
-export default Transactions
+export default TransactionsPage;

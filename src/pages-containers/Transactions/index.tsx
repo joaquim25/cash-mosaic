@@ -15,7 +15,7 @@ import { fetchTransactions } from '@/services/transactions';
 import { TransactionRecordItem } from './types';
 import axios from 'axios';
 
-type TransactionsComponentProps = {
+type TransactionsProps = {
     initialTransactions: {
         itemsReceived: number;
         currPage: number;
@@ -26,7 +26,7 @@ type TransactionsComponentProps = {
     };
 };
 
-function TransactionsComponent({ initialTransactions }: TransactionsComponentProps) {
+function Transactions({ initialTransactions }: TransactionsProps) {
     const authToken = getAuthTokenFromCookies();
     const [errorStatus, setErrorStatus] = useState({ error: false, errorMessage: "" });
     const [items, setItems] = useState(initialTransactions.items);
@@ -107,4 +107,4 @@ function TransactionsComponent({ initialTransactions }: TransactionsComponentPro
     );
 }
 
-export default TransactionsComponent;
+export default Transactions;

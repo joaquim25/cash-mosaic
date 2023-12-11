@@ -1,10 +1,11 @@
 import * as cookie from 'cookie'
-import { AuthForm } from '@/components/AuthForm';
-import { Fields } from '@/components/AuthForm/types';
+
 import { GetServerSidePropsContext, PreviewData } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 import { useDispatch } from 'react-redux';
 import { cleanUser } from '@/store/user/actions';
+import { Fields } from '@/pages-containers/AuthForm/types';
+import { AuthForm } from '@/pages-containers/AuthForm';
 
 type SignupPageProps = {
     isLogged: boolean;

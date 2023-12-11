@@ -4,8 +4,8 @@ import { IoArrowDown, IoArrowUp } from "react-icons/io5";
 import { PiCurrencyEurBold } from "react-icons/pi";
 import { AmountInput, CategoryContainer, DateInput, RecordTypeSelectorContainer, ParametersInputContainer, StyledDatePicker, RecordTypeIncome, RecordTypeExpense, AddRecordsContainer, CurrencyIconContainer } from './styles'
 import { DefaultButton } from '@/styles/GlobalStyles';
-import CategoriesGrid from '../CategoriesGrid';
-import HydrationSafety from '../HydrationSafety/HydrationSafety';
+import CategoriesGrid from '../../components/CategoriesGrid';
+import HydrationSafety from '../../components/HydrationSafety/HydrationSafety';
 import CurrencyInput from 'react-currency-input-field';
 import dayjs from 'dayjs';
 import { addExpense, addIncome } from '@/services/dashboard';

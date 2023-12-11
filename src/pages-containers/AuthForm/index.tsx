@@ -1,4 +1,4 @@
-import { AuthContainer, ExtraFormLinks, FieldContainer, FormContainer, FormImageContainer, FormInput, FormTitle, StyledAuthForm } from "@/components/AuthForm/styles/styles";
+
 import { DefaultButton } from "@/styles/GlobalStyles";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,7 +9,7 @@ import { authLogin, authSignup } from "@/services/auth";
 import { useDispatch } from "react-redux";
 import { logIn } from "@/store/user/actions";
 import { FormValues, propTypes } from "./types";
-
+import { AuthContainer, ExtraFormLinks, FieldContainer, FormContainer, FormImageContainer, FormInput, FormTitle, StyledAuthForm } from "./styles";
 
 
 export const AuthForm = ({ fields, title }: propTypes) => {

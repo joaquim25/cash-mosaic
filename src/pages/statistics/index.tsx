@@ -8,9 +8,9 @@ import { ParsedUrlQuery } from 'querystring';
 import { RootState, User } from '@/store/types';
 import { fetchDayData } from '../../services/statistics';
 import DashboardLayout from '@/components/DashboardLayout'
-import Statistics from '@/components/Statistics';
 import { setUserDashboard } from '@/store/user/actions';
 import DataLoadingError from '@/components/Error/DataLoading';
+import Statistics from '@/pages-containers/Statistics';
 
 type StatisticsPageProps = {
     initialUser: User;
