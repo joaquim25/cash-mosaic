@@ -1,4 +1,4 @@
-import { CopyrightText, ExtraText, FooterContainer, FooterLinks, FooterLogo, SocialLinksContainer } from "@/components/Footer/styles/FooterStyles"
+import { CopyrightText, ExtraText, FooterContainer, FooterLinks, FooterLogo, SocialLinksContainer } from "@/components/Footer/styles"
 import { HiOutlineMail } from 'react-icons/hi';
 import { FiGithub, FiLinkedin } from 'react-icons/fi';
 import Image from "next/image"

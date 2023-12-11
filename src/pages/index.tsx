@@ -3,7 +3,7 @@ import features from '../../public/data/features.json';
 import Head from 'next/head'
 import { FeatureSectionHeading, FeatureSectionSubHeading, HeroHeader, HeroSection, HeroText, HomeHeroImg, HomepageContainer, LeftHeroContainer, RightHeroContainer } from '@/styles/HomeStyles'
 import { DefaultButton } from '@/styles/GlobalStyles';
-import FeatureSection from '../components/FeatureSection/FeatureSection';
+import FeatureSection from '../components/FeatureSection';
 import { motionAn_toLeft, motionAn_toRight } from '../../utils/framer-motion-settings';
 import HydrationSafety from '@/components/HydrationSafety/HydrationSafety';
 import * as cookie from 'cookie'

@@ -10,7 +10,7 @@ type StatisticsPageProps = {
     data: { label: string, value: number }[];
 };
 
-function StatisticsComponent({ data }: StatisticsPageProps) {
+function Statistics({ data }: StatisticsPageProps) {
     const [currentTab, setCurrentTab] = React.useState(0);
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -66,4 +66,4 @@ function StatisticsComponent({ data }: StatisticsPageProps) {
     )
 }
 
-export default StatisticsComponent;
+export default Statistics;

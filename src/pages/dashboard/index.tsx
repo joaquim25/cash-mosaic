@@ -8,7 +8,7 @@ import { setUserDashboard } from '@/store/user/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchDashboardData } from '../../services/dashboard';
 import DashboardLayout from '@/components/DashboardLayout';
-import AddRecordsComponent from '@/components/AddRecords';
+import AddRecords from '@/components/AddRecords';
 import axios from 'axios';
 import DataLoadingError from '@/components/Error/DataLoading';
 
@@ -33,7 +33,7 @@ function Dashboard({ initialUser }: DashboardPageProps) {
     return (
         <DashboardLayout user={user} >
             {initialUser
-                ? <AddRecordsComponent user={user} />
+                ? <AddRecords user={user} />
                 : <DataLoadingError />
             }
         </DashboardLayout>

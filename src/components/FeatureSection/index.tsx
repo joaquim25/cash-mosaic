@@ -1,5 +1,5 @@
-import { CardsContainer, FeatureContainer, FeatureHeading, FeatureImg, FeatureSubHeading, FeatureText, SectionInfoCol } from "@/components/FeatureSection/styles/FeatureSectionStyles";
-import FeatureCard from "../FeatureCard/FeatureCard";
+import { CardsContainer, FeatureContainer, FeatureHeading, FeatureImg, FeatureSubHeading, FeatureText, SectionInfoCol } from "@/components/FeatureSection/styles";
+import FeatureCard from "../FeatureCard";
 import { motionAn_toLeft, motionAn_toRight } from "../../../utils/framer-motion-settings";
 
 type FeatureSectionProps = {

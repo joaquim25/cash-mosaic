@@ -14,11 +14,11 @@ import { setUserDashboard } from '@/store/user/actions';
 import axios from 'axios';
 import { Alert, Snackbar } from '@mui/material';
 
-type AddRecordsComponentProps = {
+type AddRecordsProps = {
     user: User;
 }
 
-function AddRecordsComponent({ user }: AddRecordsComponentProps) {
+function AddRecords({ user }: AddRecordsProps) {
     const dispatch = useDispatch();
     // record type selections, date, amount, category
     const [selectedRecordType, setSelectedRecordType] = useState<"expenses" | "income">("expenses");
@@ -271,4 +271,4 @@ function AddRecordsComponent({ user }: AddRecordsComponentProps) {
     )
 }
 
-export default AddRecordsComponent
+export default AddRecords;

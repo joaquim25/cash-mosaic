@@ -1,4 +1,4 @@
-import { CardContainer, CardIcon, CardText, CardUnList } from "@/components/FeatureCard/styles/FeatureCardStyles"
+import { CardContainer, CardIcon, CardText, CardUnList } from "@/components/FeatureCard/styles"
 import Image from "next/image"
 
 type FeatureCardProps = {

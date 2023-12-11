@@ -1,15 +1,10 @@
 import React from 'react'
-import styled from "@emotion/styled"
-
-const LoadingErrorContainer = styled.div`
-    // min-height: 300px;
-`
 
 function DataLoadingError() {
     return (
-        <LoadingErrorContainer>
+        <div>
             <p style={{ textAlign: 'center' }}>An error ocurred trying to load your data, please refresh the page and try again</p>
-        </LoadingErrorContainer>
+        </div>
     )
 }
 

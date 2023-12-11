@@ -1,5 +1,5 @@
 import * as cookie from 'cookie'
-import { AuthForm } from '@/components/AuthForm/AuthForm';
+import { AuthForm } from '@/components/AuthForm';
 import { Fields } from '@/components/AuthForm/types';
 import { GetServerSidePropsContext, PreviewData } from 'next';
 import { ParsedUrlQuery } from 'querystring';

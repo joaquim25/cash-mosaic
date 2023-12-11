@@ -8,7 +8,7 @@ import { ParsedUrlQuery } from 'querystring';
 import { RootState, User } from '@/store/types';
 import { fetchDayData } from '../../services/statistics';
 import DashboardLayout from '@/components/DashboardLayout'
-import StatisticsComponent from '@/components/StatisticsComponent';
+import Statistics from '@/components/Statistics';
 import { setUserDashboard } from '@/store/user/actions';
 import DataLoadingError from '@/components/Error/DataLoading';
 
@@ -17,7 +17,7 @@ type StatisticsPageProps = {
     data: { label: string, value: number }[];
 };
 
-function Statistics({ initialUser, data }: StatisticsPageProps) {
+function StatisticsPage({ initialUser, data }: StatisticsPageProps) {
     const dispatch = useDispatch();
     const user = useSelector((state: RootState) => state.user);
 
@@ -28,7 +28,7 @@ function Statistics({ initialUser, data }: StatisticsPageProps) {
     return (
         <DashboardLayout user={user} >
             {initialUser
-                ? <StatisticsComponent data={data} />
+                ? <Statistics data={data} />
                 : <DataLoadingError />
             }
         </DashboardLayout>
@@ -83,4 +83,4 @@ export const getServerSideProps: (context: GetServerSidePropsContext<ParsedUrlQu
     }
 };
 
-export default Statistics;
+export default StatisticsPage;

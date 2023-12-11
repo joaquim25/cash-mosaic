@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ButtonsContainer, CancelButton, ConfimationModalText, ConfirmButton, StyledPopover } from './styles/ConfirmationModalStyles';
+import { ButtonsContainer, CancelButton, ConfimationModalText, ConfirmButton, StyledPopover } from './styles';
 import { AnyAction } from 'redux';
 
 interface ConfirmationModalProps {

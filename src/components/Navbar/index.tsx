@@ -10,7 +10,7 @@ import {
     SidebarIcon,
     SidebarItems,
     SidebarTitle
-} from "@/components/Navbar/styles/NavbarStyles";
+} from "@/components/Navbar/styles";
 import { IoIosMenu } from 'react-icons/io';
 import { LiaUser } from 'react-icons/lia';
 import { MdOutlineLogout } from 'react-icons/md';
@@ -22,7 +22,7 @@ import { NavItem } from './types';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from '@/store/user/actions';
-import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
+import ConfirmationModal from "../ConfirmationModal";
 import { AnyAction } from "@reduxjs/toolkit";
 
 function Navbar() {
