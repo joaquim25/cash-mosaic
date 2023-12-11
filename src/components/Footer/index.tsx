@@ -4,36 +4,30 @@ import { FiGithub, FiLinkedin } from 'react-icons/fi';
 import Image from "next/image"
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
 import { RootState } from '@/store/types';
 import { FooterLink } from './types';
 
 function Footer() {
     const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
-    const [footerLinks, setFooterLinks] = useState<FooterLink[]>();
 
-    useEffect(() => {
-        if (isLoggedIn) {
-            setFooterLinks([
-                { href: "/", content: "Homepage" },
-                { href: "/dashboard", content: "Dashboard" },
-                { href: "/profile", content: "Profile" },
-                { href: "/#", content: "Terms" },
-                { href: "/#", content: "Privacy" },
-                { href: "/#", content: "About" }
-            ])
-        } else {
-            setFooterLinks([
-                { href: "/", content: "Homepage" },
-                { href: "/login", content: "Login" },
-                { href: "/signup", content: "Sign-up" },
-                { href: "/#", content: "Terms" },
-                { href: "/#", content: "Privacy" },
-                { href: "/#", content: "About" }
-            ])
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoggedIn]);
+    const footerLinks: FooterLink[] = isLoggedIn ?
+    [
+        { href: "/", content: "Homepage" },
+        { href: "/dashboard", content: "Dashboard" },
+        { href: "/profile", content: "Profile" },
+        { href: "/#", content: "Terms" },
+        { href: "/#", content: "Privacy" },
+        { href: "/#", content: "About" }
+    ]
+    :
+    [
+        { href: "/", content: "Homepage" },
+        { href: "/login", content: "Login" },
+        { href: "/signup", content: "Sign-up" },
+        { href: "/#", content: "Terms" },
+        { href: "/#", content: "Privacy" },
+        { href: "/#", content: "About" }
+    ];
 
     return (
         <FooterContainer>

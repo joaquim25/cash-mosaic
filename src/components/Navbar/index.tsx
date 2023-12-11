@@ -19,7 +19,7 @@ import Image from "next/image"
 import Link from 'next/link';
 import { RootState } from '@/store/types';
 import { NavItem } from './types';
-import { useState, useEffect } from 'react';
+import { useState} from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from '@/store/user/actions';
 import ConfirmationModal from "../ConfirmationModal";
@@ -27,33 +27,12 @@ import { AnyAction } from "@reduxjs/toolkit";
 
 function Navbar() {
     const [showSidebar, setShowSidebar] = useState(false);
-    const [navItems, setNavItems] = useState<NavItem[]>();
+    const [showLogoutConfirmation, setShowLogoutConfirmation] = useState(false);
+    const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
     const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
     const dispatch = useDispatch();
 
 
-    const [showLogoutConfirmation, setShowLogoutConfirmation] = useState(false);
-    const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
-
-
-
-    useEffect(() => {
-        if (isLoggedIn) {
-            setNavItems([
-                { href: "/", content: "Homepage" },
-                { href: "/dashboard", content: "Dashboard" },
-                { href: "/profile", icon: <LiaUser />, action: handleSideBarItemClick },
-                { href: "#", class: "logout-icon", icon: <MdOutlineLogout />, action: onLogoutClick },
-            ])
-        } else {
-            setNavItems([
-                { href: "/", content: "Homepage" },
-                { href: "/login", content: "Login" },
-                { href: "/signup", content: "Sign-up" },
-            ])
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoggedIn]);
 
     const onLogoutClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         setShowLogoutConfirmation(true);
@@ -68,6 +47,19 @@ function Navbar() {
         setShowSidebar(false);
     }
 
+    const navItems: NavItem[] = isLoggedIn ?
+        [
+            { href: "/", content: "Homepage" },
+            { href: "/dashboard", content: "Dashboard" },
+            { href: "/profile", icon: <LiaUser />, action: handleSideBarItemClick },
+            { href: "#", class: "logout-icon", icon: <MdOutlineLogout />, action: onLogoutClick },
+        ]
+        : [
+            { href: "/", content: "Homepage" },
+            { href: "/login", content: "Login" },
+            { href: "/signup", content: "Sign-up" },
+        ];
+
     return (
         <>
             <NavbarContainer>
@@ -75,7 +67,7 @@ function Navbar() {
                     <IoIosMenu onClick={toggleShowSidebar} />
                 </HambuguerIcon>
                 <Link href="/">
-                    <Image src="/images/logo.svg" width={150} height={45} alt="menu icon" priority={true}/>
+                    <Image src="/images/logo.svg" width={150} height={45} alt="menu icon" priority={true} />
                 </Link>
 
                 <DesktopNavItemsContainer>

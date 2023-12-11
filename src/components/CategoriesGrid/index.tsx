@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 import categories from "../../../public/data/categories.json";
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { CategorieCard, CategoriesGridContainer } from "./styles";
 
 type CategoriesGridProps = {
@@ -17,12 +17,7 @@ type CategoriesData = {
 }[]
 
 function CategoriesGrid({ type, onCategorySelection, category }: CategoriesGridProps) {
-    const [categoriesData, setCategoriesData] = useState<CategoriesData>([]);
-
-    useEffect(() => {
-        setCategoriesData(categories[type]);
-    }, [type])
-
+    const categoriesData = categories[type]
 
     return (
         <CategoriesGridContainer>
