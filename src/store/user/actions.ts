@@ -34,9 +34,6 @@ export const logOut = () => {
         dispatch({ type: actions.LOGOUT });
         removeAuthTokenFromCookies();
 
-        // Wait for the authToken to be removed before redirecting
-        await new Promise(resolve => setTimeout(resolve, 0));
-
         // Redirect to the landing page
         window.location.href = "/";
     };
