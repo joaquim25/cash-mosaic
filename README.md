@@ -62,14 +62,14 @@ Welcome to Cash-mosaic – a versatile web application designed to simplify your
 </div>
 
 The following tools were used in this project:
-- [<img width="20" src="https://user-images.githubusercontent.com/25181517/183890598-19a0ac2d-e88a-4005-a8df-1ee36782fde1.png" alt="TypeScript" title="TypeScript"/>](https://www.typescriptlang.org/) TypeScript
-- [<img width="20" src="https://github.com/marwin1991/profile-technology-icons/assets/136815194/5f8c622c-c217-4649-b0a9-7e0ee24bd704" alt="Next.js" title="Next.js"/>](https://nextjs.org/) Next.js
-- [<img width="40" src="https://seeklogo.com/images/A/axios-logo-CDDCBC8E4A-seeklogo.com.png" alt="Axios" title="Axios"/>](https://axios-http.com/) Axios
-- [<img width="20" src="https://user-images.githubusercontent.com/25181517/187896150-cc1dcb12-d490-445c-8e4d-1275cd2388d6.png" alt="Redux" title="Redux"/>](https://redux.js.org/) Redux
-- [<img width="20" src="https://assets-global.website-files.com/6145a64d8a08a13f1a8040f7/62ac59c910a24f76bbede71f_xx.png" alt="Xano" title="Xano"/>](https://www.xano.com/) Xano
-- [<img width="20" src="https://user-images.githubusercontent.com/25181517/187955005-f4ca6f1a-e727-497b-b81b-93fb9726268e.png" alt="Jest" title="Jest"/>](https://jestjs.io/) Jest
-- [<img width="20" src="https://testing-library.com/img/octopus-64x64.png" alt="React Testing Library" title="React Testing Library"/>](https://testing-library.com/) React Testing Library
-- [<img width="20" src="https://seeklogo.com/images/V/vercel-logo-F748E39008-seeklogo.com.png" alt="Vercel" title="Vercel"/>](https://vercel.com/) Vercel
+- [<img width="15" src="https://user-images.githubusercontent.com/25181517/183890598-19a0ac2d-e88a-4005-a8df-1ee36782fde1.png" alt="TypeScript" title="TypeScript"/>](https://www.typescriptlang.org/) TypeScript
+- [<img width="15" src="https://github.com/marwin1991/profile-technology-icons/assets/136815194/5f8c622c-c217-4649-b0a9-7e0ee24bd704" alt="Next.js" title="Next.js"/>](https://nextjs.org/) Next.js
+- [<img width="25" src="https://seeklogo.com/images/A/axios-logo-CDDCBC8E4A-seeklogo.com.png" alt="Axios" title="Axios"/>](https://axios-http.com/) Axios
+- [<img width="15" src="https://user-images.githubusercontent.com/25181517/187896150-cc1dcb12-d490-445c-8e4d-1275cd2388d6.png" alt="Redux" title="Redux"/>](https://redux.js.org/) Redux
+- [<img width="15" src="https://assets-global.website-files.com/6145a64d8a08a13f1a8040f7/62ac59c910a24f76bbede71f_xx.png" alt="Xano" title="Xano"/>](https://www.xano.com/) Xano
+- [<img width="15" src="https://user-images.githubusercontent.com/25181517/187955005-f4ca6f1a-e727-497b-b81b-93fb9726268e.png" alt="Jest" title="Jest"/>](https://jestjs.io/) Jest
+- [<img width="15" src="https://testing-library.com/img/octopus-64x64.png" alt="React Testing Library" title="React Testing Library"/>](https://testing-library.com/) React Testing Library
+- [<img width="15" src="https://seeklogo.com/images/V/vercel-logo-F748E39008-seeklogo.com.png" alt="Vercel" title="Vercel"/>](https://vercel.com/) Vercel
 
 ## :white_check_mark: Requirements ##
 
