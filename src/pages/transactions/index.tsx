@@ -8,7 +8,7 @@ import { RootState, User } from '@/store/types';
 import { setUserDashboard } from '@/store/user/actions';
 import { GetServerSidePropsContext, PreviewData } from 'next';
 import { ParsedUrlQuery } from 'querystring';
-import { fetchTransactions } from '../api/transactions';
+import { fetchTransactions } from '../../services/transactions';
 import DataLoadingError from '@/components/Error/DataLoading';
 import axios from 'axios';
 import { TransactionRecordItem } from '@/components/Transactions/types';

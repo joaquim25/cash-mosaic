@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import { RangeSelectorContainer, RangeSubmitButton, StatisticsChartContainer } from './styles';
-import { fetchMonthData, fetchRangeData, fetchWeekData, fetchYearData } from '@/pages/api/statistics';
+import { fetchMonthData, fetchRangeData, fetchWeekData, fetchYearData } from '@/services/statistics';
 import { getAuthTokenFromCookies } from '../../../utils/cookies';
 import axios from 'axios';
 import dayjs from 'dayjs';
@@ -55,7 +55,6 @@ function StatisticsChart({ type, data }: StatisticsChartProps) {
 
         try {
             const response = authToken && (await fetchRangeData(authToken, dateRange.start, dateRange.end));
-            console.log(response)
             setClientData(response)
         } catch (error) {
             if (axios.isAxiosError(error) && error.response?.status === 429) {

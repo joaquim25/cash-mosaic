@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { GetServerSideProps } from "next";
-import { changeProfileData, fetchProfileData } from "../api/profile";
+import { changeProfileData, fetchProfileData } from "../../services/profile";
 import { User } from "@/store/types";
 import * as cookie from 'cookie'
 import ProfileFormContainer from "@/components/ProfileFormContainer";

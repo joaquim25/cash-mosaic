@@ -6,7 +6,7 @@ import * as cookie from 'cookie'
 import { ParsedUrlQuery } from 'querystring';
 import { setUserDashboard } from '@/store/user/actions';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchDashboardData } from '../api/dashboard';
+import { fetchDashboardData } from '../../services/dashboard';
 import DashboardLayout from '@/components/DashboardLayout';
 import AddRecordsComponent from '@/components/AddRecords';
 import axios from 'axios';

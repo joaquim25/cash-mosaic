@@ -11,7 +11,7 @@ import { Alert, Pagination, PaginationItem, Snackbar, Stack } from '@mui/materia
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { getAuthTokenFromCookies } from '../../../utils/cookies';
-import { fetchTransactions } from '@/pages/api/transactions';
+import { fetchTransactions } from '@/services/transactions';
 import { TransactionRecordItem } from './types';
 import axios from 'axios';
 

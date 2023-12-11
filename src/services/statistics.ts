@@ -1,5 +1,5 @@
 import axios from "axios"
-import { get7DaysPriorDate, getCurrentDate, getPriorMonthDate, getPriorYearDate } from "../../../utils/dates";
+import { get7DaysPriorDate, getCurrentDate, getPriorMonthDate, getPriorYearDate } from "../../utils/dates";
 
 const BASE_URL = "https://x8ki-letl-twmt.n7.xano.io/api:8Mli9063";
 

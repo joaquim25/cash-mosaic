@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from 'next/router';
 import { ChangeEvent, useState } from "react";
 import { Alert, Snackbar } from "@mui/material";
-import { authLogin, authSignup } from "@/pages/api/auth";
+import { authLogin, authSignup } from "@/services/auth";
 import { useDispatch } from "react-redux";
 import { logIn } from "@/store/user/actions";
 import { FormValues, propTypes } from "./types";

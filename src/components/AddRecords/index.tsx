@@ -7,7 +7,7 @@ import CategoriesGrid from '../CategoriesGrid';
 import HydrationSafety from '../HydrationSafety/HydrationSafety';
 import CurrencyInput from 'react-currency-input-field';
 import dayjs from 'dayjs';
-import { addExpense, addIncome } from '@/pages/api/dashboard';
+import { addExpense, addIncome } from '@/services/dashboard';
 import { useDispatch } from 'react-redux';
 import { User } from '@/store/types';
 import { setUserDashboard } from '@/store/user/actions';

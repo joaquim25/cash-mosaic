@@ -1,5 +1,5 @@
 import axios from "axios";
-import { SimplifiedUserData } from "../../../utils";
+import { SimplifiedUserData } from "../../utils";
 
 const BASE_URL = "https://x8ki-letl-twmt.n7.xano.io/api:8Mli9063";
 

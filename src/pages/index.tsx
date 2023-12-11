@@ -9,7 +9,7 @@ import HydrationSafety from '@/components/HydrationSafety/HydrationSafety';
 import * as cookie from 'cookie'
 import { GetServerSideProps } from 'next';
 import { useDispatch } from 'react-redux';
-import { fetchisUserLogged } from './api/homepage';
+import { fetchisUserLogged } from '../services/homepage';
 import { setLogged } from '@/store/user/actions';
 
 

@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { GetServerSidePropsContext, PreviewData } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 import { RootState, User } from '@/store/types';
-import { fetchDayData } from '../api/statistics';
+import { fetchDayData } from '../../services/statistics';
 import DashboardLayout from '@/components/DashboardLayout'
 import StatisticsComponent from '@/components/StatisticsComponent';
 import { setUserDashboard } from '@/store/user/actions';
