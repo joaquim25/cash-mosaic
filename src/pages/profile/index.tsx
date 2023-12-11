@@ -98,7 +98,8 @@ function ProfilePage({ user }: ProfilePageProps) {
         }
     }
 
-    const submitChanges = async () => {
+    const submitChanges = async (e:any) => {
+        e.preventDefault();
         const newUserData = simplifyUserData(userData);
         try {
             const response = await changeProfileData(user.id, newUserData);

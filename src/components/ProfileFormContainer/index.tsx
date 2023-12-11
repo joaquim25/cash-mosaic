@@ -23,7 +23,7 @@ type ProfileFormContainerProps = {
     handleFieldChange: FieldChangeProps;
     handleEditActionField: EditActionFieldProps;
     cancelChanges: () => void;
-    submitChanges: () => Promise<void>;
+    submitChanges: any;
 };
 
 function ProfileFormContainer({
