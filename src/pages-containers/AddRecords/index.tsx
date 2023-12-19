@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState } from 'react'
 import { IoArrowDown, IoArrowUp } from "react-icons/io5";
@@ -18,7 +19,7 @@ type AddRecordsProps = {
     user: User;
 }
 
-function AddRecords({ user }: AddRecordsProps) {
+const AddRecords = React.memo(({ user }: AddRecordsProps) => {
     const dispatch = useDispatch();
     // record type selections, date, amount, category
     const [selectedRecordType, setSelectedRecordType] = useState<"expenses" | "income">("expenses");
@@ -92,7 +93,7 @@ function AddRecords({ user }: AddRecordsProps) {
                         )
                     }, 3000);
 
-                    setAmount("0,00");
+                    setAmount("");
                     setDate(dayjs());
                     setCategory(undefined);
 
@@ -135,7 +136,7 @@ function AddRecords({ user }: AddRecordsProps) {
                         )
                     }, 3000);
 
-                    setAmount("0,00");
+                    setAmount("");
                     setDate(dayjs());
                     setCategory(undefined);
 
@@ -275,6 +276,6 @@ function AddRecords({ user }: AddRecordsProps) {
             </Snackbar>
         </>
     )
-}
+});
 
 export default AddRecords;

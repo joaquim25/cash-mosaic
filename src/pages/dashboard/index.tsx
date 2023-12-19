@@ -2,7 +2,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { RootState, User } from '@/store/types';
 import { GetServerSidePropsContext, PreviewData } from 'next';
-import React, { useEffect } from 'react'
+import React, { ReactNode, useEffect } from 'react'
 import * as cookie from 'cookie'
 import { ParsedUrlQuery } from 'querystring';
 import { setUserDashboard } from '@/store/user/actions';
@@ -11,35 +11,49 @@ import { fetchDashboardData } from '../../services/dashboard';
 import DashboardLayout from '@/components/DashboardLayout';
 import AddRecords from '@/pages-containers/AddRecords';
 import axios from 'axios';
+import Statistics from '@/pages-containers/statistics';
+import Transactions from '@/pages-containers/transactions';
+import { useRouter } from 'next/router';
+import { fetchDayData } from '@/services/statistics';
 import DataLoadingError from '@/components/Error/DataLoading';
+import { fetchTransactions } from '@/services/transactions';
 
 type DashboardPageProps = {
     initialUser: User;
     statisticsData: { label: string, value: number }[];
+    initialTransactions: any;
     totalExpenses: number;
     totalIncome: number;
     balance: number;
+    contentType: 'dashboard' | 'statistics' | 'transactions';
 };
 
-const Dashboard = React.memo(({ initialUser }: DashboardPageProps) => {
+const Dashboard = ({ initialUser /*, statisticsData, initialTransactions */ }: DashboardPageProps) => {
     const dispatch = useDispatch();
-    //2. Get hold of redux user state
     const user = useSelector((state: RootState) => state.user);
+    const router = useRouter();
+    const type = router.query.type;
 
-    //1. populate the redux user state with the SSP info
     useEffect(() => {
         dispatch(setUserDashboard(initialUser));
-    }, [])
+    }, []);
 
-    return (
-        <DashboardLayout user={user} >
-            {initialUser
-                ? <AddRecords user={user} />
-                : <DataLoadingError />
-            }
-        </DashboardLayout>
-    )
-});
+    let contentComponent: ReactNode;
+
+    switch (type) {
+        case 'statistics':
+            contentComponent =  <Statistics />;
+            break;
+        case 'transactions':
+            contentComponent =  <Transactions />;
+            break;
+        default:
+            contentComponent = <AddRecords user={user} />;
+            break;
+    }
+
+    return <DashboardLayout user={user}>{initialUser && contentComponent}</DashboardLayout>;
+};
 
 export const getServerSideProps: (context: GetServerSidePropsContext<ParsedUrlQuery, PreviewData>) => Promise<{ redirect?: { destination?: string; permanent?: false; }; props?: any; }> = async (context) => {
     try {
@@ -58,10 +72,12 @@ export const getServerSideProps: (context: GetServerSidePropsContext<ParsedUrlQu
         }
 
         const initialUser = await fetchDashboardData(parsedCookies.authToken);
+        const contentType = context.query.type || 'dashboard';
 
         return {
             props: {
                 initialUser,
+                contentType,
             },
         };
     } catch (error) {
