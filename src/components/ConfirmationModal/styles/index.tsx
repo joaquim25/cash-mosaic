@@ -1,6 +1,6 @@
 import { THEME_COLORS } from "@/styles/GlobalStyles";
 import styled from "@emotion/styled"
-import Popover from '@mui/material/Popover';
+import { Popover } from '@mui/material';
 
 export const StyledPopover = styled(Popover)`
 

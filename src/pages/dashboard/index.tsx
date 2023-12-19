@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { RootState, User } from '@/store/types';
 import { GetServerSidePropsContext, PreviewData } from 'next';
@@ -20,7 +21,7 @@ type DashboardPageProps = {
     balance: number;
 };
 
-function Dashboard({ initialUser }: DashboardPageProps) {
+const Dashboard = React.memo(({ initialUser }: DashboardPageProps) => {
     const dispatch = useDispatch();
     //2. Get hold of redux user state
     const user = useSelector((state: RootState) => state.user);
@@ -38,7 +39,7 @@ function Dashboard({ initialUser }: DashboardPageProps) {
             }
         </DashboardLayout>
     )
-}
+});
 
 export const getServerSideProps: (context: GetServerSidePropsContext<ParsedUrlQuery, PreviewData>) => Promise<{ redirect?: { destination?: string; permanent?: false; }; props?: any; }> = async (context) => {
     try {

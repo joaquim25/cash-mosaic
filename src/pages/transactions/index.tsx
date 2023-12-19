@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 /* eslint-disable react-hooks/exhaustive-deps */
 import DashboardLayout from '@/components/DashboardLayout'
 import React, { useEffect } from 'react'
@@ -10,8 +11,8 @@ import { ParsedUrlQuery } from 'querystring';
 import { fetchTransactions } from '../../services/transactions';
 import DataLoadingError from '@/components/Error/DataLoading';
 import axios from 'axios';
-import { TransactionRecordItem } from '@/pages-containers/Transactions/types';
-import Transactions from '@/pages-containers/Transactions';
+import { TransactionRecordItem } from '@/pages-containers/transactions/types';
+import Transactions from '@/pages-containers/transactions';
 
 type TransactionsPageProps = {
     initialUser: User;
@@ -26,7 +27,7 @@ type TransactionsPageProps = {
 };
 
 
-function TransactionsPage({ initialUser, transactions_list }: TransactionsPageProps) {
+const TransactionsPage = React.memo(({ initialUser, transactions_list }: TransactionsPageProps) => {
     const dispatch = useDispatch();
     const user = useSelector((state: RootState) => state.user);
 
@@ -42,7 +43,7 @@ function TransactionsPage({ initialUser, transactions_list }: TransactionsPagePr
             }
         </DashboardLayout>
     )
-}
+});
 
 
 export const getServerSideProps: (context: GetServerSidePropsContext<ParsedUrlQuery, PreviewData>) => Promise<{ redirect?: { destination?: string; permanent?: false; }; props?: any; }> = async (context) => {

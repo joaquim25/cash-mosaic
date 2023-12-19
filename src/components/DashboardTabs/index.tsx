@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Box from '@mui/material/Box';
-import Link from 'next/link';  // Import Link from Next.js
+import {Tabs, Tab, Box } from '@mui/material';
+import Link from 'next/link';
 import { CustomTabPanel } from '@/components/DashboardTabs/utils/CustomTabPanel';
 import { a11yProps } from '@/components/DashboardTabs/utils/al11yProps';
 import { DashboardTabsContainer } from './styles';

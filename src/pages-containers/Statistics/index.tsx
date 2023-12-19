@@ -1,9 +1,9 @@
 import React from 'react'
-import { StatisticTab, StatisticsCard, StatisticsContainer, StatisticsTabs, StatisticsTabsContainer } from './styles'
 import { Box } from '@mui/material';
 import { CustomTabPanel } from '../../components/DashboardTabs/utils/CustomTabPanel';
 import { a11yProps } from '../../components/DashboardTabs/utils/al11yProps';
 import StatisticsChart from '../../components/StatisticsChart';
+import { StatisticTab, StatisticsCard, StatisticsContainer, StatisticsTabs, StatisticsTabsContainer } from './styles';
 
 type StatisticsPageProps = {
     data: { label: string, value: number }[];

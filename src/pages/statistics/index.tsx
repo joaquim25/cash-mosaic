@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 /* eslint-disable react-hooks/exhaustive-deps */
 import * as cookie from 'cookie'
 import axios from 'axios';
@@ -10,14 +11,14 @@ import { fetchDayData } from '../../services/statistics';
 import DashboardLayout from '@/components/DashboardLayout'
 import { setUserDashboard } from '@/store/user/actions';
 import DataLoadingError from '@/components/Error/DataLoading';
-import Statistics from '@/pages-containers/Statistics';
+import Statistics from '@/pages-containers/statistics';
 
 type StatisticsPageProps = {
     initialUser: User;
     data: { label: string, value: number }[];
 };
 
-function StatisticsPage({ initialUser, data }: StatisticsPageProps) {
+const StatisticsPage = React.memo(({ initialUser, data }: StatisticsPageProps) => {
     const dispatch = useDispatch();
     const user = useSelector((state: RootState) => state.user);
 
@@ -33,7 +34,7 @@ function StatisticsPage({ initialUser, data }: StatisticsPageProps) {
             }
         </DashboardLayout>
     )
-}
+});
 
 
 export const getServerSideProps: (context: GetServerSidePropsContext<ParsedUrlQuery, PreviewData>) => Promise<{ redirect?: { destination?: string; permanent?: false; }; props?: any; }> = async (context) => {

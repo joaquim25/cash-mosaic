@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import { User } from '@/store/types';
 import React, { ReactNode } from 'react'
 import DashboardHeader from './DashboardHeader';
@@ -13,14 +14,15 @@ const DashboardContainer = styled.div`
     min-height: 100vh;
 `
 
-function DashboardLayout({ children, user }: DashboardLayoutProps) {
-    return (
-            <DashboardContainer>
-                <DashboardHeader user={user} />
-                <DashboardTabs />
-                {children}
-            </DashboardContainer>
-    )
-}
+const DashboardLayout = React.memo(({ children, user }: DashboardLayoutProps) => {
 
-export default DashboardLayout
+    return (
+        <DashboardContainer>
+            <DashboardHeader user={user} />
+            <DashboardTabs />
+            {children}
+        </DashboardContainer>
+    );
+});
+
+export default DashboardLayout;

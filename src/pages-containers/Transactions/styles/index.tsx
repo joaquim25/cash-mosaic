@@ -1,5 +1,5 @@
 import styled from "@emotion/styled"
-import TableCell from '@mui/material/TableCell';
+import { TableCell } from '@mui/material';
 
 export const TransactionsContainer = styled.div`
     padding: 0 24px;
