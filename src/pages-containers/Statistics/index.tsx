@@ -4,10 +4,10 @@ import { Box } from '@mui/material';
 import { CustomTabPanel } from '../../components/DashboardTabs/utils/CustomTabPanel';
 import { a11yProps } from '../../components/DashboardTabs/utils/al11yProps';
 import StatisticsChart from '../../components/StatisticsChart';
-import { StatisticTab, StatisticsCard, StatisticsContainer, StatisticsTabs, StatisticsTabsContainer } from './styles';
 import { getAuthTokenFromCookies } from '../../../utils/cookies';
 import { fetchDayData } from '@/services/statistics';
 import DataLoadingError from '@/components/Error/DataLoading';
+import { StatisticTab, StatisticsCard, StatisticsContainer, StatisticsTabs, StatisticsTabsContainer } from "./styles";
 
 function Statistics() {
     const [currentTab, setCurrentTab] = useState(0);
