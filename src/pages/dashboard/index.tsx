@@ -11,12 +11,9 @@ import { fetchDashboardData } from '../../services/dashboard';
 import DashboardLayout from '@/components/DashboardLayout';
 import AddRecords from '@/pages-containers/AddRecords';
 import axios from 'axios';
-import Statistics from '@/pages-containers/statistics';
-import Transactions from '@/pages-containers/transactions';
 import { useRouter } from 'next/router';
-import { fetchDayData } from '@/services/statistics';
-import DataLoadingError from '@/components/Error/DataLoading';
-import { fetchTransactions } from '@/services/transactions';
+import Statistics from '@/pages-containers/Statistics';
+import Transactions from '@/pages-containers/Transactions';
 
 type DashboardPageProps = {
     initialUser: User;
