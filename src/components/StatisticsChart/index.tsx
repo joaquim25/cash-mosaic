@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import React, { useEffect, useRef, useState } from 'react'
-import { RangeSelectorContainer, RangeSubmitButton, StatisticsChartContainer } from './styles';
+import React, { useEffect, useState } from 'react'
+import { ChartGenInfo, ChartLegend, ChartLengendItem, RangeSelectorContainer, RangeSubmitButton, StatisticsChartContainer } from './styles';
 import { fetchMonthData, fetchRangeData, fetchWeekData, fetchYearData } from '@/services/statistics';
 import { getAuthTokenFromCookies } from '../../../utils/cookies';
 import axios from 'axios';
@@ -10,15 +10,15 @@ import SearchIcon from '@mui/icons-material/Search';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { Alert, Snackbar } from '@mui/material';
 import { PieChart } from '@mui/x-charts/PieChart';
+import { getRandomColor, getTotalPeriodExpenses } from '../../../utils/statistics';
 
 
 type StatisticsChartProps = {
     type: "day" | "week" | "month" | "year" | "range";
-    data: { label: string, value: number }[];
+    data: { label: string, value: number, color: string }[];
 }
 
 function StatisticsChart({ type, data }: StatisticsChartProps) {
-    const windowSize = useRef(window.innerWidth);
     const [errorStatus, setErrorStatus] = useState({ error: false, errorMessage: "" });
     const [clientData, setClientData] = useState(data);
     const authToken = getAuthTokenFromCookies();
@@ -26,6 +26,7 @@ function StatisticsChart({ type, data }: StatisticsChartProps) {
         start: dayjs(),
         end: dayjs()
     });
+
 
     const onRangeChange = (value: any, param: string) => {
         setDateRange({
@@ -95,7 +96,6 @@ function StatisticsChart({ type, data }: StatisticsChartProps) {
                         response = authToken && (await fetchYearData(authToken));
                         break;
                     case 'range':
-                        // TO-DO: Refactor (this one should have a range selector and submit btn)
                         response = authToken && (await fetchRangeData(authToken, dateRange.start, dateRange.end));
                         break;
                     default:
@@ -137,16 +137,28 @@ function StatisticsChart({ type, data }: StatisticsChartProps) {
     // Data processment for pieChart dispay
     let displayData = type !== "day" ? clientData : data;
 
-    displayData.forEach((item: { value: number; }) => {
+    displayData.forEach((item) => {
+        // Modify negative values to absolute
         item.value = Math.abs(item.value);
+        // Set a color for each item
+        item.color = getRandomColor();
     });
 
-    displayData = displayData.length > 0 ? displayData : [{ label: `${type !== "range" ? `No data for ${type} period` : `No data for this range`}`, value: 1 }];
 
-    // Mobile & Desktop dispositions for pieChart
-    const pieDisposition = windowSize.current > 600
-        ? { x: 115, y: 95, width: 600, height: 200 }
-        : { x: 50, y: 100, width: 130, height: 800 };
+
+    // Check total expenses for this selected period
+    const totalExpenses = getTotalPeriodExpenses(displayData);
+
+    // Safety Override if there's no data
+    displayData = displayData.length > 0 ? displayData : [{ label: `${type !== "range" ? `No data for ${type} period` : `No data for this range`}`, value: 1, color: "#398585" }];
+
+    // PieChart details
+    const sizing = {
+        margin: { right: 5 },
+        width: 250,
+        height: 250,
+        legend: { hidden: true },
+    };
 
     return (
         <>
@@ -168,6 +180,7 @@ function StatisticsChart({ type, data }: StatisticsChartProps) {
                 </RangeSelectorContainer>
             }
             <StatisticsChartContainer>
+                <ChartGenInfo>Your total expenses this {type} were: <span>{totalExpenses}€</span></ChartGenInfo>
                 <PieChart
                     series={[
                         {
@@ -176,15 +189,23 @@ function StatisticsChart({ type, data }: StatisticsChartProps) {
                             outerRadius: 100,
                             paddingAngle: 2,
                             cornerRadius: 2,
-                            cx: pieDisposition.x,
-                            cy: pieDisposition.y,
+                            cx: 125,
+                            cy: 125,
                             highlightScope: { faded: 'global', highlighted: 'item' },
                             faded: { innerRadius: 40, additionalRadius: -20, color: 'gray' },
                         },
                     ]}
-                    width={pieDisposition.width}
-                    height={pieDisposition.height}
+                    {...sizing}
                 />
+                <ChartLegend>
+                    {displayData.map((item, index) => (
+                        <ChartLengendItem $color={item.color} key={index}>
+                            <div></div>
+                            {item.color !== "#398585" && <span>{((item.value / parseFloat(totalExpenses)) * 100).toFixed(2)}%</span>}
+                            {item.label}
+                        </ChartLengendItem>
+                    ))}
+                </ChartLegend>
 
             </StatisticsChartContainer>
 

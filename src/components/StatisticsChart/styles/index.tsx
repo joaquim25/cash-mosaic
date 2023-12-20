@@ -50,9 +50,64 @@ export const StatisticsChartContainer = styled.div`
     background-color: #D6E1DF;
     border-radius: 16px;
     display: flex;
-    padding: 40px 0 20px 0;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 20px 20px 20px;
 
     @media (min-width: 600px){
-        padding: 80px 0;
+        padding: 40px 40px;
     }
+`
+
+export const ChartGenInfo = styled.p`
+    color: #333;
+    text-align: center;
+
+    & span {
+        font-weight: 600;
+    }
+`
+
+export const ChartLegend =  styled.ul`
+    color: #333;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-auto-flow: row;
+    column-gap: 50px;
+    row-gap: 15px;
+
+    @media (min-width: 600px){
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (min-width: 768px){
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media (min-width: 1024px){
+        grid-template-columns: repeat(4, 1fr);
+    }
+`
+
+export const ChartLengendItem = styled.li <{ $color: string }>`
+    list-style-type: none;
+    display: flex;
+    height: 30px;
+
+    & div {
+        height: 20px;
+        width: 20px;
+        border-radius: 3px;
+        background-color: ${(props) => props.$color};
+        margin-right: 10px;
+    }
+
+    & span {
+        font-size: .9rem;
+        font-weight: 600;
+        margin-right: 6px;
+    }
+
+
 `
