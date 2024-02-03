@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { Tabs, Tab, Box } from '@mui/material';
-import Link from 'next/link';
 import { CustomTabPanel } from '@/components/DashboardTabs/utils/CustomTabPanel';
 import { a11yProps } from '@/components/DashboardTabs/utils/al11yProps';
 import { DashboardTabsContainer } from './styles';
@@ -8,7 +7,7 @@ import { useRouter } from 'next/router';
 
 const DashboardTabs = () => {
     const router = useRouter();
-    const { type } = router.query;
+    const [currentTab, setCurrentTab] = useState(0);
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         event.preventDefault();
@@ -17,13 +16,6 @@ const DashboardTabs = () => {
             shallow: true,
         });
     };
-
-    useEffect(() => {
-        const tab = type === 'statistics' ? 1 : type === 'transactions' ? 2 : 0;
-        setCurrentTab(tab);
-    }, [type]);
-
-    const [currentTab, setCurrentTab] = React.useState(0);
 
     return (
         <DashboardTabsContainer>
